@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "431239490243",
+    "project_id": "retali-f7eb3",
+    "storage_bucket": "retali-f7eb3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431239490243:android:ca8a7c600094b34e87d076",
+        "android_client_info": {
+          "package_name": "com.example.retali"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdRy1O-GfGlLLIRNuWKJ8n9WGt3kmiV50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

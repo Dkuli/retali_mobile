@@ -1,0 +1,85 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'auth/providers/auth_provider.dart';
+import 'auth/screens/login_screen.dart';
+import 'home_screen.dart';
+import 'onboarding/screens/onboarding_screens.dart'; 
+import 'notification/services/notification_service.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  
+  // Initialize notifications
+  final notificationService = NotificationService();
+  await notificationService.initialize();
+  
+  runApp(const MyApp());
+}
+
+// Handle background messages
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _showOnboarding = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkOnboardingStatus();
+  }
+
+  Future<void> _checkOnboardingStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _showOnboarding = prefs.getBool('showOnboarding') ?? true;
+    });
+  }
+
+  Future<void> _completeOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('showOnboarding', false);
+    setState(() {
+      _showOnboarding = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        Provider<NotificationService>(create: (_) => NotificationService()),
+      ],
+      child: MaterialApp(
+        title: 'Luggage Scanner App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          useMaterial3: true,
+        ),
+        home: _showOnboarding
+            ? OnboardingScreen(onComplete: _completeOnboarding)
+            : Consumer<AuthProvider>(
+                builder: (context, auth, _) {
+                  return auth.isAuthenticated ? const HomeScreen() : const LoginScreen();
+                },
+              ),
+      ),
+    );
+  }
+}
