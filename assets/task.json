@@ -1,0 +1,98 @@
+{
+    "soal_soal": [
+      {
+        "title": "Bandara Keberangkatan",
+        "tasks": [
+          "1. Membuat Absensi Memastikan seluruh jamaah tergabung di dalam Grup Keberangkatan",
+          "2. Memperkenalkan diri dan menyimpan kontak seluruh Jamaah",
+          "3. Memberikan Pembekalan ulang teknis keberangkatan",
+          "4. Menginfokan kepada Jamaah titik kumpul pada saat di Bandara",
+          "5. Menyampaikan aturan Perjalanan"
+        ]
+      },
+      {
+        "title": "Hari Keberangkatan",
+        "tasks": [
+          "1. Membuat Absensi Memastikan seluruh jamaah tergabung di dalam Grup Keberangkatan",
+          "2. Memperkenalkan diri dan menyimpan kontak seluruh Jamaah",
+          "3. Memberikan Pembekalan ulang teknis keberangkatan",
+          "4. Menginfokan kepada Jamaah titik kumpul pada saat di Bandara",
+          "5. Menyampaikan aturan Perjalanan"
+        ]
+      },
+      {
+        "title": "Saat di Pesawat",
+        "tasks": [
+          "1. Membuat Absensi Memastikan seluruh jamaah tergabung di dalam Grup Keberangkatan",
+          "2. Memperkenalkan diri dan menyimpan kontak seluruh Jamaah",
+          "3. Memberikan Pembekalan ulang teknis keberangkatan",
+          "4. Menginfokan kepada Jamaah titik kumpul pada saat di Bandara",
+          "5. Menyampaikan aturan Perjalanan"
+        ]
+      },
+      {
+        "title": "Bandara Transit (Tiba)",
+        "tasks": [
+          "1. Pastikan informasi jadwal penerbangan dari Bandara Transit ke Bandara Tujuan tidak ada perubahan.",
+          "2. Berikan penjelasan singkat kepada jamaah tentang prosedur transit, durasi, dan lokasi transit.",
+          "3. Ingatkan jamaah untuk mengecek barang bawaan dan membawa paspor, tiket, di dalam tas bawaan.",
+          "4. Menginfokan kepada Jamaah titik kumpul pada saat di Bandara.",
+          "5. Pastikan semua dokumen yang di perlukan (paspor, visa, boarding pass) sudah siap dan lengkap, Bantu jamaah melalui proses Administrasi di Bandara Transit.",
+          "6. Informasikan kepada jamaah tentang fasilitas yang tersedia di bandara (Toilet, Mushola, Restoran, Tempat Istirahat).",
+          "7. Pastikan jamaah mengatahui waktu dan tempat berkumpul kembali sebelum melanjutkan penerbangan.",
+          "8. Pastikan semua barang bawaan Jamaah tetap aman selama transit, Bantu jamaah jika ada masalah dengan barang bawaan atau bagasi"
+        ]
+      },
+      {
+        "title": "Bandara Transit (Pergi)",
+        "tasks": [
+          "1. Pastikan semua jamaah sudah berkumpul di titik pertemuan yang ditentukan sesuai dengan jadwal boarding.",
+          "2. Lakukan pengecekan ulang jumlah untuk memastikan tidak ada yang tertinggal.",
+          "3. Pastikan semua jamaah memiliki boarding pass dan paspor siap untuk diperiksa.",
+          "4. Ingatkan jamaah untuk tetap tenang dan mengikuti instruksi petugas bandara serta kru pesawat.",
+          "5. Pastikan jamaah duduk di tempat yang telah ditentukan dan merasa nyaman",
+          "6. Pastikan jamaah menyimpan paspor, tiket, dan dokumen penting lainnya dengan aman selama penerbangan.",
+          "7. Bantu jamaah jika ada kebutuhan khusus selama penerbangan.",
+          "8. Sampaikan infomasi penting mengenai prosedur yang akan dilakukan setibanya di Bandara Tujuan."
+        ]
+      },
+      {
+        "title": "Bandara Ketibaan",
+        "tasks": [
+          "1. Berikan penjelasan singkat kepada jamaah tentang apa yang harus dilakukan setibanya di bandara.",
+          "2. Pastikan semua jamaah sudah menyiapkan paspor, visa, dan dokumen penting lainnya.",
+          "3. Pandu Seluruh jamaah keluar dari pesawat secara tertib dan pastikan semua barang bawaan terambil.",
+          "4. Kumpulkan jamaahh di titik pertemuan yang telah disepakati sebelum masuk ke area imigrasi.",
+          "5. Bantu jamaah melalui proses imigrasi dengan memastikan semua dokumen siap dan lengkap.",
+          "6. Bantu jamaah dalam mengambil bagasi dan Pastikan semua bagasi tidak ada yang tertinggal.",
+          "7. Koordinasi dengan Muthawwif untuk memastikan kendaraan sudah siap menjemput jamaah.",
+          "8. Pastikan jamaah bertemu Muthawwif dan semua bagasi dimuat ke dalam kendaraan dengan aman."
+        ]
+      },
+      {
+        "title": "Bandara ke Mekkah",
+        "tasks": [
+          "1. Setelah Jamaah di Bus Petugas membagikan Makan dan Minum kepada seluruh jamaah Retali.",
+          "2. Setelah Jamaah dan Koper Lengkap Muthawwif Memberikan Sambutan kepada Jamaah Lalu Muthawwif memperkenalkan diri lalu menjabarkan kegiatan yang selanjutnya akan di lakukan.",
+          "3. Ingatkan kepada Jamaah dalam kondisi Ihram, jelaskan juga larangan-larangan Ihram agar jamaah tidak melanggar.",
+          "4. Selama Perjalanan jelaskan kepada Jamaah tentang kenampakan alam sekitar.(Contoh: Rumah Imam besar, dan Tempat lainnya)",
+          "5. Setelah semua tugas selesai tour Leader dan Muthawwif berbincang dengan Jamaah agar timbul kedekatan antara Jamaah dengan Petugas",
+          "6. Ceritakan keutamaan Kota Mekkah, Keutamaan Melaksanakan Ibadah Umrah dan Keutamaan Sabar.",
+          "7. Sebelum tiba di Mekkah, Koordinasi dengan Tim untuk kesiapan Cek-in Hotel.",
+          "8. Seketika bus berjalan, ajak Jamaah untuk memperbanyak Talbiyah."
+        ]
+      },
+      {
+        "title": "Bandara ke Madinah",
+        "tasks": [
+          "1. Sesaat setelah Bus Berjalan Muthawwif Memberikan Sambutan kepada Jamaah lalu Muthawwif memperkenalkan diri lalu menjabarkan kegiatan yang selanjutnya akan di lakukan.",
+          "2. Tour Leader membagikan Makan dan Minum kepada seluruh Jamaah Retali.",
+          "3. Pandu Seluruh jamaah keluar dari pesawat secara tertib dan pastikan semua barang bawaan terambil.",
+          "4. Selama Perjalanan jelaskan kepada Jamaah tentang kenampakan alam sekitar.(Contoh: Rumah Imam besar, dan Tempat bersejarah lainnya)",
+          "5. Setelah semua tugas selesai Tour Leader dan Muthawwif berbincang dengan Jamaah apabila memungkinkan.",
+          "6. Berikan Ceramah perihal Keutamaan Kota Madinah, Raudhah dan Ziarah Makam Rasul.",
+          "7. Sebelum tiba di Madinah, Koordinasi dengan Tim untuk kesiapan Cek-in Hotel."
+        ]
+      }
+    ]
+  }

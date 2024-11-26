@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:retali/main_layout.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -54,23 +55,26 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Notifikasi'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.done_all),
-            onPressed: () {
-              // Mark all as read
-            },
-          ),
-        ],
+    return MainLayout(
+      currentIndex: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Notifikasi'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.done_all),
+              onPressed: () {
+                // Mark all as read
+              },
+            ),
+          ],
+        ),
+        body: _isLoading
+            ? _buildLoadingShimmer()
+            : _notifications.isEmpty
+                ? _buildEmptyState()
+                : _buildNotificationList(),
       ),
-      body: _isLoading
-          ? _buildLoadingShimmer()
-          : _notifications.isEmpty
-              ? _buildEmptyState()
-              : _buildNotificationList(),
     );
   }
 

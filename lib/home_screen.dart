@@ -2,25 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:retali/luggages/screens/luggage_scan_screen.dart';
-import 'package:retali/navigation_map/LocationScreen%20.dart';
-import 'package:retali/profile/ProfileScreen.dart';
+import 'package:retali/ContentUpload/ContentUploadScreen.dart';
+import 'package:retali/GuideScreen/guide_screen.dart';
+import 'package:retali/main_layout.dart';
+import 'package:retali/location/page/locations_list_page.dart';
+import 'package:retali/surah/screens/doa_umrah_screen.dart';
+import 'package:retali/task/TaskScreen.dart';
 import '../auth/providers/auth_provider.dart';
 import 'notification/notification_screen.dart';
+import 'package:retali/luggages/screens/luggage_history_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State {
-  int _currentCarouselIndex = 0;
+class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
   bool _showTitle = false;
+  int _currentCarouselIndex = 0;
 
-  @override
+   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
@@ -35,9 +39,16 @@ class _HomeScreenState extends State {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+ @override
+ Widget build(BuildContext context) {
+    return MainLayout(
+      currentIndex: 0, // Index for Home
+      child: CustomScrollView(
         controller: _scrollController,
         slivers: [
           _buildSliverAppBar(),
@@ -51,9 +62,14 @@ class _HomeScreenState extends State {
                   const SizedBox(height: 24),
                   _buildCategories(context),
                   const SizedBox(height: 24),
-                  _buildJamaahSection(),
-                  const SizedBox(height: 24),
-                  _buildScheduleSection(),
+                  _buildHorizontalImageList(
+                    title: 'Potensi Masalah',
+                    images: List.generate(
+                      5,
+                      (index) =>
+                          'http://192.168.190.13:8000/storage/5/01JCWPVDQAQWD7VSJ9YFJ7WHP7.jpg',
+                    ),
+                  ),
                   const SizedBox(height: 32),
                 ],
               ),
@@ -61,9 +77,6 @@ class _HomeScreenState extends State {
           ),
         ],
       ),
-      floatingActionButton: _buildFloatingActionButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -110,6 +123,7 @@ class _HomeScreenState extends State {
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
+                                  fontFamily: 'GoogleSans',
                                 ),
                               ),
                             ],
@@ -131,15 +145,18 @@ class _HomeScreenState extends State {
   Widget _buildCarousel() {
     final carouselItems = [
       {
-        'image': 'http://192.168.241.13:8000/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
-        'title': 'Panduan Ibadah Umrah',
+        'image':
+            'http://192.168.190.13:8000/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
+        'title': 'Informasi Penting',
       },
       {
-        'image': 'http://192.168.241.13:8000/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
-        'title': 'Jadwal Sholat',
+        'image':
+            'http://192.168.190.13:8000/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
+        'title': 'Informasi Penting',
       },
       {
-        'image': 'http://192.168.241.13:8000/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
+        'image':
+            'http://192.168.190.13:8000/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
         'title': 'Informasi Penting',
       },
     ];
@@ -225,238 +242,182 @@ class _HomeScreenState extends State {
     );
   }
 
- Widget _buildCategories(BuildContext context) {
-  final categories = [
-    {'icon': Icons.group, 'label': 'Jamaah', 'color': Colors.green, 'screen': ()},
-    {'icon': Icons.calendar_today, 'label': 'Jadwal', 'color': Colors.blue, 'screen': ()},
-    {'icon': Icons.location_on, 'label': 'Lokasi', 'color': Colors.red, 'screen': LocationScreen()},
-    {'icon': Icons.menu_book, 'label': 'Panduan', 'color': Colors.orange, 'screen': ()},
-    {'icon': Icons.medical_services, 'label': 'Kesehatan', 'color': Colors.purple, 'screen': ()},
-    {'icon': Icons.luggage, 'label': 'Bagasi', 'color': Colors.brown, 'screen': ()},
-    {'icon': Icons.mosque, 'label': 'Ibadah', 'color': Colors.teal, 'screen': ()},
-    {'icon': Icons.support_agent, 'label': 'Bantuan', 'color': Colors.indigo, 'screen': ()},
-  ];
+  Widget _buildCategories(BuildContext context) {
+    final categories = [
+      {
+        'icon': Icons.mosque,
+        'label': 'doa',
+        'color': Colors.teal,
+        'screen': const DoaUmrahScreen()
+      },
+      {
+        'icon': Icons.calendar_today,
+        'label': 'Jadwal',
+        'color': Colors.blue,
+        'screen': const TaskScreen()
+      },
+      {
+        'icon': Icons.location_on,
+        'label': 'Lokasi',
+        'color': Colors.red,
+        'screen': LocationsListPage()
+      },
+      {
+        'icon': Icons.menu_book,
+        'label': 'Panduan',
+        'color': Colors.orange,
+        'screen': const GuideScreen()
+      },
+      {
+        'icon': Icons.camera_alt_sharp,
+        'label': 'konten',
+        'color': Colors.purple,
+        'screen': const ContentUploadScreen()
+      },
+      {
+        'icon': Icons.luggage,
+        'label': 'Bagasi',
+        'color': Colors.brown,
+        'screen': const LuggageHistoryScreen()
+      },
+      {
+        'icon': Icons.description,
+        'label': 'Naskah',
+        'color': Colors.indigo,
+        'screen': const TaskScreen()
+      },
+      {
+        'icon': Icons.group,
+        'label': 'Jamaah',
+        'color': Colors.green,
+        'screen': const TaskScreen()
+      },
+    ];
 
-  return GridView.builder(
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 4,
-      childAspectRatio: 0.9,
-      crossAxisSpacing: 16,
-      mainAxisSpacing: 16,
-    ),
-    itemCount: categories.length,
-    itemBuilder: (context, index) {
-      final category = categories[index];
-      return _buildCategoryItem(
-        category['icon'] as IconData,
-        category['label'] as String,
-        category['color'] as Color,
-        () {
-          // Fungsi navigasi ke layar tertentu
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => category['screen'] as Widget),
-          );
-        },
-      );
-    },
-  );
-}
-
-  Widget _buildCategoryItem(IconData icon, String label, Color color, VoidCallback onTap) {
-  return InkWell(
-    onTap: onTap, // Fungsi navigasi di sini
-    borderRadius: BorderRadius.circular(16),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: color.withOpacity(0.1),
-                blurRadius: 8,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Icon(icon, color: color, size: 28),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
-          textAlign: TextAlign.center,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ],
-    ),
-  );
-}
-
-  Widget _buildJamaahSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Daftar Jamaah',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text('Lihat Semua'),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 3,
-          itemBuilder: (context, index) => _buildJamaahCard(),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildJamaahCard() {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        leading: CircleAvatar(
-          child: Icon(Icons.person),
-        ),
-        title: Text('Nama Jamaah'),
-        subtitle: Text('No. Passport: AB123456'),
-        trailing: Icon(Icons.chevron_right),
-        onTap: () {},
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+        childAspectRatio: 0.9,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
       ),
-    );
-  }
-
-  Widget _buildScheduleSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Jadwal Hari Ini',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text('Lihat Semua'),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 3,
-          itemBuilder: (context, index) => _buildScheduleCard(),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildScheduleCard() {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        leading: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.blue.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Icon(Icons.event, color: Colors.blue),
-        ),
-        title: Text('Tawaf & Sa\'i'),
-        subtitle: Text('09:00 - Masjidil Haram'),
-        trailing: Icon(Icons.chevron_right),
-        onTap: () {},
-      ),
-    );
-  }
-
-  Widget _buildFloatingActionButton() {
-    return FloatingActionButton(
-      onPressed: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const LuggageScanScreen(),
-          ),
+      itemCount: categories.length,
+      itemBuilder: (context, index) {
+        final category = categories[index];
+        return _buildCategoryItem(
+          category['icon'] as IconData,
+          category['label'] as String,
+          category['color'] as Color,
+          () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => category['screen'] as Widget),
+            );
+          },
         );
       },
-            child: Icon(Icons.qr_code, color: Colors.white),
-      backgroundColor: const Color.fromARGB(255, 78, 29, 87),
-      shape: CircleBorder(),
-      elevation: 6.0,
     );
   }
 
-  Widget _buildBottomNavigationBar() {
-    return BottomAppBar(
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 8,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+  Widget _buildCategoryItem(
+      IconData icon, String label, Color color, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          IconButton(
-            icon: const Icon(Icons.home),
-            onPressed: () {},
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: color.withOpacity(0.1),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Icon(icon, color: color, size: 28),
           ),
-          IconButton(
-            icon: const Icon(Icons.group),
-            onPressed: () {
-            },
-          ),
-          const SizedBox(width: 40),
-          IconButton(
-            icon: const Icon(Icons.calendar_today),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {
-              
-                Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const ProfileScreen(),
-          ),
-        );
-            },
+          const SizedBox(height: 8),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),
     );
   }
 
-  
-  
+  Widget _buildHorizontalImageList(
+      {required String title, required List<String> images}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: const Text('Lihat Semua'),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        SizedBox(
+          height: 120,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: images.length,
+            itemBuilder: (context, index) {
+              return Card(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    boxShadow: [],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: CachedNetworkImage(
+                      imageUrl: images[index],
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Container(
+                        color: Colors.grey[200],
+                        child: const Center(child: CircularProgressIndicator()),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        color: Colors.grey[200],
+                        child: const Icon(Icons.error),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildNotificationBadge() {
     return Stack(
       children: [
@@ -512,14 +473,11 @@ class _HomeScreenState extends State {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
             color: _currentCarouselIndex == index
-                ? Color.fromARGB(255, 78, 29, 87)
+                ? const Color.fromARGB(255, 78, 29, 87)
                 : Colors.grey.shade300,
           ),
         );
       }),
     );
   }
-
-
-  }
-
+}

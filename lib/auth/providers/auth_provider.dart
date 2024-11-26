@@ -6,15 +6,18 @@ class AuthProvider extends ChangeNotifier {
   String? _token;
   String? _tourLeaderId;
   String? _tourLeaderName;
+  String? _tourLeaderEmail;
   String? profilePhotoUrl;
 
   bool get isAuthenticated => _token != null;
   String? get token => _token;
   String? get tourLeaderId => _tourLeaderId;
   String? get tourLeaderName => _tourLeaderName;
+  String? get tourLeaderEmail => _tourLeaderEmail;
+
   Map<String, dynamic>? tourLeader;
 
-  static const String baseUrl = 'http://192.168.241.13:8000';
+  static const String baseUrl = 'http://192.168.190.13:8000';
 
   get profile_photo_url => null;
 
@@ -38,7 +41,9 @@ class AuthProvider extends ChangeNotifier {
           final tourLeader = data['tour_leader'];
           _tourLeaderId = tourLeader['id'].toString();  // Ambil ID dari 'tour_leader' object
           _tourLeaderName = tourLeader['name']; 
-           profilePhotoUrl = tourLeader['profile_photo_url'];
+          _tourLeaderEmail = tourLeader['email']; // Ambil email dari 'tour_leader' object
+          profilePhotoUrl = tourLeader['profile_photo_url'];
+           
            // Ambil nama dari 'tour_leader' object
         } else {
           throw Exception('tour_leader data not found in login response');
@@ -57,6 +62,7 @@ class AuthProvider extends ChangeNotifier {
     _token = null;
     _tourLeaderId = null;
     _tourLeaderName = null;
+    _tourLeaderEmail = null;
     notifyListeners();
   }
 }

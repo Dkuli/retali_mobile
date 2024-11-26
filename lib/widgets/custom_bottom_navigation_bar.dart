@@ -1,0 +1,148 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:retali/home_screen.dart';
+import 'package:retali/luggages/screens/luggage_scan_screen.dart';
+import 'package:retali/notification/notification_screen.dart';
+import 'package:retali/profile/ProfileScreen.dart';
+import 'package:retali/task/TaskScreen.dart';
+
+class CustomBottomNavigationBar extends StatelessWidget {
+  final int selectedIndex;
+  final Function(int) onItemSelected;
+
+  const CustomBottomNavigationBar({
+    Key? key,
+    required this.selectedIndex,
+    required this.onItemSelected,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        BottomAppBar(
+          notchMargin: 8,
+          shape: const CircularNotchedRectangle(),
+          child: Container(
+            height: 60,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildNavItem(context, 0, Icons.home_outlined, Icons.home, 'Beranda'),
+                      _buildNavItem(context, 1, Icons.task_outlined, Icons.task, 'Tugas'),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 60), // Increased space for FAB
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildNavItem(context, 2, Icons.notifications_outlined, Icons.notifications, 'Notifikasi'),
+                      _buildNavItem(context, 3, Icons.person_outline, Icons.person, 'Profil'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          top: -30,
+          child: Center(
+            child: SizedBox(
+              width: 56,
+              height: 56,
+              child: FloatingActionButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const LuggageScanScreen(),
+                    ),
+                  );
+                },
+                backgroundColor: const Color.fromARGB(255, 78, 29, 87),
+                child: SvgPicture.asset(
+                  'assets/images/qr-scan.svg',
+                  width: 24,
+                  height: 24,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNavItem(BuildContext context, int index, IconData icon, IconData activeIcon, String label) {
+    final isSelected = selectedIndex == index;
+    return InkWell(
+      onTap: () {
+        onItemSelected(index);
+        _handleNavigation(context, index);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            isSelected ? activeIcon : icon,
+            color: isSelected 
+              ? const Color.fromARGB(255, 78, 29, 87)
+              : Colors.grey,
+          ),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: isSelected 
+                ? const Color.fromARGB(255, 78, 29, 87)
+                : Colors.grey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _handleNavigation(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ),
+        );
+        break;
+      case 1:
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const TaskScreen(),
+          ),
+        );
+        break;
+      case 2:
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const NotificationScreen(),
+          ),
+        );
+        break;
+      case 3:
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const ProfileScreen(),
+          ),
+        );
+        break;
+    }
+  }
+}

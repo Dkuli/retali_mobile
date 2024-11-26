@@ -15,16 +15,27 @@ class LuggageScanScreen extends StatefulWidget {
   State<LuggageScanScreen> createState() => _LuggageScanScreenState();
 }
 
-class _LuggageScanScreenState extends State<LuggageScanScreen> {
+class _LuggageScanScreenState extends State<LuggageScanScreen> with SingleTickerProviderStateMixin {
   MobileScannerController cameraController = MobileScannerController();
   bool isScanning = true;
   Position? currentPosition;
   bool isLoading = false;
+  late AnimationController _animationController;
+  late Animation<double> _fadeAnimation;
 
   @override
   void initState() {
     super.initState();
     _checkLocationPermission();
+    _animationController = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
+    _fadeAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeIn,
+    );
+    _animationController.forward();
   }
 
   Future<void> _checkLocationPermission() async {
@@ -177,6 +188,7 @@ Future<void> _submitScanData(String qrData) async {
 
   @override
   void dispose() {
+    _animationController.dispose();
     cameraController.dispose();
     super.dispose();
   }
@@ -205,22 +217,27 @@ Future<void> _submitScanData(String qrData) async {
           ),
           if (isLoading)
             const Center(child: CircularProgressIndicator(color: Colors.white)),
-          const QRScannerOverlay(overlayColour: Colors.black54),
+          FadeTransition(
+            opacity: _fadeAnimation,
+            child: const QRScannerOverlay(overlayColour: Colors.black54),
+          ),
           Positioned(
             bottom: 60,
             left: 0,
             right: 0,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Align the QR code within the frame to scan',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
+            child: FadeTransition(
+              opacity: _fadeAnimation,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Align the QR code within the frame to scan',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
                     
                     backgroundColor: Colors.black87,
                     padding: const EdgeInsets.symmetric(vertical: 12),
@@ -233,13 +250,16 @@ Future<void> _submitScanData(String qrData) async {
                     'Scan Again',
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      isScanning = true;
-                    });
-                  },
-                ),
-              ],
+                    onPressed: () {
+                      setState(() {
+                        isScanning = true;
+                      });
+                      _animationController.reset();
+                      _animationController.forward();
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ],
