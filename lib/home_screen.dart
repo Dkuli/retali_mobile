@@ -4,6 +4,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:retali/ContentUpload/ContentUploadScreen.dart';
 import 'package:retali/GuideScreen/guide_screen.dart';
+import 'package:retali/briefings_page/briefings_page.dart';
+import 'package:retali/itinerary/JourneysScreen.dart';
 import 'package:retali/main_layout.dart';
 import 'package:retali/location/page/locations_list_page.dart';
 import 'package:retali/surah/screens/doa_umrah_screen.dart';
@@ -14,6 +16,7 @@ import 'package:retali/luggages/screens/luggage_history_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+    
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -44,6 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+
+  static const String baseUrl = 'http://192.168.110.13:8000';
+
  @override
  Widget build(BuildContext context) {
     return MainLayout(
@@ -67,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     images: List.generate(
                       5,
                       (index) =>
-                          'http://192.168.190.13:8000/storage/5/01JCWPVDQAQWD7VSJ9YFJ7WHP7.jpg',
+                          '$baseUrl/storage/5/01JCWPVDQAQWD7VSJ9YFJ7WHP7.jpg',
                     ),
                   ),
                   const SizedBox(height: 32),
@@ -129,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                         ),
-                        _buildNotificationBadge(),
+                       
                       ],
                     ),
                   ],
@@ -146,17 +152,17 @@ class _HomeScreenState extends State<HomeScreen> {
     final carouselItems = [
       {
         'image':
-            'http://192.168.190.13:8000/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
+            '$baseUrl/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
         'title': 'Informasi Penting',
       },
       {
         'image':
-            'http://192.168.190.13:8000/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
+            '$baseUrl/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
         'title': 'Informasi Penting',
       },
       {
         'image':
-            'http://192.168.190.13:8000/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
+            '$baseUrl/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
         'title': 'Informasi Penting',
       },
     ];
@@ -165,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            height: 200,
+            height: 150,
             viewportFraction: 0.92,
             enlargeCenterPage: true,
             autoPlay: true,
@@ -254,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'icon': Icons.calendar_today,
         'label': 'Jadwal',
         'color': Colors.blue,
-        'screen': const TaskScreen()
+        'screen': JourneysScreen()
       },
       {
         'icon': Icons.location_on,
@@ -272,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'icon': Icons.camera_alt_sharp,
         'label': 'konten',
         'color': Colors.purple,
-        'screen': const ContentUploadScreen()
+        'screen': ContentUploadScreen()
       },
       {
         'icon': Icons.luggage,
@@ -284,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'icon': Icons.description,
         'label': 'Naskah',
         'color': Colors.indigo,
-        'screen': const TaskScreen()
+        'screen':  BriefingsPage()
       },
       {
         'icon': Icons.group,
@@ -383,7 +389,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         const SizedBox(height: 12),
         SizedBox(
-          height: 120,
+          height: 100,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: images.length,
@@ -418,49 +424,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildNotificationBadge() {
-    return Stack(
-      children: [
-        IconButton(
-          icon: const Icon(Icons.notifications_outlined),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const NotificationScreen(),
-              ),
-            );
-          },
-        ),
-        Positioned(
-          right: 8,
-          top: 8,
-          child: Container(
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              color: Colors.red,
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 2),
-            ),
-            constraints: const BoxConstraints(
-              minWidth: 16,
-              minHeight: 16,
-            ),
-            child: const Text(
-              '3',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
+ 
   Widget _buildCarouselIndicator(int itemCount) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

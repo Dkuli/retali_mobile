@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:retali/main_layout.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -32,49 +31,30 @@ class _NotificationScreenState extends State<NotificationScreen> {
     _notifications.clear(); // Kosongkan daftar sebelum menambahkan data baru
 
     // Tambahkan data notifikasi dummy
-    _notifications.addAll([
-      NotificationItem(
-        title: 'Perjalanan Baru',
-        message: 'Anda memiliki jadwal perjalanan baru',
-        timestamp: DateTime.now().subtract(const Duration(hours: 1)),
-        isRead: false,
-        type: NotificationType.trip,
-      ),
-      NotificationItem(
-        title: 'Pengingat Jamaah',
-        message: 'Ada jamaah yang memerlukan perhatian khusus',
-        timestamp: DateTime.now().subtract(const Duration(hours: 3)),
-        isRead: true,
-        type: NotificationType.alert,
-      ),
-    ]);
-
+   
     _isLoading = false; // Sembunyikan shimmer setelah selesai
   });
 }
 
   @override
   Widget build(BuildContext context) {
-    return MainLayout(
-      currentIndex: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Notifikasi'),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.done_all),
-              onPressed: () {
-                // Mark all as read
-              },
-            ),
-          ],
-        ),
-        body: _isLoading
-            ? _buildLoadingShimmer()
-            : _notifications.isEmpty
-                ? _buildEmptyState()
-                : _buildNotificationList(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Notifikasi'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.done_all),
+            onPressed: () {
+              // Mark all as read
+            },
+          ),
+        ],
       ),
+      body: _isLoading
+          ? _buildLoadingShimmer()
+          : _notifications.isEmpty
+              ? _buildEmptyState()
+              : _buildNotificationList(),
     );
   }
 

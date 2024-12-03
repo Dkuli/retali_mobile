@@ -17,7 +17,7 @@ class AuthProvider extends ChangeNotifier {
 
   Map<String, dynamic>? tourLeader;
 
-  static const String baseUrl = 'http://192.168.190.13:8000';
+  static const String baseUrl = 'http://192.168.110.13:8000';
 
   get profile_photo_url => null;
 

@@ -93,6 +93,89 @@
           "6. Berikan Ceramah perihal Keutamaan Kota Madinah, Raudhah dan Ziarah Makam Rasul.",
           "7. Sebelum tiba di Madinah, Koordinasi dengan Tim untuk kesiapan Cek-in Hotel."
         ]
-      }
-    ]
-  }
+      },
+    
+    
+        {
+          "title": "Ketibaan di Hotel dan Check-in (Madinah)",
+          "tasks": [
+            "1. Tour Leader memastikan hotel telah benar-benar dibooking sebelum jamaah turun dari bus",
+            "2. Muthawwif memastikan kamar sudah tersedia dan mendapatkan konfirmasi pasti dari pihak hotel",
+            "3. Tour Leader menghimbau jamaah di atas bus agar tidak ada barang yang tertinggal",
+            "4. Muthawwif membantu jamaah mengeluarkan koper dari bagasi bus",
+            "5. Cek ketersediaan koper jamaah satu per satu dan centang daftar",
+            "6. Tour Leader membuat ketersediaan koper jamaah untuk memastikan semua koper lengkap",
+            "7. Kumpulkan jamaah di lobi setelah seluruh koper jamaah lengkap",
+            "8. Bagikan kunci kamar kepada jamaah sesuai dengan roomlist",
+            "9. Pastikan kamar sesuai dengan komposisi yang tercantum dalam roomlist",
+            "10. Informasikan aturan kamar kepada jamaah dan pastikan aturan ditempel di pintu kamar",
+            "11. Antarkan koper jamaah ke lantai kamar masing-masing",
+            "12. Pantau dan pastikan koper jamaah diletakkan sesuai dengan kamar masing-masing",
+            "13. Setelah koper didistribusikan oleh bellboy, pastikan koper dibawa masuk oleh jamaah",
+            "14. Pastikan seluruh kamar jamaah aman dan tanpa kendala",
+            "15. Jika ketibaan bersamaan dengan waktu makan, ajak jamaah segera menuju restoran",
+            "16. Berikan informasi terkait hotel, termasuk foto hotel dan lokasinya"
+          ]
+        },
+        {
+          "title": "Persiapan Checkout dan Transisi ke Madinah",
+          "tasks": [
+            "1. Ingatkan jamaah untuk mengumpulkan koper dalam keadaan disarungkan di depan kamar jamaah",
+            "2. Petugas mengingatkan jamaah untuk berkemas dan bersiap-siap menuju kota Madinah",
+            "3. Hubungi supir bus untuk memastikan bus tersedia dan hadir tepat waktu",
+            "4. Kumpulkan kunci kamar di lobi dan pastikan tidak ada barang jamaah yang tertinggal",
+            "5. Saat memasukkan koper ke bagasi bus, pastikan semua koper jamaah lengkap",
+            "6. Berikan gambaran singkat kepada jamaah tentang keadaan Raudhah dan tingkat kepadatannya di Masjid Nabawi"
+          ]
+        },
+        {
+          "title": "Persiapan Checkout dan Transisi ke Mekkah",
+          "tasks": [
+            "1. Ingatkan jamaah untuk mengumpulkan koper dalam keadaan disarungkan di depan kamar jamaah",
+            "2. Petugas mengingatkan jamaah untuk berkemas dan bersiap-siap menuju kota Mekkah",
+            "3. Hubungi supir bus untuk memastikan bus tersedia dan hadir tepat waktu untuk perjalanan ke Mekkah",
+            "4. Kumpulkan kunci kamar di lobi dan pastikan tidak ada barang jamaah yang tertinggal di kamar",
+            "5. Saat memasukkan koper ke bagasi bus, pastikan seluruh koper jamaah sudah terdata dan lengkap",
+            "6. Berikan informasi singkat kepada jamaah mengenai prosedur umrah, termasuk persiapan ihram dan niat di miqat",
+            "7. Ingatkan jamaah untuk menjaga kebersihan diri dan membawa kebutuhan pribadi selama perjalanan ke Mekkah"
+          ]
+        },
+        {
+          "title": "Ketibaan di Hotel dan Check-in (Mekkah)",
+          "tasks": [
+            "1. Tour Leader memastikan hotel telah benar-benar dibooking sebelum jamaah turun dari bus",
+            "2. Muthawwif memastikan kamar sudah tersedia dan mendapatkan konfirmasi pasti dari pihak hotel",
+            "3. Tour Leader menghimbau jamaah di atas bus agar tidak ada barang yang tertinggal",
+            "4. Muthawwif membantu jamaah mengeluarkan koper dari bagasi bus",
+            "5. Cek ketersediaan koper jamaah satu per satu dan centang daftar",
+            "6. Tour Leader membuat ketersediaan koper jamaah untuk memastikan semua koper lengkap",
+            "7. Kumpulkan jamaah di lobi setelah seluruh koper jamaah lengkap",
+            "8. Bagikan kunci kamar kepada jamaah sesuai dengan roomlist",
+            "9. Pastikan kamar sesuai dengan komposisi yang tercantum dalam roomlist",
+            "10. Informasikan aturan kamar kepada jamaah dan pastikan aturan ditempel di pintu kamar",
+            "11. Antarkan koper jamaah ke lantai kamar masing-masing",
+            "12. Pantau dan pastikan koper jamaah diletakkan sesuai dengan kamar masing-masing",
+            "13. Setelah koper didistribusikan oleh bellboy, pastikan koper dibawa masuk oleh jamaah",
+            "14. Pastikan seluruh kamar jamaah aman dan tanpa kendala",
+            "15. Jika ketibaan bersamaan dengan waktu makan, ajak jamaah segera menuju restoran",
+            "16. Berikan informasi terkait hotel, termasuk foto hotel dan lokasinya"
+          ]
+        },
+        {
+          "title": "Persiapan Checkout dan Transisi Kepulangan",
+          "tasks": [
+            "1. Ingatkan jamaah untuk mengumpulkan koper dalam keadaan disarungkan di depan kamar jamaah",
+            "2. Pastikan jamaah sudah menyelesaikan semua barang pribadi dan tidak ada yang tertinggal di kamar",
+            "3. Kumpulkan kunci kamar di lobi dan serahkan kepada pihak hotel sesuai prosedur checkout",
+            "4. Hubungi supir bus untuk memastikan kendaraan siap dan hadir tepat waktu untuk perjalanan ke bandara",
+            "5. Saat memasukkan koper ke bagasi bus, pastikan seluruh koper jamaah sudah terdata dan lengkap",
+            "6. Berikan informasi kepada jamaah terkait jadwal keberangkatan penerbangan, terminal, dan gate di bandara",
+            "7. Ingatkan jamaah untuk memeriksa kelengkapan dokumen perjalanan seperti paspor, tiket, dan visa",
+            "8. Pastikan jamaah membawa makanan ringan atau minuman jika diperlukan selama perjalanan",
+            "9. Koordinasikan dengan pihak bandara atau agen terkait untuk mempermudah proses check-in penerbangan",
+            "10. Berikan penjelasan singkat tentang prosedur di bandara, seperti check-in bagasi, imigrasi, dan boarding",
+            "11. Dampingi jamaah hingga proses boarding selesai untuk memastikan semuanya berjalan lancar"
+          ]
+        }
+      ]
+    }

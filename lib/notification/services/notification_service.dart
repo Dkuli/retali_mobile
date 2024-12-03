@@ -13,6 +13,7 @@ class NotificationService {
       badge: true,
       sound: true,
     );
+    
 
     // Initialize local notifications
     const AndroidInitializationSettings initializationSettingsAndroid =
@@ -30,6 +31,13 @@ class NotificationService {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       _showNotification(message);
     });
+
+     await _logFCMToken();
+  }
+
+  Future<void> _logFCMToken() async {
+    String? token = await _fcm.getToken();
+    print("FCM Token: $token");
   }
 
   Future<void> _showNotification(RemoteMessage message) async {

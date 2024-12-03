@@ -1,0 +1,320 @@
+{
+  "Potensi": {
+    "image": "URL_GAMBAR_Kesehatan",
+    "MasalahDehidrasi": {
+      "Solusi": "Segera beristirahat dan mencari tempat untuk minum.",
+      "Pencegahan": "Jangan terlalu cepat dalam berjalan, gunakan pakaian yang ringan."
+    },
+    "MasalahKelelahan": {
+      "Pengenalan": "Perkenalkan, nama saya [Nama Tour Leader], dan saya akan menjadi tour leader Anda selama perjalanan umrah ini.",
+      "Solusi": "Istirahat yang cukup, berikan Vit B Kompleks untuk memulihkan energi.",
+      "Pencegahan": "Jangan forsir ibadah dan berjalan-jalan terlalu banyak."
+    },
+    "MasalahGangguanPencernaan": {
+      "Solusi": "Konsumsi obat antidiare atau antasida.",
+      "Pencegahan": "Hindari makanan pedas atau tidak higienis, kurangi jajan sembarangan."
+    }
+  },
+  "MasalahLogistik": {
+    "image": "URL_GAMBAR_Logistik",
+    "KehilanganBagasi": {
+      "Solusi": "Laporkan segera ke bagian lost and found, berikan label bagasi dan boarding pass jamaah terkait.",
+      "Pencegahan": "Tandai bagasi dengan tanda khusus dan simpan label bagasi serta boarding pass dengan baik."
+    },
+    "TiketPesawatHilangan": {
+      "Solusi": "Hubungi maskapai penerbangan dan minta untuk mencetak ulang tiket.",
+      "Pencegahan": "Simpan tiket/boarding pass di tempat aman dan buat salinan digital."
+    },
+    "TertinggalPesawat": {
+      "Solusi": "Cari penerbangan pengganti jika memungkinkan.",
+      "Pencegahan": "Datang ke bandara 4 jam sebelum penerbangan."
+    },
+    "PasporHilang": {
+      "Solusi": "Laporkan kepada manajemen dan kunjungi kedutaan/KJRI terdekat jika memungkinkan.",
+      "Pencegahan": "Simpan paspor di tempat aman dan miliki salinan digital."
+    },
+    "AkomodasiTidakSesuai": {
+      "Solusi": "Komplain ke manajemen hotel untuk meminta fasilitas yang kurang.",
+      "Pencegahan": "Dapatkan konfirmasi booking sebelum tiba di hotel."
+    },
+    "KehilanganDompet": {
+      "Solusi": "Laporkan ke polisi dan blokir kartu ATM.",
+      "Pencegahan": "Bawa uang tunai secukupnya dan hindari membawa dompet saat ibadah."
+    },
+    "TersesatDanTerpisah": {
+      "Solusi": "Hubungi nomor darurat yang tersedia di ID Card SISKOPATUH.",
+      "Pencegahan": "Selalu gunakan ID Card SISKOPATUH."
+    },
+    "MasalahBus": {
+      "Solusi": "Cari bus alternatif untuk menggantikan.",
+      "Pencegahan": "Konfirmasi bus minimal H-2 dan pastikan surat reservasi ada sebelum keberangkatan."
+    },
+    "KeterlambatanBus": {
+      "Solusi": "Cari alternatif atau alihkan perhatian jamaah dengan berbincang hingga bus tiba.",
+      "Pencegahan": "Hubungi bus sehari sebelum kegiatan atau berangkat lebih awal."
+    },
+    "KesulitanKomunikasi": {
+      "Solusi": "Gunakan aplikasi Google Translate atau bantuan dari Muthawwif.",
+      "Pencegahan": "Pelajari beberapa kosakata dasar dalam bahasa Arab dan bawa kamus saku."
+    },
+    "TidakCocokDenganLidah": {
+      "Solusi": "Cari restoran yang menyediakan makanan sesuai selera atau bawa bekal.",
+      "Pencegahan": "Cari tahu tempat makan di sekitar hotel/masjid dan bawa makanan tahan lama."
+    }
+  },
+  "MasalahIbadah": {
+    "image": "URL_GAMBAR_Ibadah",
+    "AntrianPanajang": {
+      "Solusi": "Ikuti antrian dengan sabar dan manfaatkan waktu untuk berdoa.",
+      "Pencegahan": "Kunjungi Masjid di luar jam sibuk jika memungkinkan."
+    },
+    "KetidakpahamanRukun": {
+      "Solusi": "Thawaf di waktu yang lebih sepi atau lebih dekat dengan dinding luar.",
+      "Pencegahan": "Pilih waktu yang tidak terlalu ramai dan tetap tenang."
+    },
+    "KepadatanSa'I": {
+      "Solusi": "Tour Leader harus tetap bersama rombongan dan saling menjaga.",
+      "Pencegahan": "Melakukan sa’i pada waktu yang kurang padat seperti tengah malam atau dini hari."
+    },
+    "AntrianTahallul": {
+      "Solusi": "Pilih tukang cukur yang lebih sedikit antriannya.",
+      "Pencegahan": "Tahallul di tempat yang waktu cukurnya singkat atau bawa alat cukur pribadi."
+    },
+    "KeterlambatanTasrehRaudhah": {
+      "Solusi": "Mencari penjual tasreh agar jamaah bisa masuk raudhah.",
+      "Pencegahan": "Mengajukan tasreh Raudhah jauh hari sebelum keberangkatan."
+    }
+  },
+  "MasalahKeamanan": {
+    "image": "URL_GAMBAR_Keamanan",
+    "Kecopetan": {
+      "Solusi": "Laporkan segera ke bagian lost and found atau petugas keamanan terdekat.",
+      "Pencegahan": "Gunakan tas yang aman dan jangan simpan barang berharga di tempat yang mudah diakses."
+    },
+    "Kecelakaan": {
+      "Solusi": "Hubungi Muthawwif atau kabari ke Manajemen lalu segera cari bantuan medis.",
+      "Pencegahan": "Selalu berhati-hati saat menyebrang dan selalu ikuti aturan lalu lintas."
+    },
+    "Kebakaran": {
+      "Solusi": "Ikuti jalur evakuasi dan petunjuk dari petugas atau pegawai hotel.",
+      "Pencegahan": "Jangan menyalakan api di kamar hotel dan ketahui lokasi jalur evakuasi serta alat pemadam kebakaran."
+    },
+    "PerangAtauTerorisme": {
+      "Solusi": "Ikuti arahan otoritas dan evakuasi jika diperlukan.",
+      "Pencegahan": "Hindari tempat-tempat yang dianggap berisiko tinggi."
+    }
+  },
+  "MasalahAdministratif": {
+    "image": "URL_GAMBAR_Administratif",
+    "KesalahanVisa": {
+      "Solusi": "Laporkan segera ke bagian lost and found atau petugas keamanan terdekat.",
+      "Pencegahan": "Sediakan dokumen cadangan dan kontak darurat untuk meminta soft file visa atau pengajuan tasreh secara cepat."
+    },
+    "ImigrasiPanjang": {
+      "Solusi": "Berkoordinasi dengan petugas bandara untuk mendapatkan bantuan atau prioritas pemeriksaan.",
+      "Pencegahan": "Siapkan semua dokumen dan serahkan kepada tim handling untuk pemeriksaan cepat."
+    },
+    "PerubahanJadwal": {
+      "Solusi": "Cari alternatif transportasi dan informasikan peserta tentang kemungkinan perubahan jadwal.",
+      "Pencegahan": "Pastikan konfirmasi tiket penerbangan dan atur jadwal transportasi dengan cadangan waktu yang cukup."
+    },
+    "KesalahanBooking": {
+      "Solusi": "Hubungi manajemen hotel untuk mengonfirmasi dan ubah pemesanan jika memungkinkan.",
+      "Pencegahan": "Adakan pertemuan dengan pihak hotel sebelum keberangkatan dan tinjau fasilitas yang disediakan."
+    },
+    "MuthawwifTidakBersama": {
+      "Solusi": "Miliki kontak darurat muthawwif atau guide lain untuk menggantikan jika diperlukan.",
+      "Pencegahan": "Pastikan komunikasi dan kesepakatan tertulis dengan muthawwif atau guide melalui TTD akad kerja."
+    },
+    "PembengkakanBiaya": {
+      "Solusi": "Petugas memberikan laporan keuangan yang transparan dan sediakan dana cadangan untuk keadaan darurat.",
+      "Pencegahan": "Susun anggaran yang detail dan realistis sesuai dengan kebutuhan di Tanah Suci."
+    },
+    "KegiatanTidakSesuai": {
+      "Solusi": "Hubungi manajemen dan susun rencana alternatif, serta komunikasikan dengan jelas kepada jamaah.",
+      "Pencegahan": "Rencanakan program dengan waktu cadangan yang cukup dan pertimbangkan kondisi lokal."
+    }
+  },
+  "MasalahHotel": {
+    "image": "URL_GAMBAR_Hotel",
+    "KualitasKamar": {
+      "Solusi": "Melaporkan kepada manajemen hotel untuk perubahan kamar atau peningkatan layanan kebersihan.",
+      "Pencegahan": "Melakukan survei sebelum perjalanan untuk memeriksa kondisi kamar dan fasilitas."
+    },
+    "FasilitasTidakLengkap": {
+      "Solusi": "Menghubungi manajemen hotel untuk perbaikan atau pelengkapan fasilitas yang kurang seperti heater.",
+      "Pencegahan": "Memastikan ketersediaan fasilitas sebelum keberangkatan."
+    },
+    "PelayananKurangRamah": {
+      "Solusi": "Melaporkan ke manajemen hotel dan meminta bantuan staf yang lebih profesional.",
+      "Pencegahan": "Memilih hotel dengan reputasi baik berdasarkan ulasan."
+    },
+    "KeterbatasanKamar": {
+      "Solusi": "Berkoordinasi dengan manajemen hotel untuk mendapatkan akomodasi alternatif tanpa biaya tambahan.",
+      "Pencegahan": "Melakukan pemesanan kamar jauh sebelum keberangkatan dengan konfirmasi tertulis."
+    },
+    "LokasiHotelTidakStrategis": {
+      "Solusi": "Menyediakan transportasi shuttle antar-jemput yang efisien untuk memudahkan akses ke Masjid atau tempat ibadah utama.",
+      "Pencegahan": "Memilih hotel yang strategis dan dekat dengan lokasi yang diinginkan."
+    },
+    "BiayaTambahanTidakJelas": {
+      "Solusi": "Klarifikasi dengan manajemen hotel mengenai biaya tambahan yang tidak wajar.",
+      "Pencegahan": "Memastikan semua biaya dan kebijakan tertulis dalam booking confirmation."
+    },
+    "MakananTidakCocok": {
+      "Solusi": "Mengumpulkan masukan dari jamaah mengenai preferensi makanan dan berkoordinasi dengan hotel untuk menyesuaikan menu.",
+      "Pencegahan": "Jamaah menyiapkan makanan alternatif sesuai kebutuhan pribadi."
+    }
+  },
+  "MasalahTransportasi": {
+    "image": "URL_GAMBAR_Transportasi",
+    "KeterlambatanTransportasi": {
+      "Solusi": "Berkoordinasi dengan supir bus untuk memastikan jadwal ketibaan bus di tempat jamaah.",
+      "Pencegahan": "Memilih jadwal transportasi yang menyediakan waktu luang untuk mengatasi kemungkinan keterlambatan."
+    },
+    "TeknisKendaraan": {
+      "Solusi": "Memiliki akses ke layanan bengkel darurat dan menyediakan kendaraan pengganti jika diperlukan.",
+      "Pencegahan": "Muassasah memeriksa kondisi kendaraan secara berkala dan memilih muassasah yang memiliki rekam jejak yang baik."
+    },
+    "JamaahTidakDisiplin": {
+      "Solusi": "Komunikasi melalui grup WhatsApp atau pengumuman langsung untuk mengingatkan jamaah tentang jadwal transportasi.",
+      "Pencegahan": "Mengedukasi jamaah tentang pentingnya disiplin waktu dan memberikan briefing jadwal secara jelas sebelum keberangkatan."
+    },
+    "AksesTempatIbadah": {
+      "Solusi": "Menggunakan taksi atau shuttle yang tidak mengikuti jalur umum untuk memudahkan akses ke tempat ibadah.",
+      "Pencegahan": "Mengidentifikasi rute atau kendaraan alternatif seperti taksi pada jam sibuk."
+    },
+    "KesulitanBerkomunikasi": {
+      "Solusi": "Membekali tour leader atau muthawwif dengan kemampuan bahasa yang diperlukan.",
+      "Pencegahan": "Memilih sopir yang dapat berkomunikasi dalam bahasa Indonesia atau memastikan muthawwif ikut di dalam bus jamaah."
+    },
+    "Kemacetan": {
+      "Solusi": "Mencari rute alternatif atau berangkat lebih awal untuk menghindari kemacetan.",
+      "Pencegahan": "Mempelajari rute dan kondisi lalu lintas sebelum berangkat."
+    }
+  },
+  "MasalahKomunikasi": {
+    "image": "URL_GAMBAR_Komunikasi",
+    "PerbedaanBahasa": {
+      "Solusi": "Gunakan aplikasi penerjemah untuk mempermudah komunikasi dengan penduduk setempat.",
+      "Pencegahan": "Pelajari kata-kata dasar dalam bahasa Arab atau Inggris sebelum perjalanan."
+    },
+    "JaringanInternetBuruk": {
+      "Solusi": "Cari tempat dengan koneksi internet lebih stabil, seperti di hotel atau kafe dengan WiFi.",
+      "Pencegahan": "Beli SIM card lokal yang memiliki jaringan kuat atau gunakan layanan roaming yang andal."
+    },
+    "MenghubungiKeluarga": {
+      "Solusi": "Gunakan aplikasi komunikasi seperti WhatsApp, Google Meet, atau Zoom.",
+      "Pencegahan": "Tentukan waktu komunikasi dengan keluarga sebelum berangkat dan siapkan perangkat serta aplikasi."
+    },
+    "MencariInformasiLokal": {
+      "Solusi": "Tanyakan pada penduduk lokal atau petugas informasi di area yang dikunjungi.",
+      "Pencegahan": "Bawa buku panduan atau unduh aplikasi atau peta dengan informasi penting sebelum berangkat."
+    },
+    "BerkomunikasiDenganSopir": {
+      "Solusi": "Pastikan tour leader atau Muthawwif bisa berkomunikasi atau gunakan aplikasi penerjemah.",
+      "Pencegahan": "Pastikan Muthawwif ikut atau pilih sopir yang bisa berbahasa Indonesia atau bahasa yang jamaah pahami."
+    },
+    "PerbedaanEkspektasi": {
+      "Solusi": "Lakukan dialog terbuka untuk menjelaskan situasi dan menyesuaikan ekspektasi.",
+      "Pencegahan": "Berikan penjelasan lengkap tentang program umrah dan paket perjalanan sebelum keberangkatan."
+    },
+    "KonflikAntarjamaah": {
+      "Solusi": "Tour leader harus berperan sebagai mediator untuk menyelesaikan konflik secara objektif.",
+      "Pencegahan": "Adakan sesi perkenalan dan pembekalan sebelum perjalanan untuk mempererat kebersamaan."
+    }
+  },
+  "MasalahPsikologis": {
+    "image": "URL_GAMBAR_Psikologis",
+    "RasaTakut": {
+      "Solusi": "Buka sesi curhat dan ajak jamaah untuk berbicara dengan sesama jamaah atau pembimbing.",
+      "Pencegahan": "Persiapkan mental dan spiritual sebelum perjalanan dengan mengikuti kajian atau pembekalan rohani."
+    },
+    "KebingunganDiTempatBaru": {
+      "Solusi": "Minta bantuan dari petugas atau orang yang berpengalaman untuk menjelaskan hal-hal yang belum diketahui.",
+      "Pencegahan": "Pelajari peta dan tata letak tempat-tempat penting sebelum berangkat."
+    },
+    "KerinduanKeluarga": {
+      "Solusi": "Sering berkomunikasi dengan keluarga melalui telepon atau aplikasi video call.",
+      "Pencegahan": "Atur jadwal komunikasi dengan keluarga sebelum berangkat."
+    },
+    "JamaahMengalamiStres": {
+      "Solusi": "Ajak jamaah untuk melakukan ibadah yang menenangkan seperti zikir dan doa.",
+      "Pencegahan": "Buat jadwal ibadah yang fleksibel dan beri waktu istirahat yang cukup."
+    },
+    "KesulitanAdaptasi": {
+      "Solusi": "Ajak jamaah untuk terbuka dan menghargai budaya setempat.",
+      "Pencegahan": "Pelajari budaya lokal seperti tata cara berpakaian dan sopan santun."
+    },
+    "KehilanganFokus": {
+      "Solusi": "Berikan motivasi tambahan dan dukungan moral kepada jamaah.",
+      "Pencegahan": "Tetapkan tujuan ibadah yang jelas dan dorong jamaah untuk tetap fokus."
+    },
+    "JamaahMerasaBersalah": {
+      "Solusi": "Berikan bimbingan agama dan dukungan moral yang positif.",
+      "Pencegahan": "Dukung jamaah dalam setiap usaha ibadah mereka."
+    }
+  },
+  "MasalahCuaca": {
+    "image": "URL_GAMBAR_Cuaca",
+    "CuacaTerlaluPanas": {
+      "Solusi": "Tetapkan jadwal ibadah atau kunjungan pada waktu yang lebih sejuk, seperti pagi atau sore hari.",
+      "Pencegahan": "Sarankan jamaah membawa topi, kacamata hitam, dan pelindung dari sinar matahari."
+    },
+    "Kekeringan": {
+      "Solusi": "Hemat penggunaan air dan cari sumber air alternatif jika diperlukan.",
+      "Pencegahan": "Siapkan persediaan air yang cukup sebelum perjalanan untuk berjaga-jaga."
+    },
+    "CuacaEkstrem": {
+      "Solusi": "Beri tahu jamaah untuk membawa perlengkapan yang sesuai, seperti jaket, payung, atau pelindung matahari.",
+      "Pencegahan": "Informasikan kepada jamaah kondisi cuaca yang akan dihadapi di setiap lokasi."
+    },
+    "HujanAtauBadaiSalju": {
+      "Solusi": "Siapkan alternatif untuk kegiatan di luar ruangan jika terjadi cuaca buruk.",
+      "Pencegahan": "Periksa ramalan cuaca secara berkala dan pastikan jamaah membawa perlengkapan hujan."
+    },
+    "BanjirAtauBadaiHujan": {
+      "Solusi": "Jika cuaca buruk, tetap di hotel atau mencari tempat aman.",
+      "Pencegahan": "Pantau terus kondisi cuaca di Arab Saudi, karena kadang sulit diprediksi."
+    },
+    "KebakaranHutan": {
+      "Solusi": "Ikuti petunjuk evakuasi dari pihak berwenang jika terjadi kebakaran hutan di area sekitar.",
+      "Pencegahan": "Pantau situasi di sekitar dan hindari area yang rawan kebakaran."
+    }
+  },
+  "MasalahTeknologi": {
+    "image": "URL_GAMBAR_Teknologi",
+    "BateraiHabis": {
+      "Solusi": "Bawa power bank sebagai cadangan untuk mengisi daya perangkat.",
+      "Pencegahan": "Pastikan semua perangkat terisi penuh sebelum berangkat."
+    },
+    "KesulitanMenggunakanAplikasi": {
+      "Solusi": "Pelajari cara penggunaan aplikasi penerjemah sebelumnya.",
+      "Pencegahan": "Latih penggunaan aplikasi sebelum perjalanan."
+    },
+    "KoneksiInternetPenginapan": {
+      "Solusi": "Gunakan data seluler atau cari WiFi publik.",
+      "Pencegahan": "Pilih penginapan dengan koneksi internet yang baik."
+    },
+    "KerusakanPerangkat": {
+      "Solusi": "Bawa perangkat cadangan atau cari tempat servis terdekat.",
+      "Pencegahan": "Gunakan casing tambahan dan simpan perangkat dengan aman."
+    },
+    "KesulitanMenggunakanGPS": {
+      "Solusi": "Pelajari peta manual atau hafalkan rute sebagai cadangan.",
+      "Pencegahan": "Download peta offline dan pelajari rute sebelum berangkat."
+    },
+    "KesalahanPenggunaanAplikasi": {
+      "Solusi": "Minta bantuan dari Tour Leader atau Muthawwif.",
+      "Pencegahan": "Pelajari aplikasi Nusuk sebelum perjalanan."
+    },
+    "KehilanganHandphone": {
+      "Solusi": "Laporkan kehilangan dan gunakan fitur pelacakan.",
+      "Pencegahan": "Simpan handphone di tempat aman dan aktifkan fitur pelacakan."
+    },
+    "MasalahPowerBank": {
+      "Solusi": "Bawa power bank atau charger cadangan.",
+      "Pencegahan": "Periksa semua perangkat charging sebelum perjalanan."
+    }
+  }
+}

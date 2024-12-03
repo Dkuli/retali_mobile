@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'auth/providers/auth_provider.dart';
 import 'auth/screens/login_screen.dart';
@@ -69,8 +70,10 @@ class _MyAppState extends State<MyApp> {
         title: 'Luggage Scanner App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-          useMaterial3: true,
+          primarySwatch: Colors.purple,
+            useMaterial3: true,
+            primaryColor: Color.fromARGB(255, 113, 6, 97),
+          textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
         ),
         home: _showOnboarding
             ? OnboardingScreen(onComplete: _completeOnboarding)

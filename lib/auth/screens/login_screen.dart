@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                 children: [
                  
                   Text(
-                    'Hi, Welcome!',
+                    'Hi, Tourlider!',
                     style: TextStyle(
                       fontSize: 28.0,
                       fontWeight: FontWeight.bold,
@@ -76,8 +76,8 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                     ),
                   ),
                   SizedBox(height: 8),
-                  Text(
-                    'Please enter your username/email and password to sign in',
+                    Text(
+                    'Masukkan username/email dan kata sandi Anda untuk masuk',
                     style: TextStyle(fontSize: 16.0, color: Colors.grey),
                   ),
                   SizedBox(height: 32.0),

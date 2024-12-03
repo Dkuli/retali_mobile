@@ -1,0 +1,352 @@
+
+{
+  "briefings": [
+   
+    {
+      "type": "Group Manasik",
+      "content": {
+        "opening": "Assalamu'alaikum warahmatullahi wabarakatuh, Bismillahirrahmanirrahim, Alhamdulillahi rabbil 'alamin, segala puji bagi Allah عز وجل yang telah memberikan kita nikmat iman, kesehatan, dan kesempatan sehingga kita dapat berkumpul di sini dalam keadaan yang penuh berkah. Shalawat serta salam semoga senantiasa tercurahkan kepada junjungan kita Nabi Besar Muhammad ﷺ, beserta keluarga, sahabat, dan para pengikutnya yang setia hingga akhir zaman.",
+        "introduction": "Para jamaah Retali yang dirahmati Allah, Alhamdulillah, kita telah menyelesaikan perjalanan kita di kota Madinah dan sebentar lagi kita akan melanjutkan perjalanan menuju kota suci Mekkah untuk melaksanakan ibadah umrah. Sebelum kita berangkat, izinkan saya untuk memberikan beberapa pemantapan mengenai manasik umrah agar kita semua dapat melaksanakan ibadah dengan benar dan khusyuk.",
+        "niat_and_ihram": {
+          "instructions": "Sebelum memasuki miqat, pastikan kita sudah berniat untuk melaksanakan umrah dan mengenakan pakaian ihram. Ihram bagi laki-laki adalah dua helai kain putih tanpa jahitan, sementara bagi perempuan adalah pakaian yang menutupi seluruh tubuh kecuali wajah dan telapak tangan. Setelah berniat dan mengenakan ihram, larangan-larangan ihram mulai berlaku."
+        },
+        "tawaf": {
+          "instructions": "Setelah tiba di Masjidil Haram, kita akan melaksanakan tawaf mengelilingi Ka'bah sebanyak tujuh putaran, dimulai dari Hajar Aswad dan berakhir di tempat yang sama. Tidak ada doa khusus yang terlalu sulit, perbanyaklah bermunajat, dzikir, dan istighfar."
+        },
+        "sa'i": {
+          "instructions": "Setelah menyelesaikan tawaf, kita akan melakukan sa'i, yaitu berjalan tujuh kali antara bukit Shafa dan Marwah. Saat sa'i, perbanyaklah doa dan dzikir, mengingat perjuangan Hajar mencari air untuk putranya, Nabi Ismail."
+        },
+        "tahallul": {
+          "instructions": "Setelah sa'i, kita akan melakukan tahallul, yaitu mencukur atau memotong sebagian rambut. Bagi laki-laki, dianjurkan untuk mencukur seluruh rambut, sedangkan perempuan cukup memotong sebagian kecil."
+        },
+        "etika": {
+          "instructions": "Selama berada di Masjidil Haram, harap jaga adab dan sopan santun. Hormati sesama jamaah dan petugas masjid. Jaga kebersihan, ketertiban, dan jangan berdesak-desakan."
+        },
+        "closing": "Para jamaah yang berbahagia, mari kita manfaatkan waktu di kota Mekkah dengan sebaik-baiknya. Perbanyaklah ibadah, dzikir, dan doa. Semoga Allah عز وجل menerima amal ibadah kita dan memberikan kita keberkahan serta kemudahan dalam menjalankan ibadah umrah. Wassalamu'alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+        "type": "Keberangkatan",
+        "content": {
+          "opening": "Assalamu'alaikum warahmatullahi wabarakatuh, Alhamdulillah, segala puji bagi Allah SWT yang telah memberikan kita kesempatan untuk melaksanakan ibadah umrah. Shalawat dan salam kita sampaikan kepada junjungan kita Nabi Muhammad SAW, keluarga, sahabat, dan kita semua sebagai umatnya.",
+          "introduction": "Perkenalkan, nama saya [Nama Tour Leader], dan saya akan menjadi tour leader Anda selama perjalanan umrah ini. Saya bersama tim Retali akan mendampingi Anda semua untuk memastikan perjalanan ibadah kita berjalan lancar, aman, dan nyaman, sesuai dengan tuntunan syariat Islam.",
+          "jamaah_preparedness": {
+            "gathering_location": "Pastikan semua jamaah sudah berkumpul di lokasi keberangkatan di [lokasi] pada pukul [waktu] sesuai dengan jadwal yang telah ditentukan.",
+            "travel_documents": "Pastikan semua jamaah telah membawa dokumen perjalanan yang diperlukan, seperti paspor, visa, tiket, dan surat keterangan kesehatan jika diperlukan. Silakan periksa kembali kelengkapan dokumen Anda."
+          },
+          "administration_check": {
+            "document_verification": "Kami akan melakukan pengecekan terakhir terhadap dokumen perjalanan Anda. Mohon siapkan paspor dan tiket untuk diperiksa.",
+            "emergency_contact": "Kami juga akan mengumpulkan informasi kontak darurat dari setiap jamaah. Mohon untuk memberikan nomor kontak yang bisa dihubungi selama perjalanan."
+          },
+          "coordination": {
+            "airport_and_flight": "Kami telah berkoordinasi dengan pihak handling bandara dan manajemen terkait persiapan keberangkatan, termasuk check-in dan prosedur boarding. Mohon ikuti arahan dari tim kami.",
+            "accommodation_transport": "Semua tiket pesawat, akomodasi, dan transportasi selama di Tanah Suci telah diatur dengan baik. Kami akan memastikan semuanya sesuai dengan rencana."
+          },
+          "important_information": {
+            "departure_schedule": "Keberangkatan kita dijadwalkan pada pukul [waktu], dengan penerbangan [nomor penerbangan]. Pastikan Anda sudah berada di area check-in minimal 3 jam sebelum keberangkatan.",
+            "airport_procedure": "Ikuti instruksi dari petugas bandara dan pastikan Anda membawa barang-barang sesuai dengan aturan. Jangan membawa barang-barang terlarang dan perhatikan batasan berat bagasi.",
+            "meeting_points": "Selalu perhatikan titik-titik kumpul yang telah ditentukan selama perjalanan. Informasi ini akan diberikan secara detail oleh tim kami setiap kali kita sampai di tujuan baru."
+          },
+          "building_compact": {
+            "cooperation_and_tolerance": "Mari kita bangun suasana yang positif dan harmonis di antara kita. Penting untuk saling membantu, toleransi, dan keterbukaan selama perjalanan ini."
+          },
+          "travel_rules": {
+            "conduct_rules": "Jaga kebersihan, ketertiban, dan keamanan selama perjalanan. Patuhi semua aturan yang telah disosialisasikan."
+          },
+          "personal_preparedness": {
+            "health_and_safety": "Jaga kesehatan Anda, ikuti protokol kesehatan yang berlaku. Jika merasa tidak enak badan, segera lapor ke tim kami.",
+            "mental_preparedness": "Siapkan diri secara mental untuk menghadapi berbagai situasi yang mungkin terjadi selama perjalanan."
+          },
+          "worship_guidance": {
+            "worship_according_to_sunnah": "Kami akan membimbing Anda untuk melaksanakan ibadah umrah sesuai dengan sunnah Rasulullah SAW. Hindari perkara bid'ah dan pastikan ibadah Anda sah dan khusyuk."
+          },
+          "management": {
+            "efficiency_and_organization": "Kami akan menjalankan setiap aspek perjalanan dengan manajerial yang baik untuk memastikan efisiensi dan organisasi yang rapi. Hal ini bertujuan agar Anda mendapatkan pengalaman ibadah yang berkesan dan memuaskan."
+          },
+          "closing": "Semoga Allah SWT memudahkan perjalanan kita, memberikan kita kesehatan dan kekuatan, serta menerima seluruh ibadah kita. Mari kita niatkan perjalanan ini semata-mata untuk mendapatkan ridha Allah SWT. Wassalamu'alaikum warahmatullahi wabarakatuh."
+        }
+      },
+    {
+      "type": "Tour Madinah",
+      "location": "Masjid Quba",
+      "content": {
+        "opening": "Assalamu'alaikum warahmatullahi wabarakatuh, Jamaah Retali.",
+        "description": "Alhamdulillah, kita sekarang berada di tempat yang sangat mulia, Masjid Quba, masjid pertama yang dibangun dalam Islam. Bisa bayangkan? Inilah tempat yang dibangun oleh Nabi Muhammad ﷺ bersama para sahabatnya yang mulia, dan masjid ini dibangun atas dasar takwa kepada Allah sejak awal. Begitu besar kedudukannya dalam Islam! Ketika Nabi ﷺ tiba di Madinah setelah hijrah dari Mekkah, beliau tinggal beberapa hari di Quba. Salah satu tindakan pertama beliau adalah membangun masjid ini bersama para sahabatnya dari kaum Muhajirin dan Anshar. Masjid Quba terletak di perkampungan Bani 'Amr bin 'Auf, dan hingga sekarang, masjid ini tetap berdiri megah. Ini bukan hanya sebuah bangunan, Sobat Retali, tetapi juga simbol iman, ketakwaan, dan kecintaan kepada Allah dan Rasul-Nya.",
+        "historical_significance": "Yang menarik, Nabi ﷺ biasa mengunjungi masjid ini setiap hari Sabtu. Beliau datang baik dengan berjalan kaki maupun berkendara, dan melaksanakan salat di sini. Beliau ﷺ menyampaikan kepada kita dalam sebuah hadis, “Barang siapa bersuci di rumahnya, kemudian datang ke Masjid Quba dan melaksanakan salat di dalamnya, baginya pahala seperti pahala umrah.” Bayangkan, Sobat Retali, kita semua yang hadir di sini bisa meraih pahala umrah dengan melaksanakan salat di masjid ini. Maka, jangan lewatkan kesempatan emas ini, insya Allah.",
+        "narrative_history": "Sobat Retali, Masjid Quba juga mendapatkan perhatian besar sepanjang sejarah. Diperbarui oleh Khalifah Utsman bin Affan رضي الله عنه, dan kemudian ditingkatkan lagi oleh Umar bin Abdul Aziz ketika beliau menjadi gubernur Madinah. Hingga kini, di era Kerajaan Saudi, masjid ini terus diperluas. Kita bisa melihat bagaimana desain aslinya tetap dipertahankan, tetapi dengan tambahan empat menara megah dan beberapa kubah besar. Saat ini, di bawah Proyek Raja Salman, masjid ini diperluas lebih jauh dan bisa menampung hingga 66 ribu jamaah.",
+        "observations": "Sekarang, perhatikan Sobat Retali, lihat sekeliling. Banyak sekali jamaah dari seluruh dunia yang datang ke sini, mengingat betapa besar keutamaan dan berkah yang ada di masjid ini. Ini adalah tempat yang selalu terbuka untuk kita semua, tanpa batasan waktu. Setiap saat, kita bisa datang untuk mendekatkan diri kepada Allah di sini.",
+        "conclusion": "Masjid ini bukan hanya sebuah bangunan, tetapi juga saksi bisu dari hijrah Nabi Muhammad ﷺ, simbol perjuangan, ketakwaan, dan kecintaan kepada Islam. Semoga kita semua mendapatkan keberkahan dari tempat yang mulia ini dan bisa membawa pulang kenangan spiritual yang tak terlupakan.",
+        "closing": "Wassalamu'alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "City Tour",
+      "location": "Makam Baqi",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamualaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Alhamdulillah, hari ini kita berada di pemakaman Baqi, tempat yang penuh sejarah. Di sinilah para sahabat, keluarga Rasulullah shallallahu ‘alaihi wa sallam, dan orang-orang saleh dimakamkan. Semoga kehadiran kita di sini menambah kecintaan kita pada Rasulullah dan meningkatkan ketakwaan kita.",
+        "cultural_differences": "Jamaah Retali, di sini kita bisa melihat perbedaan pemakaman Al-Baqi ini dengan yang kita temui di Indonesia. Sesuai dengan tuntunan Islam, di sini kuburan-kuburan hanya ditandai dengan batu sederhana, tanpa bangunan atau hiasan khusus. Hal ini mengikuti sunnah Rasulullah shallallahu ‘alaihi wa sallam yang mengajarkan kesederhanaan dan menjauhi hal-hal berlebihan dalam pemakaman.",
+        "hadith_reference": "Sebagaimana dalam hadits, Rasulullah shallallahu ‘alaihi wa sallam bersabda: 'Dahulu Rasulullah shallallahu ‘alaihi wa sallam melarang untuk membangun di atas kuburan, menambah tinggi tanahnya, atau memberikan tanda khusus di atasnya.' (HR. Muslim).",
+        "moral_lessons": "Hal ini mengajarkan bahwa pemakaman adalah tempat yang seharusnya tetap sederhana, mengingatkan kita pada kematian dan pentingnya beramal saleh.",
+        "ziarah_enhancement": "Mari kita gunakan kesempatan Perjalanan Umrah ini untuk berdoa kepada Allah, menyampaikan salam kepada para penghuni pemakaman ini, dan memohon ampunan serta rahmat-Nya untuk mereka dan untuk diri kita sendiri.",
+        "closing": "Terima kasih atas perhatian Jamaah Retali. Wassalamualaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "City Tour",
+      "location": "Masjid Ali bin Abi Thalib",
+      "content": {
+        "opening": "Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Alhamdulillah, hari ini kita mendapat kesempatan untuk berada di dekat Masjid Ali bin Abi Thalib رضي الله عنه. Saat kita berdiri di sini, mari kita mengenang salah satu sosok paling pemberani, sahabat dan juga menantu Rasulullah ﷺ, Ali bin Abi Thalib رضي الله عنه.",
+        "characteristics": "Ali dikenal karena keilmuan dan kebijaksanaannya, serta keberaniannya di medan perang. Masjid ini berfungsi sebagai tempat ibadah dan tempat Ali رضي الله عنه sering menghabiskan waktu untuk bertafakur dan berdoa.",
+        "atmosphere": "Di tengah kota Madinah yang berkembang ini, masjid ini masih memancarkan kesederhanaan dan nilai sejarah yang luar biasa. Kini, desain arsitekturnya terlihat lebih modern dengan sentuhan klasik, namun tetap mempertahankan atmosfer kedamaian.",
+        "wisdom": "Kita belajar dari Ali رضي الله عنه bahwa iman harus diiringi dengan pemahaman yang mendalam dan amalan yang ikhlas. Semoga kita bisa meneladani keteguhan hati Ali رضي الله عنه dan mengambil hikmah dari setiap langkah hidup kita.",
+        "closing": "Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "City Tour",
+      "location": "Masjid Umar bin Khattab",
+      "content": {
+        "opening": "Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Di tempat yang mulia ini, kita sekarang berada di depan Masjid Umar bin Khattab رضي الله عنه, yang didedikasikan untuk sahabat Nabi yang dikenal dengan keberanian dan keteguhannya dalam menegakkan keadilan.",
+        "historical_significance": "Masjid ini menjadi saksi bisu perjuangan beliau dalam menegakkan kebenaran. Saat ini, masjid ini masih berdiri kokoh di salah satu sudut dekat Masjid Nabawi, mengingatkan kita akan sifat kuat Umar رضي الله عنه yang menjadi perisai bagi umat Islam.",
+        "characteristics": "Dengan arsitektur sederhana namun kokoh, masjid ini adalah cerminan karakter Umar رضي الله عنه yang tegas namun selalu mengedepankan kasih sayang pada umat.",
+        "quote": "Umar رضي الله عنه adalah khalifah kedua yang dikenal karena reformasi sosial dan ekonominya. Beliau yang memperkenalkan kalender Hijriyah, mengatur peradilan Islam, dan memperhatikan kesejahteraan rakyatnya. Rasulullah ﷺ bersabda, 'Jika ada nabi setelahku, maka Umar-lah orangnya.' (HR. Tirmidzi).",
+        "closing": "Di sini kita diingatkan bahwa menjadi Muslim berarti berani untuk berbuat adil, untuk menegakkan kebenaran walaupun itu sulit. Semoga kita semua diberikan kekuatan untuk selalu berbuat baik sebagaimana yang Umar رضي الله عنه contohkan. Aamiin. Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "City Tour",
+      "location": "Masjid Abu Bakar Ash-Shiddiq",
+      "content": {
+        "opening": "Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Sekarang kita berada di depan Masjid Abu Bakar Ash-Shiddiq رضي الله عنه, sahabat Nabi yang paling setia dan orang pertama yang beriman kepada beliau.",
+        "significance": "Masjid ini berada di dekat Masjid Nabawi, dan tetap berdiri sebagai simbol ketulusan Abu Bakar dalam membela Islam. Abu Bakar رضي الله عنه tidak hanya membenarkan Nabi ﷺ dalam peristiwa Isra' Mi'raj tanpa ragu, tetapi juga rela berkorban dengan seluruh hartanya di jalan Allah.",
+        "role": "Beliau menjadi khalifah pertama setelah wafatnya Rasulullah ﷺ dan berhasil menjaga keutuhan umat meskipun banyak ujian yang dihadapi.",
+        "characteristics": "Bangunan masjid ini yang sederhana seakan mencerminkan kepribadian Abu Bakar رضي الله عنه yang rendah hati dan penuh cinta kepada Islam.",
+        "closing": "Di tempat ini, mari kita ingat kesetiaan dan kecintaan Abu Bakar رضي الله عنه kepada Nabi ﷺ, dan mari kita memohon agar kita juga diberi keimanan yang kuat. Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "City Tour",
+      "location": "Gunung Uhud",
+      "content": {
+        "opening": "Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Alhamdulillah, kita berada di salah satu tempat bersejarah yang sangat berarti bagi umat Islam, yaitu Gunung Uhud. Rasulullah ﷺ bersabda, 'Gunung ini mencintai kita, dan kita pun mencintainya.' (HR. Bukhari).",
+        "historical_significance": "Gunung ini menjadi saksi dari Perang Uhud, yang menjadi ujian berat bagi umat Islam saat itu. Saat ini, Gunung Uhud berdiri megah di depan kita dengan keindahan alamnya yang tak berubah.",
+        "reflections": "Ketika kita berdiri di sini, mari kita bayangkan suasana perang di mana para sahabat mempertaruhkan nyawa mereka demi Islam. Di sinilah Hamzah bin Abdul Muthalib رضي الله عنه, paman Nabi ﷺ, gugur sebagai syahid.",
+        "lessons": "Meskipun umat Islam sempat hampir meraih kemenangan, kekalahan terjadi ketika beberapa pemanah meninggalkan pos mereka demi mengejar harta rampasan.",
+        "conclusion": "Peristiwa di Bukit Pemanah ini menjadi pelajaran bagi kita tentang pentingnya disiplin, kesabaran, dan keikhlasan dalam menjalankan perintah Allah. Semoga kita semua bisa mengambil pelajaran berharga dari peristiwa ini dan menjadi hamba yang selalu taat kepada-Nya.",
+        "closing": "Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "City Tour",
+      "location": "Makam Syuhada Uhud",
+      "content": {
+        "opening": "Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Saat ini kita berada di Makam Syuhada Uhud, tempat di mana para pahlawan Islam yang gugur dalam Perang Uhud dimakamkan.",
+        "significant_person": "Di antara mereka terdapat paman Rasulullah ﷺ, Hamzah bin Abdul Muthalib رضي الله عنه, yang dikenal sebagai 'Singa Allah.' Para syuhada yang dimakamkan di sini telah memberikan nyawa mereka demi menegakkan agama Allah.",
+        "reflection": "Ketika kita berada di tempat ini, kita diingatkan pada firman Allah, 'Janganlah kamu mengira bahwa orang-orang yang gugur di jalan Allah itu mati; bahkan mereka hidup di sisi Tuhannya dengan mendapat rezeki.' (QS. Ali Imran: 169).",
+        "prayers": "Mari kita berdoa untuk para syuhada agar Allah menempatkan mereka di surga-Nya yang tertinggi.",
+        "closing": "Di tempat ini, kita juga diingatkan untuk memperbarui niat dan siap untuk berkorban demi agama, apapun yang terjadi. Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "City Tour",
+      "location": "Saqifah Bani Saidah",
+      "content": {
+        "opening": "Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Kita berada di Saqifah Bani Saidah, tempat bersejarah di mana para sahabat berkumpul untuk bermusyawarah setelah wafatnya Nabi ﷺ.",
+        "significance": "Di sinilah Abu Bakar Ash-Shiddiq رضي الله عنه akhirnya terpilih sebagai khalifah pertama umat Islam. Tempat ini memiliki nilai sejarah penting.",
+        "lessons": "Mengajarkan kita bahwa Islam menganjurkan musyawarah dalam menyelesaikan masalah. Allah berfirman, 'Dan bermusyawarahlah dalam urusan itu.' (QS. Ali Imran: 159).",
+        "goal": "Di sini, kita belajar betapa pentingnya persatuan dan saling mendengarkan.",
+        "closing": "Semoga kita dapat menerapkan pelajaran dari Saqifah Bani Saidah ini dalam kehidupan sehari-hari, dan senantiasa menjunjung tinggi nilai persatuan dan kebijaksanaan. Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "City Tour",
+      "location": "Raudhah Asy Syarifah",
+      "content": {
+        "opening": "Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Alhamdulillah, kita saat ini berada di salah satu tempat yang paling mulia dan istimewa di dunia, yaitu Raudhah Asy Syarifah.",
+        "hadith_reference": "Rasulullah ﷺ bersabda, 'Antara rumahku dan mimbarku adalah taman (Raudhah) dari taman-taman surga.' (HR. Bukhari dan Muslim).",
+        "experience": "Setiap langkah kita di sini adalah langkah yang diiringi berkah dan rahmat Allah, sebuah kesempatan yang tidak semua orang dapatkan.",
+        "observations": "Raudhah sekarang ditandai dengan karpet berwarna hijau, berbeda dari karpet merah di sekitarnya. Tempat ini sering kali penuh dengan jamaah dari berbagai penjuru dunia yang datang untuk berdoa.",
+        "usage": "Di Raudhah ini, kita merasakan kedekatan yang mendalam dengan Rasulullah ﷺ. Mari manfaatkan momen ini untuk memanjatkan doa yang tulus, memohon apa yang kita butuhkan kepada Allah.",
+        "closing": "Semoga setiap doa yang kita panjatkan di Raudhah ini diijabah oleh Allah. Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "City Tour",
+      "location": "Bukit Pemanah",
+      "content": {
+        "opening": "Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Hari ini kita berada di depan salah satu titik penting dari Perang Uhud, yaitu Bukit Pemanah.",
+        "strategic_importance": "Di sinilah Rasulullah ﷺ menempatkan para pemanah yang dipimpin oleh Abdullah bin Jubair رضي الله عنه, dengan pesan agar mereka tidak meninggalkan posisi, apapun yang terjadi.",
+        "historical_context": "Bukit ini mungkin tampak sederhana sekarang, tetapi dulunya, bukit ini menjadi benteng pertahanan umat Islam. Namun, sebagian pemanah turun sebelum perang usai.",
+        "lesson": "Peristiwa di Bukit Pemanah ini menjadi pelajaran besar bagi kita semua akan pentingnya mematuhi perintah Allah dan Rasul-Nya.",
+        "closing": "Mari kita ingat selalu untuk menaati perintah Allah tanpa ragu dan tidak tergoda oleh kenikmatan dunia yang hanya sementara. Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "City Tour",
+      "location": "Masjid Al Ghamamah",
+      "content": {
+        "opening": "Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Saat ini kita berada di depan Masjid Al Ghamamah, masjid bersejarah yang juga dikenal dengan nama Masjid Awan.",
+        "historical_significance": "Masjid ini dibangun di tempat Nabi ﷺ melaksanakan shalat istisqa, shalat meminta hujan, ketika penduduk Madinah mengalami kekeringan.",
+        "miracle": "Saat Nabi ﷺ mengangkat tangan beliau untuk berdoa, awan tiba-tiba muncul di atas beliau dan tak lama kemudian hujan pun turun.",
+        "architecture": "Masjid ini berdiri dengan arsitektur khas, berbentuk persegi dengan kubah indah.",
+        "usage": "Saat kita berada di sini, mari kita panjatkan doa-doa kita kepada Allah, memohon keberkahan, kelancaran, serta keselamatan dalam perjalanan ini.",
+        "closing": "Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "City Tour",
+      "location": "Masjid Nabawi",
+      "content": {
+        "opening": "Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dimuliakan Allah.",
+        "description": "Alhamdulillah, kita sekarang berada di Masjid Nabawi, masjid yang dibangun oleh Rasulullah ﷺ sendiri.",
+        "historical_significance": "Inilah masjid yang memiliki keutamaan besar, di mana satu kali shalat di sini sama dengan seribu kali shalat di masjid lain.",
+        "architecture": "Masjid Nabawi kini telah mengalami banyak perluasan yang megah, dengan payung-payung besar yang meneduhkan jamaah dan kubah hijau.",
+        "spiritual_significance": "Di sini juga terdapat Hajar Aswad, batu dari surga yang dicium oleh Nabi ﷺ.",
+        "usage": "Mari kita manfaatkan waktu di Masjid Nabawi ini dengan memperbanyak doa, dzikir, dan ibadah. Semoga Allah menerima amal kita di tempat suci ini dan melimpahkan kita dengan keberkahan-Nya.",
+        "closing": "Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "Umrah Guidance",
+      "location": "Jabal Rahmah",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Alhamdulillah, segala puji kita panjatkan kepada Allah Azza wa Jalla yang telah memberikan kita kesempatan luar biasa ini untuk hadir di tempat penuh sejarah, yaitu Jabal Rahmah.",
+        "historical_context": "Saat ini kita berada di Jabal Rahmah, atau 'Bukit Kasih Sayang,' yang menurut tradisi Islam menjadi tempat pertemuan kembali Nabi Adam dan Hawa.",
+        "moral_lessons": "Jabal Rahmah mengingatkan kita pada pentingnya cinta, ampunan, dan keikhlasan. Mari kita manfaatkan kesempatan ini dengan berdoa kepada Allah, memohon ampunan dan kebaikan bagi diri kita dan keluarga kita.",
+        "closing": "Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "Umrah Guidance",
+      "location": "Arafah",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali.",
+        "description": "Alhamdulillah, kita berada di Padang Arafah, lokasi yang sangat istimewa dalam ibadah haji.",
+        "significance": "Nabi Muhammad ﷺ bersabda, 'Haji itu adalah Arafah' (HR. Tirmidzi). Arafah merupakan simbol dari pengakuan dan permohonan ampunan kita kepada Allah.",
+        "spiritual_significance": "Mari kita manfaatkan waktu yang sangat berharga ini untuk berdoa dan memohon kepada Allah. Semoga kita semua diterima sebagai hamba yang bertobat dan diampuni dosa-dosa kita.",
+        "closing": "Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "Umrah Guidance",
+      "location": "Mina",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali.",
+        "description": "Segala puji bagi Allah Azza wa Jalla yang telah memudahkan kita untuk berada di Mina, tempat bersejarah dalam pelaksanaan ibadah haji.",
+        "rituals": "Di Mina ini, kita akan melakukan pelontaran jumrah, yaitu melempar batu sebagai simbol perlawanan terhadap godaan setan.",
+        "reminder": "Mari kita isi waktu kita di Mina dengan berdzikir dan berdoa, memohon perlindungan dari Allah dari segala tipu daya setan.",
+        "closing": "Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "Umrah Guidance",
+      "location": "Muzdalifah",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali.",
+        "description": "Segala puji bagi Allah Azza wa Jalla yang telah memberikan kita kesempatan untuk berada di Muzdalifah.",
+        "reminder": "Di sini kita diingatkan tentang ketenangan dan keikhlasan dalam menjalankan perintah Allah.",
+        "hope": "Semoga Allah menerima doa dan amalan kita, serta mempermudah setiap urusan kita dalam ibadah ini.",
+        "closing": "Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "Umrah Guidance",
+      "location": "Jabal Tsur",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "historical_context": "Jabal Tsur adalah tempat bersejarah di mana Nabi Muhammad ﷺ dan sahabatnya, Abu Bakar Ash-Shiddiq رضي الله عنه, berlindung selama tiga hari dari pengejaran kaum Quraisy.",
+        "lessons": "Melihat Jabal Tsur yang menjulang tinggi ini mengingatkan kita pada ketabahan dan tawakkal kepada Allah dalam setiap ujian.",
+        "reminder": "Semoga kisah hijrah ini memberikan kekuatan kepada kita semua untuk bersabar dan bertawakkal, apapun tantangan yang kita hadapi.",
+        "closing": "Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "Umrah Guidance",
+      "location": "Jabal Nur",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Alhamdulillah, kita berada di Jabal Nur, tempat penuh berkah di mana wahyu pertama diturunkan kepada Nabi Muhammad ﷺ.",
+        "historical_context": "Di puncak Jabal Nur, terdapat Gua Hira, tempat Nabi ﷺ menyendiri untuk beribadah sebelum masa kerasulannya.",
+        "lessons": "Peristiwa ini mengingatkan kita tentang pentingnya ilmu dan membaca dalam Islam.",
+        "closing": "Semoga Allah menambahkan ilmu dan iman kepada kita semua di tempat yang mulia ini. Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "Umrah Guidance",
+      "location": "Masjidil Haram",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Alhamdulillah, segala puji hanya bagi Allah Azza wa Jalla yang telah memberi kita kesempatan berada di Masjidil Haram, masjid yang paling mulia di muka bumi.",
+        "significance": "Di sinilah berdiri Ka’bah, kiblat bagi umat Islam di seluruh dunia.",
+        "spiritual_significance": "Mari kita manfaatkan waktu di Masjidil Haram ini dengan memperbanyak doa, dzikir, dan ibadah, memohon ampunan dan rahmat dari Allah.",
+        "closing": "Semoga Allah menerima amal kita di tempat suci ini dan melimpahkan kita dengan keberkahan-Nya. Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "Umrah Guidance",
+      "location": "Clock Tower (Makkah Royal Clock Tower)",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali.",
+        "description": "Di dekat Masjidil Haram, kita dapat melihat salah satu menara jam tertinggi di dunia, yaitu Makkah Royal Clock Tower.",
+        "importance": "Bangunan ini menjadi ikon modern yang membantu jamaah mengetahui waktu shalat dengan tepat.",
+        "significance": "Menara ini juga mencerminkan semangat Islam dalam menghargai ilmu pengetahuan dan perkembangan teknologi.",
+        "closing": "Semoga kita bisa mengambil hikmah dari keindahan arsitektur ini, sebagai pengingat akan pentingnya waktu dan kesungguhan dalam beribadah. Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "Umrah Guidance",
+      "location": "Masjid Jin",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Alhamdulillah, kita berada di Masjid Jin, sebuah tempat yang menjadi saksi interaksi Rasulullah ﷺ dengan sekelompok jin.",
+        "importance": "Masjid Jin mengingatkan kita pada luasnya dakwah Islam yang meliputi semua makhluk.",
+        "reflection": "Semoga kita diingatkan untuk selalu memperbanyak bacaan Al-Quran dan memohon perlindungan kepada Allah dari segala kejahatan yang kasat mata maupun tidak.",
+        "closing": "Semoga kehadiran kita di sini semakin mempertebal iman kita kepada Allah. Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "Umrah Guidance",
+      "location": "Masjid Al-Khoif di Mina",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Alhamdulillah, kita kini berada di Masjid Al-Khoif, yang dikenal sebagai 'Masjid Para Nabi.'",
+        "significance": "Masjid ini terletak di Mina dan sering menjadi tempat shalat Rasulullah ﷺ selama beliau melaksanakan ibadah haji.",
+        "characteristics": "Masjid ini mengingatkan kita pada kisah-kisah perjuangan para nabi yang tetap teguh dalam keimanan dan ketakwaan.",
+        "closing": "Semoga kita bisa meneladani keteguhan iman mereka dan mengambil pelajaran dari tempat ini untuk memperkuat iman dan takwa kita. Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "Umrah Guidance",
+      "location": "Masjid Tan’im (Miqat Aisyah)",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali.",
+        "description": "Alhamdulillah, kita berada di Masjid Tan’im, yang juga dikenal sebagai Miqat Aisyah.",
+        "significance": "Masjid ini menjadi tempat miqat bagi jamaah yang ingin memulai ihram umrah mereka.",
+        "reminder": "Mari kita jaga kesucian niat kita dan memohon kepada Allah agar setiap langkah yang kita tempuh dalam ibadah diterima oleh-Nya.",
+        "closing": "Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    },
+    {
+      "type": "Umrah Guidance",
+      "location": "Gua Hira di Jabal Nur",
+      "content": {
+        "opening": "Bismillahirrahmanirrahim. Assalamu’alaikum warahmatullahi wabarakatuh, Jamaah Retali yang dirahmati Allah.",
+        "description": "Alhamdulillah, kita kini berada di Jabal Nur, tempat yang penuh sejarah bagi umat Islam.",
+        "significance": "Di puncak gunung ini terdapat Gua Hira, di mana Nabi Muhammad ﷺ menerima wahyu pertama dari Allah.",
+        "lessons": "Peristiwa wahyu pertama ini mengajarkan kita tentang pentingnya ilmu dan membaca.",
+        "closing": "Semoga keberadaan kita di sini semakin meningkatkan kecintaan kita pada ilmu dan menambah ketaatan kita kepada Allah. Wassalamu’alaikum warahmatullahi wabarakatuh."
+      }
+    }
+  ]
+}

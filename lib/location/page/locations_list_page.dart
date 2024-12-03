@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/dummy_data.dart';
 import '../widgets/category_card.dart';
 import '../widgets/search_bar.dart';
-import '../widgets/header_text.dart';
+
 
 class LocationsListPage extends StatelessWidget {
   const LocationsListPage({super.key});
@@ -36,10 +36,7 @@ class _Header extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HeaderText(
-            primary: 'Location',
-            secondary: 'Finder',
-          ),
+       
           SizedBox(height: 20),
           CustomSearchBar(
             hintText: 'Cari lokasi...',
@@ -77,7 +74,7 @@ class _CategoryGrid extends StatelessWidget {
       child: GridView.builder(
         padding: const EdgeInsets.all(20),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
+          crossAxisCount: 2,
           childAspectRatio: 0.8,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,

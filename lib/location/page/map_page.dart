@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/category.dart';
 import '../models/location.dart';
@@ -22,8 +20,12 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   Location? _selectedLocation;
-  final MapController _mapController = MapController();
-  static const LatLng _jakartaCenter = LatLng(-6.200000, 106.816666);
+  GoogleMapController? _mapController;
+  static const CameraPosition _jakartaCenter = CameraPosition(
+    target: LatLng(-6.200000, 106.816666),
+    zoom: 13,
+  );
+  Set<Marker> _markers = {};
 
   Future<void> _openGoogleMaps(Location location) async {
     final url = Uri.parse(
@@ -38,10 +40,33 @@ class _MapPageState extends State<MapPage> {
     setState(() {
       _selectedLocation = location;
     });
-    _mapController.move(
-      LatLng(location.lat, location.lng),
-      15,
+    _mapController?.animateCamera(
+      CameraUpdate.newLatLngZoom(
+        LatLng(location.lat, location.lng),
+        15,
+      ),
     );
+  }
+
+  void _updateMarkers() {
+    setState(() {
+      _markers = widget.category.locations.map((location) {
+        return Marker(
+          markerId: MarkerId(location.id),
+          position: LatLng(location.lat, location.lng),
+          icon: _selectedLocation == location 
+              ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure)
+              : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+          onTap: () => _selectLocation(location),
+        );
+      }).toSet();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _updateMarkers();
   }
 
   @override
@@ -51,9 +76,8 @@ class _MapPageState extends State<MapPage> {
         children: [
           _MapView(
             category: widget.category,
-            selectedLocation: _selectedLocation,
-            mapController: _mapController,
-            onLocationSelect: _selectLocation,
+            markers: _markers,
+            onMapCreated: (controller) => _mapController = controller,
           ),
           _TopSearchBar(category: widget.category),
           _LocationsList(
@@ -70,127 +94,36 @@ class _MapPageState extends State<MapPage> {
 
 class _MapView extends StatelessWidget {
   final Category category;
-  final Location? selectedLocation;
-  final MapController mapController;
-  final Function(Location) onLocationSelect;
+  final Set<Marker> markers;
+  final Function(GoogleMapController) onMapCreated;
 
   const _MapView({
     required this.category,
-    required this.selectedLocation,
-    required this.mapController,
-    required this.onLocationSelect,
+    required this.markers,
+    required this.onMapCreated,
   });
 
   @override
   Widget build(BuildContext context) {
-    return FlutterMap(
-      mapController: mapController,
-      options: MapOptions(
-        initialCenter: category.locations.isNotEmpty
-            ? LatLng(
+    return GoogleMap(
+      onMapCreated: onMapCreated,
+      initialCameraPosition: category.locations.isNotEmpty
+          ? CameraPosition(
+              target: LatLng(
                 category.locations[0].lat,
                 category.locations[0].lng,
-              )
-            : const LatLng(-6.200000, 106.816666),
-        initialZoom: 13,
-        onTap: (_, __) => onLocationSelect(selectedLocation!),
-      ),
-      children: [
-        _MapTileLayer(),
-        _LocationMarkers(
-          category: category,
-          selectedLocation: selectedLocation,
-          onLocationSelect: onLocationSelect,
-        ),
-      ],
-    );
-  }
-}
-
-class _MapTileLayer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return TileLayer(
-      urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-      userAgentPackageName: 'com.example.app',
-    );
-  }
-}
-
-class _LocationMarkers extends StatelessWidget {
-  final Category category;
-  final Location? selectedLocation;
-  final Function(Location) onLocationSelect;
-
-  const _LocationMarkers({
-    required this.category,
-    required this.selectedLocation,
-    required this.onLocationSelect,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return MarkerLayer(
-      markers: category.locations.map((location) {
-        return Marker(
-          width: 50,
-          height: 50,
-          point: LatLng(location.lat, location.lng),
-          child: _LocationMarker(
-            location: location,
-            isSelected: selectedLocation == location,
-            onTap: () => onLocationSelect(location),
-            categoryIcon: category.icon,
-          ),
-        );
-      }).toList(),
-    );
-  }
-}
-
-class _LocationMarker extends StatelessWidget {
-  final Location location;
-  final bool isSelected;
-  final VoidCallback onTap;
-  final IconData categoryIcon;
-
-  const _LocationMarker({
-    required this.location,
-    required this.isSelected,
-    required this.onTap,
-    required this.categoryIcon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        child: Container(
-          decoration: BoxDecoration(
-            color: isSelected
-                ? Theme.of(context).colorScheme.primary
-                : Colors.white,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
               ),
-            ],
-          ),
-          padding: const EdgeInsets.all(8),
-          child: Icon(
-            categoryIcon,
-            color: isSelected
-                ? Colors.white
-                : Theme.of(context).colorScheme.primary,
-            size: 24,
-          ),
-        ),
-      ),
+              zoom: 13,
+            )
+          : const CameraPosition(
+              target: LatLng(-6.200000, 106.816666),
+              zoom: 13,
+            ),
+      markers: markers,
+      myLocationEnabled: true,
+      myLocationButtonEnabled: true,
+      zoomControlsEnabled: true,
+      mapType: MapType.normal,
     );
   }
 }
