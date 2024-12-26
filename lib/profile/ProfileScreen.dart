@@ -62,8 +62,8 @@ class ProfileScreen extends StatelessWidget {
           child: Row(
             children: [
               CircleAvatar(
-                backgroundImage: authProvider.profilePhotoUrl != null
-                    ? NetworkImage(authProvider.profilePhotoUrl!)
+                backgroundImage: authProvider.avatarUrl != null
+                    ? NetworkImage(authProvider.avatarUrl!)
                     : const AssetImage('assets/default_avatar.png') as ImageProvider,
                 radius: 40,
               ),
@@ -73,7 +73,7 @@ class ProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      authProvider.tourLeaderName ?? 'Nama Muthowif',
+                      authProvider.userName ?? 'Nama Pengguna',
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -81,7 +81,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                     authProvider.tourLeaderEmail ?? 'email@example.com',
+                      authProvider.userEmail ?? 'email@example.com',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[600],

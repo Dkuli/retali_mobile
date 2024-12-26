@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               Text(
-                                authProvider.tourLeaderName ?? 'Muthowif',
+                                authProvider.userName ?? 'Pengguna',
                                 style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,

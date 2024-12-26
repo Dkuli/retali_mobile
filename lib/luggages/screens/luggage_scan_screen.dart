@@ -158,7 +158,7 @@ Future<void> _submitScanData(String qrData) async {
       },
       body: jsonEncode({
         'data': qrData,
-        'tour_leader_id': auth.tourLeaderId,
+        'user_id': auth.userId,
         'latitude': currentPosition!.latitude,
         'longitude': currentPosition!.longitude,
       }),

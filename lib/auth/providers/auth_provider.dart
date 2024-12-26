@@ -4,27 +4,28 @@ import 'dart:convert';
 
 class AuthProvider extends ChangeNotifier {
   String? _token;
-  String? _tourLeaderId;
-  String? _tourLeaderName;
-  String? _tourLeaderEmail;
-  String? profilePhotoUrl;
+  String? _userId;
+  String? _userName;
+  String? _userEmail;
+  String? _userPhone;
+  String? _avatarUrl;
+  Map<String, dynamic>? _currentGroup;
 
   bool get isAuthenticated => _token != null;
   String? get token => _token;
-  String? get tourLeaderId => _tourLeaderId;
-  String? get tourLeaderName => _tourLeaderName;
-  String? get tourLeaderEmail => _tourLeaderEmail;
+  String? get userId => _userId;
+  String? get userName => _userName;
+  String? get userEmail => _userEmail;
+  String? get userPhone => _userPhone;
+  String? get avatarUrl => _avatarUrl;
+  Map<String, dynamic>? get currentGroup => _currentGroup;
 
-  Map<String, dynamic>? tourLeader;
-
-  static const String baseUrl = 'http://192.168.110.13:8000';
-
-  get profile_photo_url => null;
+  static const String baseUrl = 'http://192.168.196.13:8000';
 
   Future<void> login(String email, String password) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/api/v1/auth/login'),
+        Uri.parse('$baseUrl/api/v1/login'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'email': email,
@@ -34,22 +35,22 @@ class AuthProvider extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        _token = data['access_token'];
-        
-        // Mengambil 'tour_leader' sebagai objek
-        if (data.containsKey('tour_leader')) {
-          final tourLeader = data['tour_leader'];
-          _tourLeaderId = tourLeader['id'].toString();  // Ambil ID dari 'tour_leader' object
-          _tourLeaderName = tourLeader['name']; 
-          _tourLeaderEmail = tourLeader['email']; // Ambil email dari 'tour_leader' object
-          profilePhotoUrl = tourLeader['profile_photo_url'];
-           
-           // Ambil nama dari 'tour_leader' object
+        if (data['status'] == 'Success') {
+          final responseData = data['data'];
+          _token = responseData['token'];
+          
+          final user = responseData['user'];
+          _userId = user['id'].toString();
+          _userName = user['name'];
+          _userEmail = user['email'];
+          _userPhone = user['phone'];
+          _avatarUrl = user['avatar_url'];
+          _currentGroup = user['current_group'];
+          
+          notifyListeners();
         } else {
-          throw Exception('tour_leader data not found in login response');
+          throw Exception('Login failed: ${data['message']}');
         }
-        
-        notifyListeners();
       } else {
         throw Exception('Failed to login');
       }
@@ -60,9 +61,12 @@ class AuthProvider extends ChangeNotifier {
 
   void logout() {
     _token = null;
-    _tourLeaderId = null;
-    _tourLeaderName = null;
-    _tourLeaderEmail = null;
+    _userId = null;
+    _userName = null;
+    _userEmail = null;
+    _userPhone = null;
+    _avatarUrl = null;
+    _currentGroup = null;
     notifyListeners();
   }
 }
