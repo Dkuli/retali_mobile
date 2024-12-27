@@ -7,6 +7,7 @@ import 'dart:convert';
 import '../../auth/providers/auth_provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:retali/luggages/screens/QRscannerOverlay.dart'; // Pastikan mengimpor QRScannerOverlay
+import '../../services/api_service.dart';
 
 class LuggageScanScreen extends StatefulWidget {
   const LuggageScanScreen({super.key});
@@ -150,33 +151,57 @@ Future<void> _submitScanData(String qrData) async {
 
   try {
     final auth = context.read<AuthProvider>();
-    final response = await http.post(
-      Uri.parse('${AuthProvider.baseUrl}/api/v1/luggage_scans'),
-      headers: {
-        'Authorization': 'Bearer ${auth.token}',
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode({
-        'data': qrData,
-        'user_id': auth.userId,
-        'latitude': currentPosition!.latitude,
-        'longitude': currentPosition!.longitude,
-      }),
+    
+    // Check if user is authenticated
+    if (!auth.isAuthenticated) {
+      await _showLottieDialog(
+        'assets/lottie/Animation - 1731747978549.json',
+        'Please login to continue'
+      );
+      if (mounted) {
+        Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+      }
+      return;
+    }
+
+    // Get user ID and verify it exists
+    final userId = auth.userId;
+    if (userId == null || userId.isEmpty) {
+      await _showLottieDialog(
+        'assets/lottie/Animation - 1731747978549.json',
+        'User data not found. Please login again.'
+      );
+      await auth.logout();
+      if (mounted) {
+        Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+      }
+      return;
+    }
+
+    // Submit scan data
+    await ApiService.storeLuggageScan(
+      qrData,
+      currentPosition!.latitude,
+      currentPosition!.longitude,
+      userId,
     );
 
-    if (response.statusCode == 201) {
-      await _showLottieDialog(
-          'assets/lottie/Animation - 1731747978549.json', 'Luggage scan recorded successfully');
-      if (mounted) {
-        setState(() {
-          isScanning = true;
-        });
-      }
-    } else {
-      throw Exception('Failed to record scan: ${response.body}');
+    await _showLottieDialog(
+      'assets/lottie/Animation - 1731747978549.json',
+      'Luggage scan recorded successfully'
+    );
+    
+    if (mounted) {
+      setState(() {
+        isScanning = true;
+      });
     }
   } catch (e) {
-    await _showLottieDialog('assets/lottie/Animation - 1731747978549.json', 'Error: $e');
+    String errorMessage = 'An error occurred';
+    if (e is ApiException) {
+      errorMessage = e.message;
+    }
+    await _showLottieDialog('assets/lottie/Animation - 1731747978549.json', errorMessage);
   } finally {
     if (mounted) {
       setState(() {

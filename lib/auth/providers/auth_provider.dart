@@ -1,72 +1,54 @@
-import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter/material.dart';
+import '../../services/api_service.dart';
+import '../../utils/shared_prefs.dart';
 
-class AuthProvider extends ChangeNotifier {
+class AuthProvider with ChangeNotifier {
   String? _token;
   String? _userId;
-  String? _userName;
-  String? _userEmail;
-  String? _userPhone;
-  String? _avatarUrl;
-  Map<String, dynamic>? _currentGroup;
+  Map<String, dynamic>? _userData;
+  static const String baseUrl = ApiService.baseUrl;
 
-  bool get isAuthenticated => _token != null;
   String? get token => _token;
   String? get userId => _userId;
-  String? get userName => _userName;
-  String? get userEmail => _userEmail;
-  String? get userPhone => _userPhone;
-  String? get avatarUrl => _avatarUrl;
-  Map<String, dynamic>? get currentGroup => _currentGroup;
+  Map<String, dynamic>? get userData => _userData;
+  bool get isAuthenticated => _token != null;
 
-  static const String baseUrl = 'http://192.168.196.13:8000';
-
-  Future<void> login(String email, String password) async {
+  Future<void> login(String email, String password, String? fcmToken) async {
     try {
-      final response = await http.post(
-        Uri.parse('$baseUrl/api/v1/login'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'email': email,
-          'password': password,
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        if (data['status'] == 'Success') {
-          final responseData = data['data'];
-          _token = responseData['token'];
-          
-          final user = responseData['user'];
-          _userId = user['id'].toString();
-          _userName = user['name'];
-          _userEmail = user['email'];
-          _userPhone = user['phone'];
-          _avatarUrl = user['avatar_url'];
-          _currentGroup = user['current_group'];
-          
-          notifyListeners();
-        } else {
-          throw Exception('Login failed: ${data['message']}');
-        }
-      } else {
-        throw Exception('Failed to login');
-      }
+      final response = await ApiService.login(email, password, fcmToken);
+      _token = response['data']['token'];
+      _userId = response['data']['user']['id'].toString();
+      _userData = response['data']['user'];
+      
+      // Save to shared preferences
+      await SharedPrefs.saveToken(_token!);
+      await SharedPrefs.saveUser(_userData!);
+      
+      notifyListeners();
     } catch (e) {
       rethrow;
     }
   }
 
-  void logout() {
-    _token = null;
-    _userId = null;
-    _userName = null;
-    _userEmail = null;
-    _userPhone = null;
-    _avatarUrl = null;
-    _currentGroup = null;
+  Future<void> logout() async {
+    try {
+      await ApiService.logout();
+    } finally {
+      _token = null;
+      _userId = null;
+      _userData = null;
+      await SharedPrefs.clearAll();
+      notifyListeners();
+    }
+  }
+
+  Future<void> loadStoredUser() async {
+    _token = SharedPrefs.getToken();
+    final userData = SharedPrefs.getUser();
+    if (userData != null) {
+      _userData = userData;
+      _userId = userData['id'].toString();
+    }
     notifyListeners();
   }
 }

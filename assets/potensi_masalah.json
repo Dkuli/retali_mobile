@@ -1,6 +1,6 @@
 {
   "Potensi": {
-    "image": "URL_GAMBAR_Kesehatan",
+    "image": "assets/images/masalah_komunikasi.jpg",
     "MasalahDehidrasi": {
       "Solusi": "Segera beristirahat dan mencari tempat untuk minum.",
       "Pencegahan": "Jangan terlalu cepat dalam berjalan, gunakan pakaian yang ringan."
@@ -16,7 +16,7 @@
     }
   },
   "MasalahLogistik": {
-    "image": "URL_GAMBAR_Logistik",
+    "image": "assets/images/masalah_komunikasi.jpg",
     "KehilanganBagasi": {
       "Solusi": "Laporkan segera ke bagian lost and found, berikan label bagasi dan boarding pass jamaah terkait.",
       "Pencegahan": "Tandai bagasi dengan tanda khusus dan simpan label bagasi serta boarding pass dengan baik."
@@ -63,7 +63,7 @@
     }
   },
   "MasalahIbadah": {
-    "image": "URL_GAMBAR_Ibadah",
+    "image": "assets/images/masalah_komunikasi.jpg",
     "AntrianPanajang": {
       "Solusi": "Ikuti antrian dengan sabar dan manfaatkan waktu untuk berdoa.",
       "Pencegahan": "Kunjungi Masjid di luar jam sibuk jika memungkinkan."
@@ -86,7 +86,7 @@
     }
   },
   "MasalahKeamanan": {
-    "image": "URL_GAMBAR_Keamanan",
+    "image": "assets/images/masalah_komunikasi.jpg",
     "Kecopetan": {
       "Solusi": "Laporkan segera ke bagian lost and found atau petugas keamanan terdekat.",
       "Pencegahan": "Gunakan tas yang aman dan jangan simpan barang berharga di tempat yang mudah diakses."
@@ -105,7 +105,7 @@
     }
   },
   "MasalahAdministratif": {
-    "image": "URL_GAMBAR_Administratif",
+    "image": "assets/images/masalah_komunikasi.jpg",
     "KesalahanVisa": {
       "Solusi": "Laporkan segera ke bagian lost and found atau petugas keamanan terdekat.",
       "Pencegahan": "Sediakan dokumen cadangan dan kontak darurat untuk meminta soft file visa atau pengajuan tasreh secara cepat."
@@ -136,7 +136,7 @@
     }
   },
   "MasalahHotel": {
-    "image": "URL_GAMBAR_Hotel",
+    "image": "assets/images/masalah_komunikasi.jpg",
     "KualitasKamar": {
       "Solusi": "Melaporkan kepada manajemen hotel untuk perubahan kamar atau peningkatan layanan kebersihan.",
       "Pencegahan": "Melakukan survei sebelum perjalanan untuk memeriksa kondisi kamar dan fasilitas."
@@ -167,7 +167,7 @@
     }
   },
   "MasalahTransportasi": {
-    "image": "URL_GAMBAR_Transportasi",
+    "image": "assets/images/masalah_komunikasi.jpg",
     "KeterlambatanTransportasi": {
       "Solusi": "Berkoordinasi dengan supir bus untuk memastikan jadwal ketibaan bus di tempat jamaah.",
       "Pencegahan": "Memilih jadwal transportasi yang menyediakan waktu luang untuk mengatasi kemungkinan keterlambatan."
@@ -194,7 +194,7 @@
     }
   },
   "MasalahKomunikasi": {
-    "image": "URL_GAMBAR_Komunikasi",
+    "image": "assets/images/masalah_komunikasi.jpg",
     "PerbedaanBahasa": {
       "Solusi": "Gunakan aplikasi penerjemah untuk mempermudah komunikasi dengan penduduk setempat.",
       "Pencegahan": "Pelajari kata-kata dasar dalam bahasa Arab atau Inggris sebelum perjalanan."
@@ -225,7 +225,7 @@
     }
   },
   "MasalahPsikologis": {
-    "image": "URL_GAMBAR_Psikologis",
+    "image": "assets/images/masalah_komunikasi.jpg",
     "RasaTakut": {
       "Solusi": "Buka sesi curhat dan ajak jamaah untuk berbicara dengan sesama jamaah atau pembimbing.",
       "Pencegahan": "Persiapkan mental dan spiritual sebelum perjalanan dengan mengikuti kajian atau pembekalan rohani."
@@ -256,7 +256,7 @@
     }
   },
   "MasalahCuaca": {
-    "image": "URL_GAMBAR_Cuaca",
+    "image": "assets/images/masalah_komunikasi.jpg",
     "CuacaTerlaluPanas": {
       "Solusi": "Tetapkan jadwal ibadah atau kunjungan pada waktu yang lebih sejuk, seperti pagi atau sore hari.",
       "Pencegahan": "Sarankan jamaah membawa topi, kacamata hitam, dan pelindung dari sinar matahari."
@@ -283,7 +283,7 @@
     }
   },
   "MasalahTeknologi": {
-    "image": "URL_GAMBAR_Teknologi",
+    "image": "assets/images/masalah_komunikasi.jpg",
     "BateraiHabis": {
       "Solusi": "Bawa power bank sebagai cadangan untuk mengisi daya perangkat.",
       "Pencegahan": "Pastikan semua perangkat terisi penuh sebelum berangkat."

@@ -8,11 +8,16 @@ import 'package:retali/briefings_page/briefings_page.dart';
 import 'package:retali/itinerary/JourneysScreen.dart';
 import 'package:retali/main_layout.dart';
 import 'package:retali/location/page/locations_list_page.dart';
+import 'package:retali/models/carousel.dart';
 import 'package:retali/surah/screens/doa_umrah_screen.dart';
 import 'package:retali/task/TaskScreen.dart';
 import '../auth/providers/auth_provider.dart';
 import 'notification/notification_screen.dart';
 import 'package:retali/luggages/screens/luggage_history_screen.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart';
+import 'package:retali/potensi_masalah/detail_masalah_screen.dart';
+import 'services/api_service.dart'; // Add this import
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,11 +31,41 @@ class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
   bool _showTitle = false;
   int _currentCarouselIndex = 0;
+  Map<String, dynamic>? _potensiMasalah;
+  List<Carousel> _carouselItems = [];
+  bool _isLoadingCarousel = true;
 
-   @override
+  @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+    _loadPotensiMasalah();
+    _loadCarouselData(); // Add this
+  }
+
+  Future<void> _loadPotensiMasalah() async {
+    try {
+      final jsonString = await rootBundle.loadString('assets/potensi_masalah.json');
+      setState(() {
+        _potensiMasalah = json.decode(jsonString);
+      });
+    } catch (e) {
+      print('Error loading potensi masalah: $e');
+    }
+  }
+
+  Future<void> _loadCarouselData() async {
+    try {
+      setState(() => _isLoadingCarousel = true);
+      final carousels = await ApiService.getCarousels();
+      setState(() {
+        _carouselItems = carousels;
+        _isLoadingCarousel = false;
+      });
+    } catch (e) {
+      print('Error loading carousels: $e');
+      setState(() => _isLoadingCarousel = false);
+    }
   }
 
   void _onScroll() {
@@ -48,10 +83,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 
-  static const String baseUrl = 'http://192.168.110.13:8000';
 
- @override
- Widget build(BuildContext context) {
+
+  @override
+  Widget build(BuildContext context) {
     return MainLayout(
       currentIndex: 0, // Index for Home
       child: CustomScrollView(
@@ -68,14 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 24),
                   _buildCategories(context),
                   const SizedBox(height: 24),
-                  _buildHorizontalImageList(
-                    title: 'Potensi Masalah',
-                    images: List.generate(
-                      5,
-                      (index) =>
-                          '$baseUrl/storage/5/01JCWPVDQAQWD7VSJ9YFJ7WHP7.jpg',
-                    ),
-                  ),
+                  _buildHorizontalImageList(title: 'Potensi Masalah'),
                   const SizedBox(height: 32),
                 ],
               ),
@@ -105,7 +133,10 @@ class _HomeScreenState extends State<HomeScreen> {
         background: Container(
           padding: const EdgeInsets.all(16.0),
           child: Consumer<AuthProvider>(
-            builder: (context, authProvider, child) {
+            builder: (context, auth, child) {
+              final userData = auth.userData;
+              final userName = userData?['name'] ?? 'Pengguna';
+
               return SafeArea(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -124,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               Text(
-                                authProvider.userName ?? 'Pengguna',
+                                userName,
                                 style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -149,23 +180,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildCarousel() {
-    final carouselItems = [
-      {
-        'image':
-            '$baseUrl/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
-        'title': 'Informasi Penting',
-      },
-      {
-        'image':
-            '$baseUrl/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
-        'title': 'Informasi Penting',
-      },
-      {
-        'image':
-            '$baseUrl/storage/2/01JCT1250JN7AD5T92BFKKQKKW.jpg',
-        'title': 'Informasi Penting',
-      },
-    ];
+    if (_isLoadingCarousel) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    if (_carouselItems.isEmpty) {
+      return const Center(
+        child: Text('No carousel items available'),
+      );
+    }
 
     return Column(
       children: [
@@ -179,72 +204,74 @@ class _HomeScreenState extends State<HomeScreen> {
               setState(() => _currentCarouselIndex = index);
             },
           ),
-          items: carouselItems.map((item) => _buildCarouselItem(item)).toList(),
-        ),
-        const SizedBox(height: 12),
-        _buildCarouselIndicator(carouselItems.length),
-      ],
-    );
-  }
-
-  Widget _buildCarouselItem(Map<String, String> item) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            CachedNetworkImage(
-              imageUrl: item['image']!,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => Container(
-                color: Colors.grey[200],
-                child: const Center(child: CircularProgressIndicator()),
-              ),
-              errorWidget: (context, url, error) => Container(
-                color: Colors.grey[200],
-                child: const Icon(Icons.error),
-              ),
-            ),
-            Container(
+          items: _carouselItems.map((item) {
+            final mediaUrl = item.media.isNotEmpty 
+                ? item.media[0].originalUrl 
+                : '';
+            
+            return Container(
+              margin: const EdgeInsets.symmetric(horizontal: 4),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withOpacity(0.7),
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: mediaUrl,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Container(
+                        color: Colors.grey[200],
+                        child: const Center(child: CircularProgressIndicator()),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        color: Colors.grey[200],
+                        child: const Icon(Icons.error),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withOpacity(0.7),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 16,
+                      left: 16,
+                      right: 16,
+                      child: Text(
+                        item.title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 16,
-              left: 16,
-              right: 16,
-              child: Text(
-                item['title']!,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
+            );
+          }).toList(),
         ),
-      ),
+        const SizedBox(height: 12),
+        _buildCarouselIndicator(_carouselItems.length),
+      ],
     );
   }
 
@@ -366,8 +393,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildHorizontalImageList(
-      {required String title, required List<String> images}) {
+  Widget _buildHorizontalImageList({required String title}) {
+    if (_potensiMasalah == null) return const SizedBox.shrink();
+
+    final items = _potensiMasalah!.entries.where((e) => e.value is Map).toList();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -392,26 +422,43 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 100,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: images.length,
+            itemCount: items.length,
             itemBuilder: (context, index) {
-              return Card(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    boxShadow: [],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: CachedNetworkImage(
-                      imageUrl: images[index],
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(
-                        color: Colors.grey[200],
-                        child: const Center(child: CircularProgressIndicator()),
+              final item = items[index];
+              final imageUrl = (item.value as Map)['image'] as String? ?? '';
+              final heroTag = 'masalah-${item.key}';
+              
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailMasalahScreen(
+                        title: item.key,
+                        problemData: item.value as Map<String, dynamic>,
+                        heroTag: heroTag,
                       ),
-                      errorWidget: (context, url, error) => Container(
-                        color: Colors.grey[200],
-                        child: const Icon(Icons.error),
+                    ),
+                  );
+                },
+                child: Card(
+                  child: Container(
+                    width: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Hero(
+                      tag: heroTag,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.asset(
+                          imageUrl,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => Container(
+                            color: Colors.grey[200],
+                            child: const Icon(Icons.error),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -424,7 +471,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
- 
   Widget _buildCarouselIndicator(int itemCount) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

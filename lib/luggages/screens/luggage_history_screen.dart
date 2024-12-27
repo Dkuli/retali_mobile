@@ -26,7 +26,7 @@ class _LuggageHistoryScreenState extends State<LuggageHistoryScreen> {
     try {
       final auth = context.read<AuthProvider>();
       final response = await http.get(
-        Uri.parse('${AuthProvider.baseUrl}/api/v1/luggage_history'),
+        Uri.parse('${AuthProvider}/api/v1/luggage_history'),
         headers: {
           'Authorization': 'Bearer ${auth.token}',
         },

@@ -94,7 +94,8 @@ flutter:
   - assets/lottie/
   - assets/task.json
   - assets/briefings.json
-  
+  - assets/potensi_masalah.json
+  - assets/images/masalah_komunikasi.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

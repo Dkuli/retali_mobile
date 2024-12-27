@@ -45,7 +45,12 @@ class ProfileScreen extends StatelessWidget {
 
   Widget _buildProfileHeader(BuildContext context) {
     return Consumer<AuthProvider>(
-      builder: (context, authProvider, child) {
+      builder: (context, auth, child) {
+        final userData = auth.userData;
+        final userName = userData?['name'] ?? 'Nama Pengguna';
+        final userEmail = userData?['email'] ?? 'email@example.com';
+        final avatarUrl = userData?['avatar_url'];
+
         return Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -62,10 +67,11 @@ class ProfileScreen extends StatelessWidget {
           child: Row(
             children: [
               CircleAvatar(
-                backgroundImage: authProvider.avatarUrl != null
-                    ? NetworkImage(authProvider.avatarUrl!)
-                    : const AssetImage('assets/default_avatar.png') as ImageProvider,
                 radius: 40,
+                backgroundImage: avatarUrl != null 
+                  ? NetworkImage(avatarUrl)
+                  : const AssetImage('assets/default_avatar.png') as ImageProvider,
+                backgroundColor: Colors.grey[200],
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -73,7 +79,7 @@ class ProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      authProvider.userName ?? 'Nama Pengguna',
+                      userName,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -81,7 +87,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      authProvider.userEmail ?? 'email@example.com',
+                      userEmail,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[600],
@@ -195,8 +201,32 @@ class ProfileScreen extends StatelessWidget {
           _buildMenuItem(
             Icons.logout,
             'Keluar',
-            () {
-              Provider.of<AuthProvider>(context, listen: false).logout();
+            () async {
+              // Show confirmation dialog
+              final shouldLogout = await showDialog<bool>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Konfirmasi Keluar'),
+                  content: const Text('Apakah Anda yakin ingin keluar?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(false),
+                      child: const Text('Batal'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(true),
+                      child: const Text('Keluar'),
+                    ),
+                  ],
+                ),
+              );
+
+              if (shouldLogout == true) {
+                await Provider.of<AuthProvider>(context, listen: false).logout();
+                if (context.mounted) {
+                  Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+                }
+              }
             },
           ),
         ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../providers/auth_provider.dart';
+import 'package:retali/home_screen.dart';
+import '../../services/api_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -40,16 +40,31 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
     setState(() => _isLoading = true);
 
     try {
-      await Provider.of<AuthProvider>(context, listen: false).login(
-        _emailController.text,
+      final response = await ApiService.login(
+        _emailController.text.trim(),
         _passwordController.text,
+        null
       );
+      
+      if (response['status'] == 'Success') {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
+      } else {
+        throw ApiException(response['message'] ?? 'Login failed');
+      }
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login failed: $error')),
+        SnackBar(
+          content: Text(error.toString()),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 3),
+        ),
       );
     } finally {
-      setState(() => _isLoading = false);
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
   }
 
@@ -181,6 +196,12 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter your $label';
+          }
+          if (label == 'Email' && !value.contains('@')) {
+            return 'Please enter a valid email';
+          }
+          if (label == 'Password' && value.length < 6) {
+            return 'Password must be at least 6 characters';
           }
           return null;
         },
