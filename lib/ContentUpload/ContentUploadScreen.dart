@@ -1,8 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:retali/services/api_service.dart';
 import 'package:video_player/video_player.dart';
 import 'package:path/path.dart' as path;
+import 'package:provider/provider.dart';
+import '../content/providers/content_provider.dart';
+import '../widgets/loading_overlay.dart';
 
 class ContentUploadScreen extends StatefulWidget {
   const ContentUploadScreen({Key? key}) : super(key: key);
@@ -12,6 +16,7 @@ class ContentUploadScreen extends StatefulWidget {
 }
 
 class _ContentUploadScreenState extends State<ContentUploadScreen> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
@@ -124,33 +129,40 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
       return;
     }
 
-    if (_titleController.text.isEmpty) {
-      _showErrorSnackbar('Please add a title');
+    if (!_formKey.currentState!.validate()) {
+      _showErrorSnackbar('Please fill in all required fields');
       return;
     }
 
     setState(() => _isUploading = true);
 
-    // TODO: Implement your upload logic here
-    await Future.delayed(const Duration(seconds: 2));
+    try {
+      for (var mediaItem in _mediaItems) {
+        await ApiService.uploadContent(
+          _titleController.text,
+          _descriptionController.text,
+          mediaItem.type == MediaType.image ? 'photo' : 'video',
+          mediaItem.file,
+        );
+      }
 
-    setState(() => _isUploading = false);
-    
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text(
-            'Content uploaded successfully!',
-            style: TextStyle(fontWeight: FontWeight.w500),
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Upload successful'),
+            backgroundColor: Colors.green,
           ),
-          backgroundColor: Colors.green.shade400,
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          margin: const EdgeInsets.all(16),
-          elevation: 0,
-        ),
-      );
-      Navigator.pop(context);
+        );
+        Navigator.pop(context);
+      }
+    } catch (e) {
+      if (mounted) {
+        _showErrorSnackbar('Upload failed: ${e.toString()}');
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isUploading = false);
+      }
     }
   }
 
@@ -158,30 +170,36 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      body: CustomScrollView(
-        slivers: [
-          _buildSliverAppBar(),
-          SliverToBoxAdapter(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _buildMediaUploadArea(),
-                  if (_mediaItems.isNotEmpty) ...[
-                    const SizedBox(height: 24),
-                    _buildMediaGrid(),
-                  ],
-                  const SizedBox(height: 24),
-                  _buildInputForm(),
-                  const SizedBox(height: 32),
-                  _buildUploadButton(),
-                  const SizedBox(height: 32),
-                ],
+      body: LoadingOverlay(
+        isLoading: _isUploading,
+        child: CustomScrollView(
+          slivers: [
+            _buildSliverAppBar(),
+            SliverToBoxAdapter(
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _buildMediaUploadArea(),
+                      if (_mediaItems.isNotEmpty) ...[
+                        const SizedBox(height: 24),
+                        _buildMediaGrid(),
+                      ],
+                      const SizedBox(height: 24),
+                      _buildInputForm(),
+                      const SizedBox(height: 32),
+                      _buildUploadButton(),
+                      const SizedBox(height: 32),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -438,11 +456,31 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildTextField(
+          TextFormField(
             controller: _titleController,
-            label: 'Title',
-            hint: 'Give your post a title',
-            icon: Icons.title_rounded,
+            decoration: InputDecoration(
+              labelText: 'Title',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter a title';
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 16),
+          TextFormField(
+            controller: _descriptionController,
+            decoration: InputDecoration(
+              labelText: 'Description',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            maxLines: 3,
           ),
           const SizedBox(height: 20),
           _buildTextField(
@@ -453,14 +491,6 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
           ),
           const SizedBox(height: 20),
           _buildCategoryDropdown(),
-          const SizedBox(height: 20),
-          _buildTextField(
-            controller: _descriptionController,
-            label: 'Description',
-            hint: 'Tell your story...',
-            icon: Icons.description_rounded,
-            maxLines: 4,
-          ),
         ],
       ),
     );

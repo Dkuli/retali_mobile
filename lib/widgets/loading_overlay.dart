@@ -1,16 +1,15 @@
-
 import 'package:flutter/material.dart';
 
 class LoadingOverlay extends StatelessWidget {
-  final Widget child;
   final bool isLoading;
-  final String? message;
+  final Widget child;
+  final Color? color;
 
   const LoadingOverlay({
     Key? key,
-    required this.child,
     required this.isLoading,
-    this.message,
+    required this.child,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -20,23 +19,10 @@ class LoadingOverlay extends StatelessWidget {
         child,
         if (isLoading)
           Container(
-            color: Colors.black54,
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
-                  if (message != null)
-                    Padding(
-                      padding: EdgeInsets.only(top: 16),
-                      child: Text(
-                        message!,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                ],
+            color: (color ?? Colors.black).withOpacity(0.5),
+            child: const Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
               ),
             ),
           ),
