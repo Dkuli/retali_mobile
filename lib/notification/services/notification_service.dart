@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:retali/services/api_service.dart'; // Add this import
 
 class NotificationService {
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
@@ -14,7 +15,6 @@ class NotificationService {
       sound: true,
     );
     
-
     // Initialize local notifications
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -32,12 +32,15 @@ class NotificationService {
       _showNotification(message);
     });
 
-     await _logFCMToken();
+    await _logAndSendFCMToken(); // Update this
   }
 
-  Future<void> _logFCMToken() async {
+  Future<void> _logAndSendFCMToken() async {
     String? token = await _fcm.getToken();
     print("FCM Token: $token");
+    if (token != null) {
+      await ApiService.updateFcmToken(token); // Send token to the server
+    }
   }
 
   Future<void> _showNotification(RemoteMessage message) async {
