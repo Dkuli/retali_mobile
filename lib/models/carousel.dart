@@ -1,14 +1,14 @@
 // lib/models/carousel.dart
 class Carousel {
   final int id;
-  final String title;
+  final String? title;
   final String? createdAt;
   final String? updatedAt;
   final List<CarouselMedia> media;
 
   Carousel({
     required this.id,
-    required this.title,
+    this.title,
     this.createdAt,
     this.updatedAt,
     required this.media,

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:retali/models/carousel.dart';
+import 'package:retali/models/schedule.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
@@ -153,14 +154,15 @@ class ApiService {
     return data['data'];
   }
 
-  static Future<List<dynamic>> getSchedule() async {
+  // Schedule APIs
+  static Future<List<Schedule>> getSchedule() async {
     final headers = await _getHeaders();
     final response = await http.get(
       Uri.parse('$baseUrl/group/schedule'),
       headers: headers,
     );
     final data = await handleResponse(response);
-    return data['data'];
+    return (data['data'] as List).map((item) => Schedule.fromJson(item)).toList();
   }
 
   // Location APIs

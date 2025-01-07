@@ -1,6 +1,6 @@
 {
   "Potensi": {
-    "image": "assets/images/masalah_komunikasi.jpg",
+    "image": "assets/images/masalah_kesehatan.jpg",
     "MasalahDehidrasi": {
       "Solusi": "Segera beristirahat dan mencari tempat untuk minum.",
       "Pencegahan": "Jangan terlalu cepat dalam berjalan, gunakan pakaian yang ringan."
@@ -16,7 +16,7 @@
     }
   },
   "MasalahLogistik": {
-    "image": "assets/images/masalah_komunikasi.jpg",
+    "image": "assets/images/masalah_logistik.jpg",
     "KehilanganBagasi": {
       "Solusi": "Laporkan segera ke bagian lost and found, berikan label bagasi dan boarding pass jamaah terkait.",
       "Pencegahan": "Tandai bagasi dengan tanda khusus dan simpan label bagasi serta boarding pass dengan baik."
@@ -63,7 +63,7 @@
     }
   },
   "MasalahIbadah": {
-    "image": "assets/images/masalah_komunikasi.jpg",
+    "image": "assets/images/masalah_ibadah.jpg",
     "AntrianPanajang": {
       "Solusi": "Ikuti antrian dengan sabar dan manfaatkan waktu untuk berdoa.",
       "Pencegahan": "Kunjungi Masjid di luar jam sibuk jika memungkinkan."
@@ -86,7 +86,7 @@
     }
   },
   "MasalahKeamanan": {
-    "image": "assets/images/masalah_komunikasi.jpg",
+    "image": "assets/images/masalah_keamanan.jpg",
     "Kecopetan": {
       "Solusi": "Laporkan segera ke bagian lost and found atau petugas keamanan terdekat.",
       "Pencegahan": "Gunakan tas yang aman dan jangan simpan barang berharga di tempat yang mudah diakses."
@@ -105,7 +105,7 @@
     }
   },
   "MasalahAdministratif": {
-    "image": "assets/images/masalah_komunikasi.jpg",
+    "image": "assets/images/masalah_administratif.jpg",
     "KesalahanVisa": {
       "Solusi": "Laporkan segera ke bagian lost and found atau petugas keamanan terdekat.",
       "Pencegahan": "Sediakan dokumen cadangan dan kontak darurat untuk meminta soft file visa atau pengajuan tasreh secara cepat."
@@ -136,7 +136,7 @@
     }
   },
   "MasalahHotel": {
-    "image": "assets/images/masalah_komunikasi.jpg",
+    "image": "assets/images/masalah_hotel.jpg",
     "KualitasKamar": {
       "Solusi": "Melaporkan kepada manajemen hotel untuk perubahan kamar atau peningkatan layanan kebersihan.",
       "Pencegahan": "Melakukan survei sebelum perjalanan untuk memeriksa kondisi kamar dan fasilitas."
@@ -167,7 +167,7 @@
     }
   },
   "MasalahTransportasi": {
-    "image": "assets/images/masalah_komunikasi.jpg",
+    "image": "assets/images/masalah_transportasi.jpg",
     "KeterlambatanTransportasi": {
       "Solusi": "Berkoordinasi dengan supir bus untuk memastikan jadwal ketibaan bus di tempat jamaah.",
       "Pencegahan": "Memilih jadwal transportasi yang menyediakan waktu luang untuk mengatasi kemungkinan keterlambatan."
@@ -225,7 +225,7 @@
     }
   },
   "MasalahPsikologis": {
-    "image": "assets/images/masalah_komunikasi.jpg",
+    "image": "assets/images/masalah_psikologi.jpg",
     "RasaTakut": {
       "Solusi": "Buka sesi curhat dan ajak jamaah untuk berbicara dengan sesama jamaah atau pembimbing.",
       "Pencegahan": "Persiapkan mental dan spiritual sebelum perjalanan dengan mengikuti kajian atau pembekalan rohani."
@@ -256,7 +256,7 @@
     }
   },
   "MasalahCuaca": {
-    "image": "assets/images/masalah_komunikasi.jpg",
+    "image": "assets/images/masalah_cuaca.jpg",
     "CuacaTerlaluPanas": {
       "Solusi": "Tetapkan jadwal ibadah atau kunjungan pada waktu yang lebih sejuk, seperti pagi atau sore hari.",
       "Pencegahan": "Sarankan jamaah membawa topi, kacamata hitam, dan pelindung dari sinar matahari."
@@ -283,7 +283,7 @@
     }
   },
   "MasalahTeknologi": {
-    "image": "assets/images/masalah_komunikasi.jpg",
+    "image": "assets/images/masalah_teknologi.jpg",
     "BateraiHabis": {
       "Solusi": "Bawa power bank sebagai cadangan untuk mengisi daya perangkat.",
       "Pencegahan": "Pastikan semua perangkat terisi penuh sebelum berangkat."

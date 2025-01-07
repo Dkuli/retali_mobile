@@ -9,6 +9,8 @@ import 'package:retali/itinerary/JourneysScreen.dart';
 import 'package:retali/main_layout.dart';
 import 'package:retali/location/page/locations_list_page.dart';
 import 'package:retali/models/carousel.dart';
+import 'package:retali/models/pilgrim.dart';
+import 'package:retali/screens/pilgrim_screen.dart';
 import 'package:retali/surah/screens/doa_umrah_screen.dart';
 import 'package:retali/task/TaskScreen.dart';
 import '../auth/providers/auth_provider.dart';
@@ -187,9 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     if (_carouselItems.isEmpty) {
-      return const Center(
-        child: Text('No carousel items available'),
-      );
+      return const SizedBox.shrink();
     }
 
     return Column(
@@ -238,31 +238,34 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: const Icon(Icons.error),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.transparent,
-                            Colors.black.withOpacity(0.7),
-                          ],
+                    // Only show gradient and title if title exists
+                    if (item.title != null) ...[
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.transparent,
+                              Colors.black.withOpacity(0.7),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      bottom: 16,
-                      left: 16,
-                      right: 16,
-                      child: Text(
-                        item.title,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      Positioned(
+                        bottom: 16,
+                        left: 16,
+                        right: 16,
+                        child: Text(
+                          item.title!,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ],
                 ),
               ),
@@ -323,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'icon': Icons.group,
         'label': 'Jamaah',
         'color': Colors.green,
-        'screen': const TaskScreen()
+        'screen':  PilgrimScreen()
       },
     ];
 

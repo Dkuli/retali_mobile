@@ -1,35 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:retali/services/api_service.dart';
+import 'package:retali/models/schedule.dart';
 import 'itinerary_card.dart';
 
-class JourneysScreen extends StatelessWidget {
-  final List<Map<String, dynamic>> journeys = [
-    {
-      "title": "Malta First Day",
-      "date": "10 June",
-      "itinerary": [
-        {"time": "06:00 AM", "activity": "Flight Departure", "details": "London → Malta"},
-        {"time": "08:00 AM", "activity": "Hotel Check-In", "details": "Hotel Cavalleri"},
-        {"time": "10:00 AM", "activity": "Drinks", "details": "Happy Days Bar"},
-      ],
-    },
-    {
-      "title": "Malta Second Day",
-      "date": "11 June",
-      "itinerary": [
-        {"time": "08:00 AM", "activity": "Breakfast", "details": "Hotel Restaurant"},
-        {"time": "10:00 AM", "activity": "City Tour", "details": "Guided city walk"},
-      ],
-    },
-    {
-      "title": "Malta Third Day",
-      "date": "12 June",
-      "itinerary": [
-        {"time": "09:00 AM", "activity": "Beach Visit", "details": "Golden Bay Beach"},
-        {"time": "12:00 PM", "activity": "Lunch", "details": "Beachside Restaurant"},
-        {"time": "03:00 PM", "activity": "Shopping", "details": "City Market"},
-      ],
-    },
-  ];
+class JourneysScreen extends StatefulWidget {
+  @override
+  _JourneysScreenState createState() => _JourneysScreenState();
+}
+
+class _JourneysScreenState extends State<JourneysScreen> {
+  late Future<List<Schedule>> _futureSchedules;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureSchedules = ApiService.getSchedule();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +28,33 @@ class JourneysScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         centerTitle: true,
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: journeys.length,
-        itemBuilder: (context, index) {
-          final journey = journeys[index];
-          return ItineraryCard(
-            title: journey['title'],
-            date: journey['date'],
-            itinerary: journey['itinerary'],
+      body: FutureBuilder<List<Schedule>>(
+        future: _futureSchedules,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('No schedules available'));
+          }
+
+          final schedules = snapshot.data!;
+          return ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: schedules.length,
+            itemBuilder: (context, index) {
+              final schedule = schedules[index];
+              return ItineraryCard(
+                title: schedule.dayTitle,
+                date: schedule.date.toLocal().toString().split(' ')[0],
+                itinerary: schedule.activities.map((activity) => {
+                  'time': activity.time.toLocal().toString().split(' ')[1],
+                  'activity': activity.title,
+                  'details': activity.location,
+                }).toList(),
+              );
+            },
           );
         },
       ),
