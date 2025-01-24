@@ -24,14 +24,7 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
   bool _isUploading = false;
   String _selectedCategory = 'Ibadah';
   
-  final List<String> _categories = [
-    'Ibadah',
-    'Wisata',
-    'Kuliner',
-    'Transportasi',
-    'Hotel',
-    'Lainnya'
-  ];
+ 
 
   @override
   void dispose() {
@@ -482,15 +475,9 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
             ),
             maxLines: 3,
           ),
+       
           const SizedBox(height: 20),
-          _buildTextField(
-            controller: _locationController,
-            label: 'Location',
-            hint: 'Where was this taken?',
-            icon: Icons.place_rounded,
-          ),
-          const SizedBox(height: 20),
-          _buildCategoryDropdown(),
+       
         ],
       ),
     );
@@ -539,64 +526,7 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
     );
   }
 
-  Widget _buildCategoryDropdown() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Category',
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          color: Colors.black87,
-          ),
-        ),
-        const SizedBox(height: 8),
-        DropdownButtonFormField<String>(
-          value: _selectedCategory,
-          decoration: InputDecoration(
-            prefixIcon: Icon(
-              Icons.category_rounded,
-              color: Colors.grey.shade600,
-            ),
-            filled: true,
-            fillColor: Colors.grey.shade50,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16,
-            ),
-          ),
-          style: const TextStyle(
-            fontSize: 15,
-            color: Colors.black87,
-          ),
-          dropdownColor: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          items: _categories.map((String category) {
-            return DropdownMenuItem(
-              value: category,
-              child: Text(
-                category,
-                style: const TextStyle(fontSize: 15),
-              ),
-            );
-          }).toList(),
-          onChanged: (String? newValue) {
-            if (newValue != null) {
-              setState(() {
-                _selectedCategory = newValue;
-              });
-            }
-          },
-        ),
-      ],
-    );
-  }
-
+ 
   Widget _buildUploadButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),

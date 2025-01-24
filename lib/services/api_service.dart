@@ -8,7 +8,7 @@ import 'package:retali/models/schedule.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.196.13:8000/api/v1';
+  static const String baseUrl = 'http://192.168.175.13:8000/api/v1';
   static const String _tokenKey = 'auth_token';
   
   static Future<String?> getToken() async {

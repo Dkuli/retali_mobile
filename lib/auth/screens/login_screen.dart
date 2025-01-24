@@ -149,19 +149,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                           ),
                         ),
                   SizedBox(height: 20.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Don't have an account?"),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Sign Up',
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                      ),
-                    ],
-                  ),
+              
                 ],
               ),
             ),
