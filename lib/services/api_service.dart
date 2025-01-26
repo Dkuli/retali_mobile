@@ -3,9 +3,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:retali/models/carousel.dart';
-import 'package:retali/models/schedule.dart';
+import 'package:retali/carousel.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/schedule.dart';
 
 class ApiService {
   static const String baseUrl = 'http://192.168.175.13:8000/api/v1';

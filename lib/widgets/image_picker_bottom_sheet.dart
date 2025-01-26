@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import '../utils/image_picker_util.dart';
+import 'package:retali/utils/image_picker_util.dart';
+
+
 
 class ImagePickerBottomSheet extends StatelessWidget {
   final Function(File?) onImagePicked;

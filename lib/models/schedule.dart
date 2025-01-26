@@ -1,4 +1,5 @@
-// lib/models/schedule.dart
+
+
 import 'package:retali/models/activity.dart';
 
 class Schedule {

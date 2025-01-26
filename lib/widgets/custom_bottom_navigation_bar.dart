@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:retali/home_screen.dart';
-import 'package:retali/luggages/screens/luggage_scan_screen.dart';
-import 'package:retali/notification/notification_screen.dart';
-import 'package:retali/profile/ProfileScreen.dart';
-import 'package:retali/task/TaskScreen.dart';
+import 'package:retali/notification_screen.dart';
+import 'package:retali/screens/ProfileScreen.dart';
+import 'package:retali/screens/TaskScreen.dart';
+import 'package:retali/screens/home_screen.dart';
+import 'package:retali/screens/luggage_scan_screen.dart';
+
 
 class CustomBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;

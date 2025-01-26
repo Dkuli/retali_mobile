@@ -2,15 +2,15 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:retali/utils/shared_prefs.dart';
+import 'package:retali/screens/home_screen.dart';
+import 'package:retali/screens/login_screen.dart';
+import 'package:retali/screens/onboarding_screens.dart';
+import 'package:retali/services/notification_service.dart';
+import 'package:retali/shared_prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'auth_provider.dart';
 
-import 'auth/providers/auth_provider.dart';
-import 'auth/screens/login_screen.dart';
-import 'home_screen.dart';
-import 'onboarding/screens/onboarding_screens.dart'; 
-import 'notification/services/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

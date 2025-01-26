@@ -1,7 +1,7 @@
 
 
-import 'package:retali/models/pilgrim.dart';
-import 'package:retali/models/schedule.dart';
+import 'package:retali/pilgrim.dart';
+import 'package:retali/schedule.dart';
 
 
 class Group {
