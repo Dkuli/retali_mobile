@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:retali/shared_prefs.dart';
+
 
 import '../services/api_service.dart';
+import '../utils/shared_prefs.dart';
 
 
 class AuthProvider with ChangeNotifier {

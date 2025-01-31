@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:retali/providers/auth_provider.dart';
 import 'package:retali/screens/home_screen.dart';
 import 'package:retali/services/api_service.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
     )..repeat(reverse: true);
   }
 
@@ -42,27 +42,43 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
     setState(() => _isLoading = true);
 
     try {
-      final response = await ApiService.login(
+      // Get the AuthProvider instance
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      
+      // Attempt login through AuthProvider
+      await authProvider.login(
         _emailController.text.trim(),
         _passwordController.text,
-        null
+        null // FCM token can be implemented later
       );
-      
-      if (response['status'] == 'Success') {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+
+      // If login successful, navigate to home screen
+      if (mounted && authProvider.isAuthenticated) {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          (route) => false,
         );
-      } else {
-        throw ApiException(response['message'] ?? 'Login failed');
+      }
+    } on ApiException catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error.message),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
       }
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(error.toString()),
-          backgroundColor: Colors.red,
-          duration: Duration(seconds: 3),
-        ),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error.toString()),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);

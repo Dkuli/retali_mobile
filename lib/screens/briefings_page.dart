@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' as rootBundle;
-import 'package:retali/briefing_preview_card.dart';
 import 'package:retali/models/briefing.dart';
-
+import '../widgets/briefing_preview_card.dart';
 import 'briefing_detail_page.dart'; // Add this import statement
 // Add this import statement
 

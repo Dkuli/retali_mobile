@@ -1,7 +1,5 @@
 
-
-// lib/models/content.dart
-import 'package:retali/user.dart';
+import 'package:retali/models/user.dart';
 
 class Content {
   final int id;

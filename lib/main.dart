@@ -2,14 +2,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:retali/providers/auth_provider.dart';
 import 'package:retali/screens/home_screen.dart';
 import 'package:retali/screens/login_screen.dart';
 import 'package:retali/screens/onboarding_screens.dart';
 import 'package:retali/services/notification_service.dart';
-import 'package:retali/shared_prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'auth_provider.dart';
+import 'utils/shared_prefs.dart';
 
 
 void main() async {

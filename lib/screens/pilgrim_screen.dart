@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:retali/pilgrim.dart';
 import 'package:retali/services/api_service.dart';
+
+import '../models/pilgrim.dart';
 
 
 class PilgrimScreen extends StatefulWidget {

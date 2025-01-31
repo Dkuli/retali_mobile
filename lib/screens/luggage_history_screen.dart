@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-import 'package:retali/auth_provider.dart';
+import 'package:retali/providers/auth_provider.dart';
 
 
 class LuggageHistoryScreen extends StatefulWidget {

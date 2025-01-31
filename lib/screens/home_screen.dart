@@ -2,26 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:retali/ContentUploadScreen.dart';
-
-import 'package:retali/auth_provider.dart';
-import 'package:retali/guide_screen.dart';
-
-import 'package:retali/JourneysScreen.dart';
-
-import 'package:retali/carousel.dart';
-
-
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:retali/detail_masalah_screen.dart';
+import 'package:retali/providers/auth_provider.dart';
+import 'package:retali/screens/ContentUploadScreen.dart';
+import 'package:retali/screens/JourneysScreen.dart';
 import 'package:retali/screens/briefings_page.dart';
 import 'package:retali/screens/doa_umrah_screen.dart';
+import 'package:retali/screens/guide_screen.dart';
 import 'package:retali/screens/locations_list_page.dart';
 import 'package:retali/screens/luggage_history_screen.dart';
 import 'package:retali/screens/pilgrim_screen.dart';
 import 'package:retali/services/api_service.dart';
 import 'package:retali/widgets/main_layout.dart';
+import '../models/carousel.dart';
+import 'detail_masalah_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -184,22 +179,24 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCarousel() {
-    if (_isLoadingCarousel) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
+Widget _buildCarousel() {
+  if (_isLoadingCarousel) {
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
+  }
 
-    if (_carouselItems.isEmpty) {
-      return const SizedBox.shrink();
-    }
+  if (_carouselItems.isEmpty) {
+    return const SizedBox.shrink();
+  }
 
-    return Column(
+  return Container(
+    margin: const EdgeInsets.only(top: 8), // Add top margin
+    child: Column(
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            height: 150,
+            height: 180, // Increased height
             viewportFraction: 0.92,
             enlargeCenterPage: true,
             autoPlay: true,
@@ -213,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 : '';
             
             return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 4),
+              margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8), // Added vertical margin
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
@@ -241,7 +238,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: const Icon(Icons.error),
                       ),
                     ),
-                    // Only show gradient and title if title exists
                     if (item.title != null) ...[
                       Container(
                         decoration: BoxDecoration(
@@ -275,12 +271,12 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }).toList(),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16), // Increased spacing after carousel
         _buildCarouselIndicator(_carouselItems.length),
       ],
-    );
-  }
-
+    ),
+  );
+}
   Widget _buildCategories(BuildContext context) {
     final categories = [
       {

@@ -1,10 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
-import 'package:retali/loading_overlay.dart';
 import 'package:retali/services/api_service.dart';
 import 'package:video_player/video_player.dart';
+import '../widgets/loading_overlay.dart';
 
 
 

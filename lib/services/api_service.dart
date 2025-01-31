@@ -1,13 +1,9 @@
-// lib/services/api_service.dart
-
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:retali/carousel.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../models/schedule.dart';
+import '../models/carousel.dart';
 
 class ApiService {
   static const String baseUrl = 'http://192.168.175.13:8000/api/v1';
@@ -264,27 +260,37 @@ class ApiService {
     return (data['data'] as List).map((item) => Carousel.fromJson(item)).toList();
   }
 
-  // Luggage Scan APIs
-  static Future<dynamic> storeLuggageScan(
+ static Future<dynamic> storeLuggageScan(
     String qrData,
     double latitude,
     double longitude,
-    String userId,
+    String tourLeaderId,
   ) async {
-    final headers = await _getHeaders();
-    final response = await http.post(
-      Uri.parse('$baseUrl/luggage_scans'),
-      headers: headers,
-      body: json.encode({
-        'data': qrData,
-        'user_id': userId,
-        'latitude': latitude,
-        'longitude': longitude,
-      }),
-    );
-    return handleResponse(response);
+    try {
+      final headers = await _getHeaders();
+      final response = await http.post(
+        Uri.parse('$baseUrl/luggage_scans'),
+        headers: headers,
+        body: json.encode({
+          'data': qrData,
+          'tour_leader_id': tourLeaderId,
+          'latitude': latitude.toString(),
+          'longitude': longitude.toString(),
+        }),
+      );
+      
+      if (response.statusCode == 201) {
+        return json.decode(response.body);
+      } else {
+        final errorData = json.decode(response.body);
+        throw ApiException(errorData['message'] ?? 'Failed to store luggage scan');
+      }
+    } catch (e) {
+      if (e is ApiException) rethrow;
+      throw ApiException(e.toString());
+    }
   }
-}
+  }
 
 // Custom exceptions
 class ApiException implements Exception {
