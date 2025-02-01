@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:retali/screens/ProfileScreen.dart';
-import 'package:retali/screens/TaskScreen.dart';
 import 'package:retali/screens/home_screen.dart';
 import 'package:retali/screens/luggage_scan_screen.dart';
 
+
 import '../screens/notification_screen.dart';
+import '../screens/questionnaire_list_screen.dart';
 
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -127,7 +128,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       case 1:
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const TaskScreen(),
+            builder: (context) =>  QuestionnaireListScreen(),
           ),
         );
         break;

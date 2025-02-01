@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/questionnaire.dart';
+
 import '../models/schedule.dart';
 import '../models/carousel.dart';
 
@@ -174,26 +176,41 @@ class ApiService {
     return handleResponse(response);
   }
 
-  // Task APIs
-  static Future<List<dynamic>> getTasks() async {
+static Future<List<Questionnaire>> getQuestionnaires() async {
     final headers = await _getHeaders();
     final response = await http.get(
-      Uri.parse('$baseUrl/tasks'),
+      Uri.parse('$baseUrl/questionnaires'),
       headers: headers,
     );
     final data = await handleResponse(response);
-    return data['data'];
+    return (data['data'] as List)
+        .map((item) => Questionnaire.fromJson(item))
+        .toList();
   }
 
-  static Future<Future> submitTaskResponse(Map<String, dynamic> responseData) async {
+  static Future<Questionnaire> getQuestionnaire(int id) async {
+    final headers = await _getHeaders();
+    final response = await http.get(
+      Uri.parse('$baseUrl/questionnaires/$id'),
+      headers: headers,
+    );
+    final data = await handleResponse(response);
+    return Questionnaire.fromJson(data['data']);
+  }
+
+  static Future<Map<String, dynamic>> submitQuestionnaire(
+    int questionnaireId,
+    List<Map<String, dynamic>> answers,
+  ) async {
     final headers = await _getHeaders();
     final response = await http.post(
-      Uri.parse('$baseUrl/tasks/response'),
+      Uri.parse('$baseUrl/questionnaires/$questionnaireId/submit'),
       headers: headers,
-      body: json.encode(responseData),
+      body: json.encode({'answers': answers}),
     );
-    return handleResponse(response);
+    return await handleResponse(response);
   }
+
 
   // Content APIs
   static Future<List<dynamic>> getContents() async {

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:retali/screens/ProfileScreen.dart';
-import 'package:retali/screens/TaskScreen.dart';
 import 'package:retali/screens/home_screen.dart';
 import 'package:retali/screens/luggage_scan_screen.dart';
+
 import '../screens/notification_screen.dart';
+import '../screens/questionnaire_list_screen.dart';
 import 'custom_bottom_navigation_bar.dart';
 
 class MainLayout extends StatefulWidget {
@@ -64,7 +65,7 @@ class _MainLayoutState extends State<MainLayout> {
       case 0:
         return const HomeScreen();
       case 1:
-        return const TaskScreen();
+        return  QuestionnaireListScreen();
       case 2:
         return const NotificationScreen();
       case 3:
