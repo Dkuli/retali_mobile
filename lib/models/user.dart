@@ -22,7 +22,7 @@ class User {
       name: json['name'],
       email: json['email'],
       phone: json['phone'],
-      avatarUrl: json['avatar_url'],
+      avatarUrl: json['avatar'],
       fcmToken: json['fcm_token'],
     );
   }
