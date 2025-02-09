@@ -6,7 +6,6 @@ import '../models/GuideCategory.dart';
 import '../widgets/search_bar.dart';
 import 'GuideDetailScreen.dart';
 
-
 class GuideScreen extends StatefulWidget {
   const GuideScreen({Key? key}) : super(key: key);
 
@@ -39,134 +38,145 @@ class _GuideScreenState extends State<GuideScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context); // Access the theme
+    final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-           appBar: AppBar(
+      appBar: AppBar(
         title: Text(
-          'Pilgrims',
+          'Panduan',
           style: theme.appBarTheme.titleTextStyle,
         ),
         elevation: theme.appBarTheme.elevation,
         backgroundColor: theme.primaryColor,
       ),
-   
-      body: CustomScrollView(
-        slivers: [
-          
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                   _Header(),
-                  const SizedBox(height: 16),
-                ],
-              ),
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final category = filteredCategories[index];
-                  return _buildCategoryCard(category, theme);
-                },
-                childCount: filteredCategories.length,
-              ),
-            ),
-          ),
-        ],
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: filteredCategories.length,
+        itemBuilder: (context, index) {
+          final category = filteredCategories[index];
+          return _buildCategoryCard(category, theme);
+        },
       ),
     );
   }
 
- 
   Widget _buildCategoryCard(GuideCategory category, ThemeData theme) {
-    return Container(
+    return Card(
       margin: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        color: theme.cardTheme.color,
-        borderRadius: theme.cardTheme.shape.runtimeType is RoundedRectangleBorder
-            ? (theme.cardTheme.shape as RoundedRectangleBorder).borderRadius
-            : BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
       child: ExpansionTile(
+        maintainState: true,
+        // Remove default divider
+        shape: const Border(),
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: category.color.withOpacity(0.1),
+            color: theme.primaryColor.withOpacity(0.1),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(category.icon, color: category.color),
+          child: Icon(category.icon, color: theme.primaryColor),
         ),
         title: Text(
           category.title,
-          style: theme.textTheme.bodyLarge?.copyWith(
+          style: theme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
-        subtitle: Text(
-          '${category.guides.length} panduan',
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.textTheme.bodyMedium?.color,
-          ),
-        ),
         children: category.guides.map((guide) {
-          return _buildGuideItem(guide, theme);
+          return Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: Colors.grey.withOpacity(0.1),
+                  width: 1,
+                ),
+              ),
+            ),
+            child: ListTile(
+              onTap: () => _showGuideDetail(context, guide, theme),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              title: Text(
+                guide.title,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: theme.primaryColor,
+                ),
+              ),
+              subtitle: Text(
+                guide.description,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: theme.textTheme.bodyMedium,
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                size: 16,
+                color: theme.primaryColor,
+              ),
+            ),
+          );
         }).toList(),
       ),
     );
   }
 
-  Widget _buildGuideItem(Guide guide, ThemeData theme) {
-    return ListTile(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => GuideDetailScreen(guide: guide),
-          ),
-        );
-      },
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Image.network(
-          guide.imageUrl,
-          width: 60,
-          height: 60,
-          fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) => Container(
-            color: Colors.grey[200],
-            child: const Icon(Icons.error),
-          ),
+  void _showGuideDetail(BuildContext context, Guide guide, ThemeData theme) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height * 0.85,
+        decoration: BoxDecoration(
+          color: theme.scaffoldBackgroundColor,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      guide.title,
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: theme.primaryColor,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      guide.description,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      guide.content,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        height: 1.6,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-      title: Text(
-        guide.title,
-        style: theme.textTheme.bodyLarge?.copyWith(
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      subtitle: Text(
-        guide.description,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: theme.textTheme.bodySmall?.color,
-        ),
-      ),
-      trailing: Icon(Icons.chevron_right, color: theme.textTheme.bodyMedium?.color),
     );
   }
 }

@@ -35,11 +35,7 @@ class _QuestionnaireListScreenState extends State<QuestionnaireListScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
-              child: Text(
-                'Available Surveys',
-                style: theme.textTheme.titleLarge,
-              ),
-            ),
+           ),
             Expanded(
               child: FutureBuilder<List<Questionnaire>>(
                 future: _questionnaires,

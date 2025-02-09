@@ -325,7 +325,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'icon': Icons.luggage,
         'label': 'Bagasi',
         'color': Colors.brown,
-        'screen': const LuggageHistoryScreen()
+        'screen': const LuggageScanHistoryScreen()
       },
       {
         'icon': Icons.description,

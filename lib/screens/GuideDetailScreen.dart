@@ -38,32 +38,7 @@ class GuideDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              background: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Image.network(
-                    guide.imageUrl,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      color: Colors.grey[200],
-                      child: const Center(child: Icon(Icons.error)),
-                    ),
-                  ),
-                  const DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black54,
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+  ),
           ),
           SliverToBoxAdapter(
             child: Card(

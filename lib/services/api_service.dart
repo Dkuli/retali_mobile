@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/questionnaire.dart';
-
 import '../models/schedule.dart';
 import '../models/carousel.dart';
+import '../models/luggage_scan.dart';  // Add this import
 
 class ApiService {
   static const String baseUrl = 'http://192.168.175.13:8000/api/v1';
@@ -176,7 +176,7 @@ class ApiService {
     return handleResponse(response);
   }
 
-static Future<List<Questionnaire>> getQuestionnaires() async {
+  static Future<List<Questionnaire>> getQuestionnaires() async {
     final headers = await _getHeaders();
     final response = await http.get(
       Uri.parse('$baseUrl/questionnaires'),
@@ -210,7 +210,6 @@ static Future<List<Questionnaire>> getQuestionnaires() async {
     );
     return await handleResponse(response);
   }
-
 
   // Content APIs
   static Future<List<dynamic>> getContents() async {
@@ -277,7 +276,8 @@ static Future<List<Questionnaire>> getQuestionnaires() async {
     return (data['data'] as List).map((item) => Carousel.fromJson(item)).toList();
   }
 
- static Future<dynamic> storeLuggageScan(
+  // Luggage APIs
+  static Future<dynamic> storeLuggageScan(
     String qrData,
     double latitude,
     double longitude,
@@ -307,7 +307,29 @@ static Future<List<Questionnaire>> getQuestionnaires() async {
       throw ApiException(e.toString());
     }
   }
+
+  static Future<List<LuggageScan>> getMyLuggageScans() async {
+    final headers = await _getHeaders();
+    final response = await http.get(
+      Uri.parse('$baseUrl/luggage/scans/mine'),
+      headers: headers,
+    );
+    final data = await handleResponse(response);
+    return (data['data']['data'] as List)
+        .map((item) => LuggageScan.fromJson(item))
+        .toList();
   }
+
+  static Future<Map<String, dynamic>> getMyLuggageStats() async {
+    final headers = await _getHeaders();
+    final response = await http.get(
+      Uri.parse('$baseUrl/luggage/stats/mine'),
+      headers: headers,
+    );
+    final data = await handleResponse(response);
+    return data['data'];
+  }
+}
 
 // Custom exceptions
 class ApiException implements Exception {
