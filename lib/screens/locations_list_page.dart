@@ -1,17 +1,23 @@
-
 import 'package:flutter/material.dart';
 import 'package:retali/data/data_location.dart';
 import 'package:retali/widgets/category_card.dart';
 import 'package:retali/widgets/search_bar.dart';
-
-
 
 class LocationsListPage extends StatelessWidget {
   const LocationsListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Pilgrims',
+          style: theme.appBarTheme.titleTextStyle,
+        ),
+        elevation: theme.appBarTheme.elevation,
+        backgroundColor: theme.primaryColor,
+      ),
       backgroundColor: Colors.grey[50],
       body: SafeArea(
         child: Column(
@@ -37,7 +43,6 @@ class _Header extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-       
           SizedBox(height: 20),
           CustomSearchBar(
             hintText: 'Cari lokasi...',

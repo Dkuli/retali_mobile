@@ -1,9 +1,8 @@
+// journeys_screen.dart
 import 'package:flutter/material.dart';
 import 'package:retali/services/api_service.dart';
 import 'package:retali/models/schedule.dart';
 import '../widgets/itinerary_card.dart';
-
-
 
 class JourneysScreen extends StatefulWidget {
   @override
@@ -21,26 +20,27 @@ class _JourneysScreenState extends State<JourneysScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Access the theme
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Journeys",
-          style: TextStyle(color: Colors.black),
+          style: theme.appBarTheme.titleTextStyle,
         ),
-        backgroundColor: Colors.white,
-        centerTitle: true,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        elevation: theme.appBarTheme.elevation,
+        iconTheme: theme.appBarTheme.iconTheme,
       ),
       body: FutureBuilder<List<Schedule>>(
         future: _futureSchedules,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator(color: theme.primaryColor));
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(child: Text('Error: ${snapshot.error}', style: theme.textTheme.bodySmall));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No schedules available'));
+            return Center(child: Text('No schedules available', style: theme.textTheme.bodySmall));
           }
-
           final schedules = snapshot.data!;
           return ListView.builder(
             padding: const EdgeInsets.all(16),
@@ -55,6 +55,7 @@ class _JourneysScreenState extends State<JourneysScreen> {
                   'activity': activity.title,
                   'details': activity.location,
                 }).toList(),
+                theme: theme,
               );
             },
           );

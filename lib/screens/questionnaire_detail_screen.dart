@@ -74,85 +74,58 @@ class _QuestionnaireDetailScreenState extends State<QuestionnaireDetailScreen> {
   }
 
   Widget _buildQuestionWidget(Question question, int index) {
-    return Container(
+    final theme = Theme.of(context);
+    return Card(
       margin: EdgeInsets.only(bottom: 24),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 28,
-                height: 28,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 78, 29, 87),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Center(
-                  child: Text(
-                    '${index + 1}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                    color: theme.primaryColor,
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: Center(
+                    child: Text(
+                      '${index + 1}',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  question.questionText,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
+                SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    question.questionText,
+                    style: theme.textTheme.titleMedium,
                   ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 16),
-          _buildAnswerWidget(question),
-        ],
+              ],
+            ),
+            SizedBox(height: 16),
+            _buildAnswerWidget(question),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildAnswerWidget(Question question) {
+    final theme = Theme.of(context);
     switch (question.type) {
       case 'text':
         return TextFormField(
           decoration: InputDecoration(
             hintText: 'Enter your answer',
-            filled: true,
-            fillColor: Colors.grey[50],
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide.none,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey[200]!),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: const Color.fromARGB(255, 78, 29, 87),
-              ),
-            ),
           ),
           maxLines: 3,
           validator: (value) =>
@@ -165,21 +138,10 @@ class _QuestionnaireDetailScreenState extends State<QuestionnaireDetailScreen> {
           children: question.options!.map((option) {
             return Container(
               margin: EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(
-                color: Colors.grey[50],
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey[200]!),
-              ),
               child: CheckboxListTile(
-                title: Text(
-                  option,
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black87,
-                  ),
-                ),
+                title: Text(option, style: theme.textTheme.bodyMedium),
                 value: (_answers[question.id] ?? []).contains(option),
-                activeColor: const Color.fromARGB(255, 78, 29, 87),
+                activeColor: theme.primaryColor,
                 checkColor: Colors.white,
                 contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                 shape: RoundedRectangleBorder(
@@ -201,26 +163,20 @@ class _QuestionnaireDetailScreenState extends State<QuestionnaireDetailScreen> {
         );
 
       default:
-        return Text('Unsupported question type: ${question.type}');
+        return Text(
+          'Unsupported question type: ${question.type}',
+          style: theme.textTheme.bodyMedium,
+        );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        title: Text(
-          'Survey',
-          style: TextStyle(
-            color: Colors.black87,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        iconTheme: IconThemeData(color: Colors.black87),
+        title: Text('Survey'),
       ),
       body: FutureBuilder<Questionnaire>(
         future: _questionnaire,
@@ -229,7 +185,7 @@ class _QuestionnaireDetailScreenState extends State<QuestionnaireDetailScreen> {
             return Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  const Color.fromARGB(255, 78, 29, 87),
+                  theme.primaryColor,
                 ),
               ),
             );
@@ -273,7 +229,7 @@ class _QuestionnaireDetailScreenState extends State<QuestionnaireDetailScreen> {
                           Container(
                             padding: EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: theme.cardColor,
                               borderRadius: BorderRadius.circular(12),
                               boxShadow: [
                                 BoxShadow(
@@ -288,19 +244,12 @@ class _QuestionnaireDetailScreenState extends State<QuestionnaireDetailScreen> {
                               children: [
                                 Text(
                                   questionnaire.title,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
+                                  style: theme.textTheme.titleLarge,
                                 ),
                                 SizedBox(height: 8),
                                 Text(
                                   questionnaire.description,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey[600],
-                                  ),
+                                  style: theme.textTheme.bodyMedium,
                                 ),
                               ],
                             ),
@@ -323,7 +272,7 @@ class _QuestionnaireDetailScreenState extends State<QuestionnaireDetailScreen> {
                   Container(
                     padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: theme.cardColor,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.05),
@@ -338,17 +287,15 @@ class _QuestionnaireDetailScreenState extends State<QuestionnaireDetailScreen> {
                       child: ElevatedButton(
                         onPressed: () => _submitQuestionnaire(questionnaire),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 78, 29, 87),
+                          backgroundColor: theme.primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
                         child: Text(
                           'Submit Survey',
-                          style: TextStyle(
-                            fontSize: 18,
+                          style: theme.textTheme.labelLarge?.copyWith(
                             color: Colors.white,
-                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),

@@ -7,10 +7,10 @@ import 'package:retali/screens/home_screen.dart';
 import 'package:retali/screens/login_screen.dart';
 import 'package:retali/screens/onboarding_screens.dart';
 import 'package:retali/services/notification_service.dart';
+import 'package:retali/themes/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'utils/shared_prefs.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +20,6 @@ void main() async {
   final notificationService = NotificationService();
   await notificationService.initialize();
   await SharedPrefs.init();
-   WidgetsFlutterBinding.ensureInitialized();
   
   runApp(const MyApp());
 }
@@ -72,12 +71,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         title: 'Luggage Scanner App',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.purple,
-            useMaterial3: true,
-            primaryColor: Color.fromARGB(255, 113, 6, 97),
-          textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
-        ),
+        theme: appTheme, // Use the appTheme
         home: _showOnboarding
             ? OnboardingScreen(onComplete: _completeOnboarding)
             : Consumer<AuthProvider>(

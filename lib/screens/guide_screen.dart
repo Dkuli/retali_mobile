@@ -1,8 +1,9 @@
+// guide_screen.dart
 import 'package:flutter/material.dart';
 
-import 'package:retali/models/GuideCategory.dart';
-
 import '../data/dummy_data.dart';
+import '../models/GuideCategory.dart';
+import '../widgets/search_bar.dart';
 import 'GuideDetailScreen.dart';
 
 
@@ -20,7 +21,6 @@ class _GuideScreenState extends State<GuideScreen> {
   @override
   void initState() {
     super.initState();
-    // Use dummy data directly instead of API call
     categories = DummyData.guideCategories;
   }
 
@@ -39,17 +39,28 @@ class _GuideScreenState extends State<GuideScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Access the theme
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: theme.scaffoldBackgroundColor,
+           appBar: AppBar(
+        title: Text(
+          'Pilgrims',
+          style: theme.appBarTheme.titleTextStyle,
+        ),
+        elevation: theme.appBarTheme.elevation,
+        backgroundColor: theme.primaryColor,
+      ),
+   
       body: CustomScrollView(
         slivers: [
-          _buildAppBar(),
+          
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSearchBar(),
+                   _Header(),
                   const SizedBox(height: 16),
                 ],
               ),
@@ -61,7 +72,7 @@ class _GuideScreenState extends State<GuideScreen> {
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   final category = filteredCategories[index];
-                  return _buildCategoryCard(category);
+                  return _buildCategoryCard(category, theme);
                 },
                 childCount: filteredCategories.length,
               ),
@@ -72,114 +83,26 @@ class _GuideScreenState extends State<GuideScreen> {
     );
   }
 
-  Widget _buildAppBar() {
-    return SliverAppBar(
-      expandedHeight: 200.0,
-      pinned: true,
-      flexibleSpace: FlexibleSpaceBar(
-        background: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF4E1D57),
-                Color(0xFF2D1657),
-              ],
-            ),
-          ),
-          child: Stack(
-            children: [
-              Positioned(
-                right: -50,
-                top: -50,
-                child: Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white.withOpacity(0.1),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Panduan Ibadah',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Pelajari tata cara ibadah dengan mudah',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.8),
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSearchBar() {
+ 
+  Widget _buildCategoryCard(GuideCategory category, ThemeData theme) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        color: theme.cardTheme.color,
+        borderRadius: theme.cardTheme.shape.runtimeType is RoundedRectangleBorder
+            ? (theme.cardTheme.shape as RoundedRectangleBorder).borderRadius
+            : BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             blurRadius: 10,
-            offset: Offset(0, 5),
-          ),
-        ],
-      ),
-      child: TextField(
-        onChanged: (value) {
-          setState(() {
-            searchQuery = value;
-          });
-        },
-        decoration: InputDecoration(
-          hintText: 'Cari panduan...',
-          border: InputBorder.none,
-          icon: Icon(Icons.search, color: Colors.grey),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCategoryCard(GuideCategory category) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: Offset(0, 5),
+            offset: const Offset(0, 5),
           ),
         ],
       ),
       child: ExpansionTile(
         leading: Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: category.color.withOpacity(0.1),
             borderRadius: BorderRadius.circular(8),
@@ -188,23 +111,24 @@ class _GuideScreenState extends State<GuideScreen> {
         ),
         title: Text(
           category.title,
-          style: TextStyle(
+          style: theme.textTheme.bodyLarge?.copyWith(
             fontWeight: FontWeight.bold,
-            fontSize: 16,
           ),
         ),
         subtitle: Text(
           '${category.guides.length} panduan',
-          style: TextStyle(color: Colors.grey),
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: theme.textTheme.bodyMedium?.color,
+          ),
         ),
         children: category.guides.map((guide) {
-          return _buildGuideItem(guide);
+          return _buildGuideItem(guide, theme);
         }).toList(),
       ),
     );
   }
 
-  Widget _buildGuideItem(Guide guide) {
+  Widget _buildGuideItem(Guide guide, ThemeData theme) {
     return ListTile(
       onTap: () {
         Navigator.push(
@@ -214,7 +138,7 @@ class _GuideScreenState extends State<GuideScreen> {
           ),
         );
       },
-      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Image.network(
@@ -222,18 +146,47 @@ class _GuideScreenState extends State<GuideScreen> {
           width: 60,
           height: 60,
           fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) => Container(
+            color: Colors.grey[200],
+            child: const Icon(Icons.error),
+          ),
         ),
       ),
       title: Text(
         guide.title,
-        style: TextStyle(fontWeight: FontWeight.w500),
+        style: theme.textTheme.bodyLarge?.copyWith(
+          fontWeight: FontWeight.w500,
+        ),
       ),
       subtitle: Text(
         guide.description,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          color: theme.textTheme.bodySmall?.color,
+        ),
       ),
-      trailing: Icon(Icons.chevron_right),
+      trailing: Icon(Icons.chevron_right, color: theme.textTheme.bodyMedium?.color),
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 20),
+          CustomSearchBar(
+            hintText: 'Cari lokasi...',
+          ),
+        ],
+      ),
     );
   }
 }

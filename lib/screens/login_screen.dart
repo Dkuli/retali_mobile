@@ -1,3 +1,4 @@
+// login_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:retali/providers/auth_provider.dart';
@@ -8,7 +9,7 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStateMixin {
@@ -38,21 +39,14 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
 
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
-
     setState(() => _isLoading = true);
-
     try {
-      // Get the AuthProvider instance
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      
-      // Attempt login through AuthProvider
       await authProvider.login(
         _emailController.text.trim(),
         _passwordController.text,
-        null // FCM token can be implemented later
+        null, // FCM token can be implemented later
       );
-
-      // If login successful, navigate to home screen
       if (mounted && authProvider.isAuthenticated) {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const HomeScreen()),
@@ -88,8 +82,9 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Access the theme
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Center(
@@ -99,27 +94,26 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 
                   Text(
                     'Hi, Tourlider!',
-                    style: TextStyle(
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
+                    style: theme.textTheme.headlineLarge?.copyWith(
                       color: Colors.black87,
                     ),
                   ),
-                  SizedBox(height: 8),
-                    Text(
+                  const SizedBox(height: 8),
+                  Text(
                     'Masukkan username/email dan kata sandi Anda untuk masuk',
-                    style: TextStyle(fontSize: 16.0, color: Colors.grey),
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: Colors.grey,
+                    ),
                   ),
-                  SizedBox(height: 32.0),
+                  const SizedBox(height: 32.0),
                   _buildTextField(
                     controller: _emailController,
                     label: 'Email',
                     icon: Icons.person_outline,
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   _buildTextField(
                     controller: _passwordController,
                     label: 'Password',
@@ -130,23 +124,25 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                       onPressed: () => setState(() => _obscureText = !_obscureText),
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {},
                       child: Text(
                         'Forgot password?',
-                        style: TextStyle(color: Colors.black54),
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: Colors.black54,
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   _isLoading
                       ? CircularProgressIndicator(
                           valueColor: _animationController.drive(ColorTween(
-                            begin: Colors.red,
-                            end: Colors.red[200],
+                            begin: theme.primaryColor,
+                            end: theme.primaryColor.withOpacity(0.5),
                           )),
                         )
                       : SizedBox(
@@ -154,20 +150,16 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                           height: 50,
                           child: ElevatedButton(
                             onPressed: _login,
-                            style: ElevatedButton.styleFrom(
-                           backgroundColor: const Color.fromARGB(255, 78, 29, 87),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                            ),
+                            style: theme.elevatedButtonTheme.style,
                             child: Text(
                               'Login',
-                              style: TextStyle(fontSize: 18.0, color: Colors.white),
+                              style: theme.textTheme.bodyLarge?.copyWith(
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
-                  SizedBox(height: 20.0),
-              
+                  const SizedBox(height: 20.0),
                 ],
               ),
             ),
@@ -184,20 +176,23 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
     bool obscureText = false,
     Widget? suffixIcon,
   }) {
+    final theme = Theme.of(context); // Access the theme
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(10.0),
+        color: theme.inputDecorationTheme.fillColor,
+        borderRadius: theme.inputDecorationTheme.border.runtimeType is OutlineInputBorder
+            ? (theme.inputDecorationTheme.border as OutlineInputBorder).borderRadius
+            : BorderRadius.circular(10.0),
       ),
       child: TextFormField(
         controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
           labelText: label,
-          border: InputBorder.none,
           prefixIcon: Icon(icon, color: Colors.black54),
           suffixIcon: suffixIcon,
-          contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+          fillColor: theme.inputDecorationTheme.fillColor,
+          border: theme.inputDecorationTheme.border,
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {

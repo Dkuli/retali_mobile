@@ -1,23 +1,19 @@
+// custom_bottom_navigation_bar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:retali/screens/ProfileScreen.dart';
+
 import 'package:retali/screens/home_screen.dart';
 import 'package:retali/screens/luggage_scan_screen.dart';
-
-
+import '../screens/ProfileScreen.dart';
 import '../screens/notification_screen.dart';
 import '../screens/questionnaire_list_screen.dart';
 
-
 class CustomBottomNavigationBar extends StatelessWidget {
+  const CustomBottomNavigationBar({super.key, required this.selectedIndex, required this.onItemSelected, required this.theme});
+
   final int selectedIndex;
   final Function(int) onItemSelected;
-
-  const CustomBottomNavigationBar({
-    Key? key,
-    required this.selectedIndex,
-    required this.onItemSelected,
-  }) : super(key: key);
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +67,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
                     ),
                   );
                 },
-                backgroundColor: const Color.fromARGB(255, 78, 29, 87),
+                backgroundColor: theme.primaryColor,
                 child: SvgPicture.asset(
                   'assets/images/qr-scan.svg',
                   width: 24,
                   height: 24,
-                  color: Colors.white,
+                  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
                 ),
               ),
             ),
@@ -98,17 +94,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
         children: [
           Icon(
             isSelected ? activeIcon : icon,
-            color: isSelected 
-              ? const Color.fromARGB(255, 78, 29, 87)
-              : Colors.grey,
+            color: isSelected ? theme.primaryColor : theme.textTheme.bodyMedium?.color,
           ),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 12,
-              color: isSelected 
-                ? const Color.fromARGB(255, 78, 29, 87)
-                : Colors.grey,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: isSelected ? theme.primaryColor : theme.textTheme.bodyMedium?.color,
             ),
           ),
         ],

@@ -1,10 +1,10 @@
+// detail_masalah_screen.dart
 import 'package:flutter/material.dart';
 
 class DetailMasalahScreen extends StatelessWidget {
   final String title;
-  final Map<String, dynamic> problemData;
+  final Map problemData;
   final String heroTag;
-
   const DetailMasalahScreen({
     Key? key,
     required this.title,
@@ -14,16 +14,16 @@ class DetailMasalahScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Access the theme
     return Scaffold(
       appBar: AppBar(
         title: Text(
           title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
+          style: theme.appBarTheme.titleTextStyle,
         ),
-        elevation: 0,
+        elevation: theme.appBarTheme.elevation,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        iconTheme: theme.appBarTheme.iconTheme,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -52,6 +52,10 @@ class DetailMasalahScreen extends StatelessWidget {
                     child: Image.asset(
                       problemData['image'] as String,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: Colors.grey[200],
+                        child: const Icon(Icons.error),
+                      ),
                     ),
                   ),
                 ),
@@ -70,13 +74,10 @@ class DetailMasalahScreen extends StatelessWidget {
                       .where((entry) => entry.key != 'image')
                       .toList();
                   final entry = entries[index];
-
                   if (entry.value is Map) {
                     return Card(
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      elevation: theme.cardTheme.elevation,
+                      shape: theme.cardTheme.shape,
                       child: Theme(
                         data: Theme.of(context).copyWith(
                           dividerColor: Colors.transparent,
@@ -84,16 +85,15 @@ class DetailMasalahScreen extends StatelessWidget {
                         child: ExpansionTile(
                           title: Text(
                             entry.key,
-                            style: const TextStyle(
+                            style: theme.textTheme.bodyLarge?.copyWith(
                               fontWeight: FontWeight.bold,
-                              fontSize: 16,
                             ),
                           ),
                           childrenPadding: const EdgeInsets.symmetric(
                             horizontal: 16,
                             vertical: 8,
                           ),
-                          children: (entry.value as Map).entries.map<Widget>((subEntry) {
+                          children: (entry.value as Map).entries.map((subEntry) {
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 8),
                               child: Column(
@@ -101,17 +101,15 @@ class DetailMasalahScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     subEntry.key,
-                                    style: const TextStyle(
+                                    style: theme.textTheme.bodyMedium?.copyWith(
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 14,
                                     ),
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
                                     subEntry.value.toString(),
-                                    style: TextStyle(
-                                      color: Colors.grey[600],
-                                      fontSize: 14,
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: theme.textTheme.bodyMedium?.color,
                                     ),
                                   ),
                                 ],
@@ -129,6 +127,7 @@ class DetailMasalahScreen extends StatelessWidget {
           ],
         ),
       ),
+      backgroundColor: theme.scaffoldBackgroundColor,
     );
   }
 }

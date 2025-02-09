@@ -1,39 +1,39 @@
+// guide_detail_screen.dart
 import 'package:flutter/material.dart';
-import 'package:retali/models/GuideCategory.dart';
+
+import '../models/GuideCategory.dart';
 
 
 class GuideDetailScreen extends StatelessWidget {
   final Guide guide;
-
   const GuideDetailScreen({
-    Key? key, 
-    required this.guide
+    Key? key,
+    required this.guide,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Access the theme
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: CustomScrollView(
         slivers: [
-          // Enhanced App Bar
           SliverAppBar(
             expandedHeight: 250,
             pinned: true,
             floating: false,
-            elevation: 0,
+            elevation: theme.appBarTheme.elevation,
             backgroundColor: Colors.transparent,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
                 guide.title,
-                style: const TextStyle(
+                style: theme.textTheme.headlineLarge?.copyWith(
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
                   shadows: [
                     Shadow(
                       offset: Offset(0, 1),
                       blurRadius: 3.0,
-                      color: Color.fromARGB(255, 0, 0, 0),
+                      color: Colors.black,
                     ),
                   ],
                 ),
@@ -41,12 +41,14 @@ class GuideDetailScreen extends StatelessWidget {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // Image with gradient overlay
                   Image.network(
                     guide.imageUrl,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      color: Colors.grey[200],
+                      child: const Center(child: Icon(Icons.error)),
+                    ),
                   ),
-                  // Gradient overlay for better text readability
                   const DecoratedBox(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -63,59 +65,48 @@ class GuideDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-
-          // Content
           SliverToBoxAdapter(
             child: Card(
               margin: const EdgeInsets.all(16.0),
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+              elevation: theme.cardTheme.elevation,
+              shape: theme.cardTheme.shape,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Description section
                     Container(
                       padding: const EdgeInsets.symmetric(
                         vertical: 12,
                         horizontal: 16,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.grey[100],
+                        color: theme.cardTheme.color,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
                         guide.description,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey[800],
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.textTheme.bodySmall?.color,
                           height: 1.5,
                         ),
                       ),
                     ),
-
                     const SizedBox(height: 24),
-
-                    // Content section
                     Text(
                       'Content',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      style: theme.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 16),
                     Text(
                       guide.content,
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: theme.textTheme.bodyLarge?.copyWith(
                         height: 1.8,
                         letterSpacing: 0.3,
                       ),
                     ),
-
                     const SizedBox(height: 32),
                   ],
                 ),

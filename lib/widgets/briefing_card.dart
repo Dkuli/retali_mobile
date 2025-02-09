@@ -1,35 +1,35 @@
+// briefing_card.dart
 import 'package:flutter/material.dart';
-import 'package:retali/models/briefing.dart';
-
+import '../models/briefing.dart';
 
 class BriefingCard extends StatefulWidget {
   final Briefing briefing;
-
-  const BriefingCard({Key? key, required this.briefing}) : super(key: key);
+  const BriefingCard({super.key, required this.briefing}); // Convert 'key' to super parameter
 
   @override
-  State<BriefingCard> createState() => _BriefingCardState();
+  BriefingCardState createState() => BriefingCardState(); // Make the private type public
 }
 
-class _BriefingCardState extends State<BriefingCard> {
-  List<bool> _expandedSections = List.generate(10, (_) => false);
-  
-  Widget _buildHeaderTile() {
+class BriefingCardState extends State<BriefingCard> {
+  List<bool> isExpanded = [false, false, false, false, false, false]; // Use a list to track expansion state
+
+  Widget _buildHeaderTile(ThemeData theme) {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       title: Text(
         '${widget.briefing.type} ${widget.briefing.location != null ? 'di ${widget.briefing.location!}' : ''}',
-        style: TextStyle(
-          fontSize: 18,
+        style: theme.textTheme.bodyLarge?.copyWith(
           fontWeight: FontWeight.bold,
-          color: Colors.teal[700],
+          color: theme.primaryColor,
         ),
       ),
       subtitle: Padding(
         padding: const EdgeInsets.only(top: 8),
         child: Text(
           widget.briefing.opening,
-          style: TextStyle(fontSize: 14),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: theme.textTheme.bodySmall?.color,
+          ),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
@@ -37,139 +37,201 @@ class _BriefingCardState extends State<BriefingCard> {
     );
   }
 
-  Widget _buildMapContent(Map<String, String>? data) {
-    if (data == null || data.isEmpty) return SizedBox.shrink();
-    
+  Widget _buildMapContent(Map<String, String> data, ThemeData theme) {
+    if (data.isEmpty) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: data.entries.map((entry) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              entry.key,
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: Colors.teal[700],
-              ),
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  entry.key,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: theme.primaryColor,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  entry.value,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.textTheme.bodyMedium?.color,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 4),
-            Text(
-              entry.value,
-              style: TextStyle(fontSize: 14),
-            ),
-          ],
-        ),
-      )).toList(),
+          )).toList(),
     );
   }
 
-  List<ExpansionPanel> _buildExpansionPanels() {
-    List<ExpansionPanelContent> sections = [];
-
+  List<ExpansionPanel> _buildExpansionPanels(ThemeData theme) {
+    final List<ExpansionPanel> panels = [];
     // Add introduction if exists
     if (widget.briefing.introduction != null) {
-      sections.add(ExpansionPanelContent(
-        'Pendahuluan',
-        widget.briefing.introduction!,
-        isText: true
-      ));
-    }
-
-    // Add description if exists
-    if (widget.briefing.description != null) {
-      sections.add(ExpansionPanelContent(
-        'Deskripsi',
-        widget.briefing.description!,
-        isText: true
-      ));
-    }
-
-    // Add other sections if they exist
-    if (widget.briefing.jamaahPreparedness?.isNotEmpty ?? false) {
-      sections.add(ExpansionPanelContent(
-        'Persiapan Jamaah',
-        widget.briefing.jamaahPreparedness!
-      ));
-    }
-
-    if (widget.briefing.administrationCheck?.isNotEmpty ?? false) {
-      sections.add(ExpansionPanelContent(
-        'Pengecekan Administrasi',
-        widget.briefing.administrationCheck!
-      ));
-    }
-
-    if (widget.briefing.coordination?.isNotEmpty ?? false) {
-      sections.add(ExpansionPanelContent(
-        'Koordinasi',
-        widget.briefing.coordination!
-      ));
-    }
-
-    if (widget.briefing.importantInformation?.isNotEmpty ?? false) {
-      sections.add(ExpansionPanelContent(
-        'Informasi Penting',
-        widget.briefing.importantInformation!
-      ));
-    }
-
-    return List.generate(sections.length, (index) {
-      final section = sections[index];
-      return ExpansionPanel(
-        headerBuilder: (context, isExpanded) => ListTile(
-          title: Text(
-            section.title,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+      panels.add(
+        ExpansionPanel(
+          headerBuilder: (context, isExpanded) => ListTile(
+            title: Text(
+              'Pendahuluan',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
+          body: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: Text(
+              widget.briefing.introduction!,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.textTheme.bodyMedium?.color,
+              ),
+            ),
+          ),
+          isExpanded: this.isExpanded[0], // Use list to track expansion state
+          canTapOnHeader: true,
         ),
-        body: Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
-          child: section.isText
-              ? Text(section.content as String)
-              : _buildMapContent(section.content as Map<String, String>),
-        ),
-        isExpanded: _expandedSections[index],
-        canTapOnHeader: true,
       );
-    });
+    }
+    // Add description if exists
+    if (widget.briefing.description != null) {
+      panels.add(
+        ExpansionPanel(
+          headerBuilder: (context, isExpanded) => ListTile(
+            title: Text(
+              'Deskripsi',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: Text(
+              widget.briefing.description!,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.textTheme.bodyMedium?.color,
+              ),
+            ),
+          ),
+          isExpanded: this.isExpanded[1], // Use list to track expansion state
+          canTapOnHeader: true,
+        ),
+      );
+    }
+    // Add other sections if they exist
+    if (widget.briefing.jamaahPreparedness?.isNotEmpty ?? false) {
+      panels.add(
+        ExpansionPanel(
+          headerBuilder: (context, isExpanded) => ListTile(
+            title: Text(
+              'Persiapan Jamaah',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: _buildMapContent(widget.briefing.jamaahPreparedness!, theme),
+          ),
+          isExpanded: this.isExpanded[2], // Use list to track expansion state
+          canTapOnHeader: true,
+        ),
+      );
+    }
+    if (widget.briefing.administrationCheck?.isNotEmpty ?? false) {
+      panels.add(
+        ExpansionPanel(
+          headerBuilder: (context, isExpanded) => ListTile(
+            title: Text(
+              'Pengecekan Administrasi',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: _buildMapContent(widget.briefing.administrationCheck!, theme),
+          ),
+          isExpanded: this.isExpanded[3], // Use list to track expansion state
+          canTapOnHeader: true,
+        ),
+      );
+    }
+    if (widget.briefing.coordination?.isNotEmpty ?? false) {
+      panels.add(
+        ExpansionPanel(
+          headerBuilder: (context, isExpanded) => ListTile(
+            title: Text(
+              'Koordinasi',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: _buildMapContent(widget.briefing.coordination!, theme),
+          ),
+          isExpanded: this.isExpanded[4], // Use list to track expansion state
+          canTapOnHeader: true,
+        ),
+      );
+    }
+    if (widget.briefing.importantInformation?.isNotEmpty ?? false) {
+      panels.add(
+        ExpansionPanel(
+          headerBuilder: (context, isExpanded) => ListTile(
+            title: Text(
+              'Informasi Penting',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: _buildMapContent(widget.briefing.importantInformation!, theme),
+          ),
+          isExpanded: this.isExpanded[5], // Use list to track expansion state
+          canTapOnHeader: true,
+        ),
+      );
+    }
+    return panels;
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Access the theme
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      shape: theme.cardTheme.shape,
+      elevation: theme.cardTheme.elevation,
       child: Column(
         children: [
-          _buildHeaderTile(),
+          _buildHeaderTile(theme),
           ExpansionPanelList(
             elevation: 0,
             expandedHeaderPadding: EdgeInsets.zero,
-            expansionCallback: (index, isExpanded) {
+            expansionCallback: (int index, bool isExpanded) {
               setState(() {
-                _expandedSections[index] = !isExpanded;
+                this.isExpanded[index] = !isExpanded; // Use list to track expansion state
               });
             },
-            children: _buildExpansionPanels(),
+            children: _buildExpansionPanels(theme),
           ),
           if (widget.briefing.closing.isNotEmpty)
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(
                 widget.briefing.closing,
-                style: TextStyle(
-                  fontSize: 14,
+                style: theme.textTheme.bodySmall?.copyWith(
                   fontStyle: FontStyle.italic,
-                  color: Colors.grey[700],
+                  color: theme.textTheme.bodyMedium?.color,
                 ),
               ),
             ),
@@ -177,12 +239,4 @@ class _BriefingCardState extends State<BriefingCard> {
       ),
     );
   }
-}
-
-class ExpansionPanelContent {
-  final String title;
-  final dynamic content;
-  final bool isText;
-
-  ExpansionPanelContent(this.title, this.content, {this.isText = false});
 }

@@ -15,6 +15,7 @@ class Briefing {
   final Map<String, String>? worshipGuidance;
   final Map<String, String>? management;
   final String closing;
+  final String imageUrl;
 
   Briefing({
     required this.type,
@@ -32,6 +33,7 @@ class Briefing {
     this.worshipGuidance,
     this.management,
     required this.closing,
+    required this.imageUrl,
   });
 
   factory Briefing.fromJson(Map<String, dynamic> json) {
@@ -52,6 +54,7 @@ class Briefing {
       worshipGuidance: Map<String, String>.from(content['worship_guidance'] ?? {}),
       management: Map<String, String>.from(content['management'] ?? {}),
       closing: content['closing'] ?? '',
+      imageUrl: json['image_url'] ?? '',
     );
   }
 }

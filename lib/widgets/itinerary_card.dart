@@ -1,16 +1,18 @@
+// itinerary_card.dart
 import 'package:flutter/material.dart';
 
 class ItineraryCard extends StatefulWidget {
   final String title;
   final String date;
   final List<Map<String, String>> itinerary;
-
+  final ThemeData theme;
   const ItineraryCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.date,
     required this.itinerary,
-  }) : super(key: key);
+    required this.theme,
+  });
 
   @override
   State<ItineraryCard> createState() => _ItineraryCardState();
@@ -21,19 +23,20 @@ class _ItineraryCardState extends State<ItineraryCard> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = widget.theme; // Access the theme
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      elevation: theme.cardTheme.elevation,
+      shape: theme.cardTheme.shape,
       child: InkWell(
         onTap: () {
           setState(() {
             isExpanded = !isExpanded;
           });
         },
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: theme.cardTheme.shape.runtimeType is RoundedRectangleBorder
+            ? (theme.cardTheme.shape as RoundedRectangleBorder).borderRadius as BorderRadius?
+            : BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -44,14 +47,14 @@ class _ItineraryCardState extends State<ItineraryCard> {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 142, 33, 243).withOpacity(0.1),
+                      color: Colors.purple.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
                       widget.date,
-                      style: const TextStyle(
+                      style: theme.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 113, 6, 97),
+                        color: theme.primaryColor,
                       ),
                     ),
                   ),
@@ -59,34 +62,31 @@ class _ItineraryCardState extends State<ItineraryCard> {
                   Expanded(
                     child: Text(
                       widget.title,
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: theme.textTheme.headlineLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                   Icon(
                     isExpanded ? Icons.expand_less : Icons.expand_more,
-                    color: Colors.grey,
+                    color: theme.textTheme.bodyMedium?.color,
                   ),
                 ],
               ),
-              if (isExpanded) ...[
-                const SizedBox(height: 16),
+              if (isExpanded)
                 ...widget.itinerary.map(
                   (item) => Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Timeline Indicator
                         Column(
                           children: [
                             Container(
                               width: 12,
                               height: 12,
                               decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 113, 6, 97),
+                                color: Colors.purple,
                                 shape: BoxShape.circle,
                               ),
                             ),
@@ -94,17 +94,16 @@ class _ItineraryCardState extends State<ItineraryCard> {
                               Container(
                                 width: 2,
                                 height: 50,
-                                color: Color.fromARGB(255, 113, 6, 97),
+                                color: Colors.purple,
                               ),
                           ],
                         ),
                         const SizedBox(width: 16),
-                        // Itinerary Item
                         Expanded(
                           child: Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: Colors.grey.withOpacity(0.1),
+                              color: Colors.grey[50],
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Column(
@@ -112,26 +111,23 @@ class _ItineraryCardState extends State<ItineraryCard> {
                               children: [
                                 Text(
                                   item['time']!,
-                                  style: const TextStyle(
+                                  style: theme.textTheme.bodyMedium?.copyWith(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Color.fromARGB(255, 113, 6, 97),
+                                    color: theme.primaryColor,
                                   ),
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
                                   item['activity']!,
-                                  style: const TextStyle(
+                                  style: theme.textTheme.bodyLarge?.copyWith(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 14,
                                   ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   item['details']!,
-                                  style: TextStyle(
+                                  style: theme.textTheme.bodyMedium?.copyWith(
                                     color: Colors.grey[600],
-                                    fontSize: 13,
                                   ),
                                 ),
                               ],
@@ -142,7 +138,6 @@ class _ItineraryCardState extends State<ItineraryCard> {
                     ),
                   ),
                 ),
-              ],
             ],
           ),
         ),

@@ -1,25 +1,26 @@
+// main_layout.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:retali/screens/ProfileScreen.dart';
 import 'package:retali/screens/home_screen.dart';
 import 'package:retali/screens/luggage_scan_screen.dart';
-
 import '../screens/notification_screen.dart';
 import '../screens/questionnaire_list_screen.dart';
 import 'custom_bottom_navigation_bar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MainLayout extends StatefulWidget {
   final Widget child;
   final int currentIndex;
-
+  final ThemeData theme;
   const MainLayout({
     Key? key,
     required this.child,
     required this.currentIndex,
+    required this.theme,
   }) : super(key: key);
 
   @override
-  State<MainLayout> createState() => _MainLayoutState();
+  State createState() => _MainLayoutState();
 }
 
 class _MainLayoutState extends State<MainLayout> {
@@ -35,7 +36,7 @@ class _MainLayoutState extends State<MainLayout> {
             ),
           );
         },
-        backgroundColor: const Color.fromARGB(255, 78, 29, 87),
+        backgroundColor: widget.theme.primaryColor,
         child: SvgPicture.asset(
           'assets/images/qr-scan.svg',
           width: 24,
@@ -47,13 +48,14 @@ class _MainLayoutState extends State<MainLayout> {
       bottomNavigationBar: CustomBottomNavigationBar(
         selectedIndex: widget.currentIndex,
         onItemSelected: _onNavItemSelected,
+        theme: widget.theme,
       ),
+      backgroundColor: widget.theme.scaffoldBackgroundColor,
     );
   }
 
   void _onNavItemSelected(int index) {
     if (index == widget.currentIndex) return;
-    
     final newRoute = _getRouteForIndex(index);
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => newRoute),
@@ -65,7 +67,7 @@ class _MainLayoutState extends State<MainLayout> {
       case 0:
         return const HomeScreen();
       case 1:
-        return  QuestionnaireListScreen();
+        return QuestionnaireListScreen();
       case 2:
         return const NotificationScreen();
       case 3:

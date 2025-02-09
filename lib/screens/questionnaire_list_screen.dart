@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../models/questionnaire.dart';
 import '../services/api_service.dart';
+import '../widgets/main_layout.dart';
 import 'questionnaire_detail_screen.dart';
 
 class QuestionnaireListScreen extends StatefulWidget {
@@ -19,93 +21,70 @@ class _QuestionnaireListScreenState extends State<QuestionnaireListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        title: Text(
-          'Questionnaires',
-          style: TextStyle(
-            color: Colors.black87,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+    final theme = Theme.of(context);
+    return MainLayout(
+        theme: theme,
+      currentIndex: 1,
+      child: Scaffold(
+        backgroundColor: theme.scaffoldBackgroundColor,
+        appBar: AppBar(
+          title: Text('Questionnaires'),
         ),
-        iconTheme: IconThemeData(color: Colors.black87),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
-            child: Text(
-              'Available Surveys',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[600],
-                fontWeight: FontWeight.w500,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+              child: Text(
+                'Available Surveys',
+                style: theme.textTheme.titleLarge,
               ),
             ),
-          ),
-          Expanded(
-            child: FutureBuilder<List<Questionnaire>>(
-              future: _questionnaires,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        const Color.fromARGB(255, 78, 29, 87),
+            Expanded(
+              child: FutureBuilder<List<Questionnaire>>(
+                future: _questionnaires,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          theme.primaryColor,
+                        ),
                       ),
-                    ),
-                  );
-                }
-
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.error_outline,
-                          size: 48,
-                          color: Colors.red[300],
-                        ),
-                        SizedBox(height: 16),
-                        Text(
-                          'Error loading questionnaires',
-                          style: TextStyle(
-                            color: Colors.grey[700],
-                            fontSize: 16,
+                    );
+                  }
+      
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            size: 48,
+                            color: Colors.red[300],
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-
-                final questionnaires = snapshot.data!;
-                return ListView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: questionnaires.length,
-                  itemBuilder: (context, index) {
-                    final questionnaire = questionnaires[index];
-                    return Container(
-                      margin: EdgeInsets.only(bottom: 16),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 10,
-                            offset: Offset(0, 4),
+                          SizedBox(height: 16),
+                          Text(
+                            'Error loading questionnaires',
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 16,
+                            ),
                           ),
                         ],
                       ),
-                      child: Material(
-                        color: Colors.transparent,
+                    );
+                  }
+      
+                  final questionnaires = snapshot.data!;
+                  return ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    itemCount: questionnaires.length,
+                    itemBuilder: (context, index) {
+                      final questionnaire = questionnaires[index];
+                      return Card(
+                        margin: EdgeInsets.only(bottom: 16),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(12),
                           onTap: () {
@@ -129,27 +108,20 @@ class _QuestionnaireListScreenState extends State<QuestionnaireListScreen> {
                                     Expanded(
                                       child: Text(
                                         questionnaire.title,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
-                                        ),
+                                        style: theme.textTheme.titleLarge,
                                       ),
                                     ),
                                     Icon(
                                       Icons.arrow_forward_ios,
                                       size: 16,
-                                      color: Colors.grey[400],
+                                      color: theme.hintColor,
                                     ),
                                   ],
                                 ),
                                 SizedBox(height: 8),
                                 Text(
                                   questionnaire.description,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey[600],
-                                  ),
+                                  style: theme.textTheme.bodyMedium,
                                 ),
                                 SizedBox(height: 12),
                                 Container(
@@ -180,14 +152,14 @@ class _QuestionnaireListScreenState extends State<QuestionnaireListScreen> {
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              },
+                      );
+                    },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

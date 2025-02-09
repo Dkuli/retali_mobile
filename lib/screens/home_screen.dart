@@ -1,3 +1,4 @@
+// home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -18,13 +19,11 @@ import 'package:retali/widgets/main_layout.dart';
 import '../models/carousel.dart';
 import 'detail_masalah_screen.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-    
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -40,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _scrollController.addListener(_onScroll);
     _loadPotensiMasalah();
-    _loadCarouselData(); // Add this
+    _loadCarouselData();
   }
 
   Future<void> _loadPotensiMasalah() async {
@@ -82,28 +81,28 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Access the theme
     return MainLayout(
       currentIndex: 0, // Index for Home
+      theme: theme, // Pass the theme
       child: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          _buildSliverAppBar(),
+          _buildSliverAppBar(theme),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 16),
-                  _buildCarousel(),
+                  _buildCarousel(theme),
                   const SizedBox(height: 24),
-                  _buildCategories(context),
+                  _buildCategories(context, theme),
                   const SizedBox(height: 24),
-                  _buildHorizontalImageList(title: 'Potensi Masalah'),
+                  _buildHorizontalImageList(title: 'Potensi Masalah', theme: theme),
                   const SizedBox(height: 32),
                 ],
               ),
@@ -114,19 +113,19 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildSliverAppBar() {
+  Widget _buildSliverAppBar(ThemeData theme) {
     return SliverAppBar(
       expandedHeight: 120.0,
       floating: true,
       pinned: true,
-      elevation: 0,
-      backgroundColor: Colors.white,
+      elevation: theme.appBarTheme.elevation,
+      backgroundColor: theme.appBarTheme.backgroundColor,
       title: AnimatedOpacity(
         opacity: _showTitle ? 1.0 : 0.0,
         duration: const Duration(milliseconds: 200),
-        child: const Text(
+        child: Text(
           'Beranda',
-          style: TextStyle(color: Colors.black),
+          style: theme.appBarTheme.titleTextStyle,
         ),
       ),
       flexibleSpace: FlexibleSpaceBar(
@@ -136,7 +135,6 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (context, auth, child) {
               final userData = auth.userData;
               final userName = userData?['name'] ?? 'Pengguna';
-
               return SafeArea(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -149,24 +147,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Text(
                                 'Assalamu\'alaikum,',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey[600],
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: const Color.fromARGB(255, 76, 76, 76),
                                 ),
                               ),
                               Text(
                                 userName,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                                style: theme.textTheme.headlineLarge?.copyWith(
+                                  color: const Color.fromARGB(255, 0, 0, 0),
                                   fontFamily: 'GoogleSans',
                                 ),
                               ),
                             ],
                           ),
                         ),
-                       
                       ],
                     ),
                   ],
@@ -179,105 +173,123 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-Widget _buildCarousel() {
-  if (_isLoadingCarousel) {
-    return const Center(
-      child: CircularProgressIndicator(),
+  Widget _buildCarousel(ThemeData theme) {
+    if (_isLoadingCarousel) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    if (_carouselItems.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    return Container(
+      margin: const EdgeInsets.only(top: 8),
+      child: Column(
+        children: [
+          CarouselSlider(
+            options: CarouselOptions(
+              height: 180,
+              viewportFraction: 0.92,
+              enlargeCenterPage: true,
+              autoPlay: true,
+              onPageChanged: (index, reason) {
+                setState(() => _currentCarouselIndex = index);
+              },
+            ),
+            items: _carouselItems.map((item) {
+              final mediaUrl = item.media.isNotEmpty
+                  ? item.media[0].originalUrl
+                  : '';
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                decoration: BoxDecoration(
+                  borderRadius: theme.cardTheme.shape.runtimeType is RoundedRectangleBorder
+                      ? (theme.cardTheme.shape as RoundedRectangleBorder).borderRadius
+                      : BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: theme.cardTheme.shape.runtimeType is RoundedRectangleBorder
+                      ? (theme.cardTheme.shape as RoundedRectangleBorder).borderRadius
+                      : BorderRadius.circular(20),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      CachedNetworkImage(
+                        imageUrl: mediaUrl,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => Container(
+                          color: Colors.grey[200],
+                          child: const Center(child: CircularProgressIndicator()),
+                        ),
+                        errorWidget: (context, url, error) => Container(
+                          color: Colors.grey[200],
+                          child: const Icon(Icons.error),
+                        ),
+                      ),
+                      if (item.title != null) ...[
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.transparent,
+                                Colors.black.withOpacity(0.7),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 16,
+                          left: 16,
+                          right: 16,
+                          child: Text(
+                            item.title!,
+                            style: theme.textTheme.headlineLarge?.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 16),
+          _buildCarouselIndicator(_carouselItems.length, theme),
+        ],
+      ),
     );
   }
 
-  if (_carouselItems.isEmpty) {
-    return const SizedBox.shrink();
+  Widget _buildCarouselIndicator(int itemCount, ThemeData theme) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(itemCount, (index) {
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          height: 10,
+          width: _currentCarouselIndex == index ? 24 : 12,
+          decoration: BoxDecoration(
+            color: _currentCarouselIndex == index ? theme.primaryColor : Colors.grey[400],
+            borderRadius: BorderRadius.circular(5),
+          ),
+        );
+      }),
+    );
   }
 
-  return Container(
-    margin: const EdgeInsets.only(top: 8), // Add top margin
-    child: Column(
-      children: [
-        CarouselSlider(
-          options: CarouselOptions(
-            height: 180, // Increased height
-            viewportFraction: 0.92,
-            enlargeCenterPage: true,
-            autoPlay: true,
-            onPageChanged: (index, reason) {
-              setState(() => _currentCarouselIndex = index);
-            },
-          ),
-          items: _carouselItems.map((item) {
-            final mediaUrl = item.media.isNotEmpty 
-                ? item.media[0].originalUrl 
-                : '';
-            
-            return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8), // Added vertical margin
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    CachedNetworkImage(
-                      imageUrl: mediaUrl,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(
-                        color: Colors.grey[200],
-                        child: const Center(child: CircularProgressIndicator()),
-                      ),
-                      errorWidget: (context, url, error) => Container(
-                        color: Colors.grey[200],
-                        child: const Icon(Icons.error),
-                      ),
-                    ),
-                    if (item.title != null) ...[
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.transparent,
-                              Colors.black.withOpacity(0.7),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 16,
-                        left: 16,
-                        right: 16,
-                        child: Text(
-                          item.title!,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-            );
-          }).toList(),
-        ),
-        const SizedBox(height: 16), // Increased spacing after carousel
-        _buildCarouselIndicator(_carouselItems.length),
-      ],
-    ),
-  );
-}
-  Widget _buildCategories(BuildContext context) {
+  Widget _buildCategories(BuildContext context, ThemeData theme) {
     final categories = [
       {
         'icon': Icons.mosque,
@@ -319,16 +331,15 @@ Widget _buildCarousel() {
         'icon': Icons.description,
         'label': 'Naskah',
         'color': Colors.indigo,
-        'screen':  BriefingsPage()
+        'screen': BriefingsPage()
       },
       {
         'icon': Icons.group,
         'label': 'Jamaah',
         'color': Colors.green,
-        'screen':  PilgrimScreen()
+        'screen': PilgrimScreen()
       },
     ];
-
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -351,13 +362,19 @@ Widget _buildCarousel() {
               MaterialPageRoute(builder: (context) => category['screen'] as Widget),
             );
           },
+          theme,
         );
       },
     );
   }
 
   Widget _buildCategoryItem(
-      IconData icon, String label, Color color, VoidCallback onTap) {
+    IconData icon,
+    String label,
+    Color color,
+    VoidCallback onTap,
+    ThemeData theme,
+  ) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(16),
@@ -382,8 +399,7 @@ Widget _buildCarousel() {
           const SizedBox(height: 8),
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 12,
+            style: theme.textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.w500,
             ),
             textAlign: TextAlign.center,
@@ -395,11 +411,9 @@ Widget _buildCarousel() {
     );
   }
 
-  Widget _buildHorizontalImageList({required String title}) {
+  Widget _buildHorizontalImageList({required String title, required ThemeData theme}) {
     if (_potensiMasalah == null) return const SizedBox.shrink();
-
     final items = _potensiMasalah!.entries.where((e) => e.value is Map).toList();
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -408,14 +422,18 @@ Widget _buildCarousel() {
           children: [
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 18,
+              style: theme.textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             TextButton(
               onPressed: () {},
-              child: const Text('Lihat Semua'),
+              child: Text(
+                'Lihat Semua',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.primaryColor,
+                ),
+              ),
             ),
           ],
         ),
@@ -429,7 +447,6 @@ Widget _buildCarousel() {
               final item = items[index];
               final imageUrl = (item.value as Map)['image'] as String? ?? '';
               final heroTag = 'masalah-${item.key}';
-              
               return InkWell(
                 onTap: () {
                   Navigator.push(
@@ -437,7 +454,7 @@ Widget _buildCarousel() {
                     MaterialPageRoute(
                       builder: (context) => DetailMasalahScreen(
                         title: item.key,
-                        problemData: item.value as Map<String, dynamic>,
+                        problemData: item.value as Map,
                         heroTag: heroTag,
                       ),
                     ),
@@ -470,26 +487,6 @@ Widget _buildCarousel() {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildCarouselIndicator(int itemCount) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(itemCount, (index) {
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          width: _currentCarouselIndex == index ? 24 : 8,
-          height: 8,
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            color: _currentCarouselIndex == index
-                ? const Color.fromARGB(255, 78, 29, 87)
-                : Colors.grey.shade300,
-          ),
-        );
-      }),
     );
   }
 }

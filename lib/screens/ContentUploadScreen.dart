@@ -1,12 +1,10 @@
+// content_upload_screen.dart
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:retali/services/api_service.dart';
 import 'package:video_player/video_player.dart';
 import '../widgets/loading_overlay.dart';
-
-
-
 
 class ContentUploadScreen extends StatefulWidget {
   const ContentUploadScreen({Key? key}) : super(key: key);
@@ -22,9 +20,6 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
   final TextEditingController _locationController = TextEditingController();
   final List<MediaItem> _mediaItems = [];
   bool _isUploading = false;
-
-  
- 
 
   @override
   void dispose() {
@@ -43,7 +38,6 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
     try {
       final ImagePicker picker = ImagePicker();
       final XFile? mediaFile;
-      
       if (type == MediaType.image) {
         mediaFile = await picker.pickImage(
           source: source,
@@ -57,14 +51,12 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
           maxDuration: const Duration(minutes: 10),
         );
       }
-
       if (mediaFile != null) {
         if (type == MediaType.video) {
           final VideoPlayerController controller = VideoPlayerController.file(
             File(mediaFile.path),
           );
           await controller.initialize();
-          
           setState(() {
             _mediaItems.add(
               MediaItem(
@@ -86,16 +78,19 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
         }
       }
     } catch (e) {
-      _showErrorSnackbar('Error picking media: $e');
+      showErrorSnackbar('Error picking media: $e');
     }
   }
 
-  void _showErrorSnackbar(String message) {
+  void showErrorSnackbar(String message) {
+    final theme = Theme.of(context);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           message,
-          style: const TextStyle(fontWeight: FontWeight.w500),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
         ),
         backgroundColor: Colors.red.shade400,
         behavior: SnackBarBehavior.floating,
@@ -118,17 +113,14 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
 
   Future<void> _uploadContent() async {
     if (_mediaItems.isEmpty) {
-      _showErrorSnackbar('Please add at least one photo or video');
+      showErrorSnackbar('Please add at least one photo or video');
       return;
     }
-
     if (!_formKey.currentState!.validate()) {
-      _showErrorSnackbar('Please fill in all required fields');
+      showErrorSnackbar('Please fill in all required fields');
       return;
     }
-
     setState(() => _isUploading = true);
-
     try {
       for (var mediaItem in _mediaItems) {
         await ApiService.uploadContent(
@@ -138,7 +130,6 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
           mediaItem.file,
         );
       }
-
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -150,7 +141,7 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
       }
     } catch (e) {
       if (mounted) {
-        _showErrorSnackbar('Upload failed: ${e.toString()}');
+        showErrorSnackbar('Upload failed: ${e.toString()}');
       }
     } finally {
       if (mounted) {
@@ -161,13 +152,23 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Access the theme
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+            appBar: AppBar(
+        title: Text(
+          'Pilgrims',
+          style: theme.appBarTheme.titleTextStyle,
+        ),
+        elevation: theme.appBarTheme.elevation,
+        backgroundColor: theme.primaryColor,
+      ),
+   
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: LoadingOverlay(
         isLoading: _isUploading,
         child: CustomScrollView(
           slivers: [
-            _buildSliverAppBar(),
+           
             SliverToBoxAdapter(
               child: Form(
                 key: _formKey,
@@ -176,15 +177,15 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      _buildMediaUploadArea(),
+                      _buildMediaUploadArea(theme),
                       if (_mediaItems.isNotEmpty) ...[
                         const SizedBox(height: 24),
-                        _buildMediaGrid(),
+                        _buildMediaGrid(theme),
                       ],
                       const SizedBox(height: 24),
-                      _buildInputForm(),
+                      _buildInputForm(theme),
                       const SizedBox(height: 32),
-                      _buildUploadButton(),
+                      _buildUploadButton(theme),
                       const SizedBox(height: 32),
                     ],
                   ),
@@ -197,23 +198,22 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
     );
   }
 
-  Widget _buildSliverAppBar() {
+  Widget _buildSliverAppBar(ThemeData theme) {
     return SliverAppBar.medium(
-      elevation: 0,
+      elevation: theme.appBarTheme.elevation,
       stretch: true,
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.black,
+      backgroundColor: theme.appBarTheme.backgroundColor,
+      foregroundColor: theme.appBarTheme.iconTheme?.color,
       flexibleSpace: FlexibleSpaceBar(
-        title: const Text(
+        title: Text(
           'Create Post',
-          style: TextStyle(
-            color: Colors.black,
+          style: theme.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.w600,
           ),
         ),
         background: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: theme.cardTheme.color,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
@@ -227,12 +227,14 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
     );
   }
 
-  Widget _buildMediaUploadArea() {
+  Widget _buildMediaUploadArea(ThemeData theme) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 32),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
+        color: theme.cardTheme.color,
+        borderRadius: theme.cardTheme.shape.runtimeType is RoundedRectangleBorder
+            ? (theme.cardTheme.shape as RoundedRectangleBorder).borderRadius
+            : BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
@@ -246,29 +248,27 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.blue.shade50,
+              color: theme.primaryColor.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.add_photo_alternate_rounded,
               size: 32,
-              color: Colors.blue.shade600,
+              color: theme.primaryColor,
             ),
           ),
           const SizedBox(height: 16),
-          const Text(
+          Text(
             'Add Your Content',
-            style: TextStyle(
-              fontSize: 20,
+            style: theme.textTheme.headlineLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             'Share your moments with the community',
-            style: TextStyle(
-              color: Colors.grey.shade600,
-              fontSize: 14,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.textTheme.bodySmall?.color,
             ),
           ),
           const SizedBox(height: 24),
@@ -279,21 +279,24 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
                 icon: Icons.camera_alt_rounded,
                 label: 'Camera',
                 onTap: () => _pickMedia(ImageSource.camera, MediaType.image),
-                color: Colors.purple.shade400,
+                color: theme.primaryColor,
+                theme: theme,
               ),
               const SizedBox(width: 16),
               _buildMediaButton(
                 icon: Icons.videocam_rounded,
                 label: 'Video',
                 onTap: () => _pickMedia(ImageSource.camera, MediaType.video),
-                color: Colors.red.shade400,
+                color: theme.primaryColor,
+                theme: theme,
               ),
               const SizedBox(width: 16),
               _buildMediaButton(
                 icon: Icons.photo_library_rounded,
                 label: 'Gallery',
-                onTap: _showGalleryOptions,
-                color: Colors.green.shade400,
+                onTap: () => _showGalleryOptions(theme),
+                color: theme.primaryColor,
+                theme: theme,
               ),
             ],
           ),
@@ -307,6 +310,7 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
     required String label,
     required VoidCallback onTap,
     required Color color,
+    required ThemeData theme,
   }) {
     return Material(
       color: Colors.transparent,
@@ -329,7 +333,7 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
               const SizedBox(height: 8),
               Text(
                 label,
-                style: TextStyle(
+                style: theme.textTheme.bodyMedium?.copyWith(
                   fontSize: 13,
                   color: color,
                   fontWeight: FontWeight.w600,
@@ -342,7 +346,7 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
     );
   }
 
-  Widget _buildMediaGrid() {
+  Widget _buildMediaGrid(ThemeData theme) {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -353,18 +357,19 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
         childAspectRatio: 1,
       ),
       itemCount: _mediaItems.length,
-      itemBuilder: (context, index) => _buildMediaPreview(index),
+      itemBuilder: (context, index) => _buildMediaPreview(index, theme),
     );
   }
 
-  Widget _buildMediaPreview(int index) {
+  Widget _buildMediaPreview(int index, ThemeData theme) {
     final item = _mediaItems[index];
-    
     return Stack(
       children: [
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: theme.cardTheme.shape.runtimeType is RoundedRectangleBorder
+                ? (theme.cardTheme.shape as RoundedRectangleBorder).borderRadius
+                : BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
@@ -374,7 +379,9 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
             ],
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: theme.cardTheme.shape.runtimeType is RoundedRectangleBorder
+                ? (theme.cardTheme.shape as RoundedRectangleBorder).borderRadius
+                : BorderRadius.circular(16),
             child: item.type == MediaType.image
                 ? Image.file(
                     item.file,
@@ -385,7 +392,10 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
                 : Stack(
                     alignment: Alignment.center,
                     children: [
-                      VideoPlayer(item.videoController!),
+                      AspectRatio(
+                        aspectRatio: 1,
+                        child: VideoPlayer(item.videoController!),
+                      ),
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
@@ -432,12 +442,14 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
     );
   }
 
-  Widget _buildInputForm() {
+  Widget _buildInputForm(ThemeData theme) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
+        color: theme.cardTheme.color,
+        borderRadius: theme.cardTheme.shape.runtimeType is RoundedRectangleBorder
+            ? (theme.cardTheme.shape as RoundedRectangleBorder).borderRadius
+            : BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
@@ -449,35 +461,23 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextFormField(
+          _buildTextField(
             controller: _titleController,
-            decoration: InputDecoration(
-              labelText: 'Title',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter a title';
-              }
-              return null;
-            },
+            label: 'Title',
+            hint: 'Enter title',
+            icon: Icons.title,
+            theme: theme,
           ),
           const SizedBox(height: 16),
-          TextFormField(
+          _buildTextField(
             controller: _descriptionController,
-            decoration: InputDecoration(
-              labelText: 'Description',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
+            label: 'Description',
+            hint: 'Enter description',
+            icon: Icons.description,
             maxLines: 3,
+            theme: theme,
           ),
-       
           const SizedBox(height: 20),
-       
         ],
       ),
     );
@@ -489,36 +489,36 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
     required String hint,
     required IconData icon,
     int maxLines = 1,
+    required ThemeData theme,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: theme.textTheme.bodyMedium?.copyWith(
             fontSize: 15,
             fontWeight: FontWeight.w600,
-            color: Colors.black87,
+            color: theme.textTheme.bodyLarge?.color,
           ),
         ),
         const SizedBox(height: 8),
-        TextField(
-          controller: controller,
-          maxLines: maxLines,
-          style: const TextStyle(fontSize: 15),
-          decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: TextStyle(color: Colors.grey.shade400),
-            prefixIcon: Icon(icon, color: Colors.grey.shade600),
-            filled: true,
-            fillColor: Colors.grey.shade50,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16,
+        Container(
+          decoration: BoxDecoration(
+            color: theme.inputDecorationTheme.fillColor,
+            borderRadius: theme.inputDecorationTheme.border.runtimeType is OutlineInputBorder
+                ? (theme.inputDecorationTheme.border as OutlineInputBorder).borderRadius
+                : BorderRadius.circular(16),
+          ),
+          child: TextField(
+            controller: controller,
+            maxLines: maxLines,
+            style: theme.textTheme.bodyLarge?.copyWith(fontSize: 15),
+            decoration: InputDecoration(
+              hintText: hint,
+              prefixIcon: Icon(icon, color: theme.primaryColor),
+              fillColor: theme.inputDecorationTheme.fillColor,
+              border: theme.inputDecorationTheme.border,
             ),
           ),
         ),
@@ -526,55 +526,47 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
     );
   }
 
- 
-  Widget _buildUploadButton() {
+  Widget _buildUploadButton(ThemeData theme) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: ElevatedButton(
-        onPressed: _isUploading ? null : _uploadContent,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue.shade500,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          elevation: 0,
-          shadowColor: Colors.transparent,
-          minimumSize: const Size(double.infinity, 54),
-        ),
-        child: _isUploading
-            ? SizedBox(
-                height: 24,
-                width: 24,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue.shade100),
-                  strokeWidth: 2.5,
-                ),
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.cloud_upload_rounded,
-                    color: Colors.blue.shade100,
+      child: SizedBox(
+        width: double.infinity,
+        height: 50,
+        child: ElevatedButton(
+          onPressed: _isUploading ? null : _uploadContent,
+          style: theme.elevatedButtonTheme.style,
+          child: _isUploading
+              ? SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(theme.primaryColor),
                   ),
-                  const SizedBox(width: 12),
-                  const Text(
-                    'Share Post',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.5,
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.cloud_upload_rounded,
+                      color: theme.cardTheme.color,
                     ),
-                  ),
-                ],
-              ),
+                    const SizedBox(width: 12),
+                    Text(
+                      'Share Post',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ],
+                ),
+        ),
       ),
     );
   }
 
-  void _showGalleryOptions() {
+  void _showGalleryOptions(ThemeData theme) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -597,9 +589,9 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            const Text(
+            Text(
               'Choose Media Type',
-              style: TextStyle(
+              style: theme.textTheme.headlineLarge?.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
@@ -615,7 +607,8 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
                     Navigator.pop(context);
                     _pickMedia(ImageSource.gallery, MediaType.image);
                   },
-                  color: Colors.blue.shade400,
+                  color: theme.primaryColor,
+                  theme: theme,
                 ),
                 const SizedBox(width: 32),
                 _buildGalleryOption(
@@ -625,7 +618,8 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
                     Navigator.pop(context);
                     _pickMedia(ImageSource.gallery, MediaType.video);
                   },
-                  color: Colors.red.shade400,
+                  color: theme.primaryColor,
+                  theme: theme,
                 ),
               ],
             ),
@@ -641,6 +635,7 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
     required String label,
     required VoidCallback onTap,
     required Color color,
+    required ThemeData theme,
   }) {
     return Material(
       color: Colors.transparent,
@@ -668,7 +663,7 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
               const SizedBox(height: 12),
               Text(
                 label,
-                style: TextStyle(
+                style: theme.textTheme.bodyMedium?.copyWith(
                   color: color,
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
@@ -681,13 +676,13 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
     );
   }
 }
+
 enum MediaType { image, video }
 
 class MediaItem {
   final File file;
   final MediaType type;
   final VideoPlayerController? videoController;
-
   MediaItem({
     required this.file,
     required this.type,

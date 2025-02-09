@@ -1,8 +1,8 @@
+// onboarding_screen.dart
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatefulWidget {
   final VoidCallback onComplete;
-
   const OnboardingScreen({Key? key, required this.onComplete}) : super(key: key);
 
   @override
@@ -21,11 +21,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Access the theme
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF4E1D57), Color(0xFF8E2DE2)],
+            colors: [theme.primaryColor, theme.colorScheme.secondary],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -40,17 +41,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   OnboardingPage(
                     imagePath: 'assets/images/jamaah.png',
                     title: 'Insya Allah Mabrur',
-                    description: 'Selamat datang di Aplikasi UmrahApp. Silahkan login dengan akun Gmail Anda.',
+                    description:
+                        'Selamat datang di Aplikasi UmrahApp. Silahkan login dengan akun Gmail Anda.',
                   ),
                   OnboardingPage(
                     imagePath: 'assets/images/travel_umrah.png',
                     title: 'Kemudahan Ibadah',
-                    description: 'Nikmati kemudahan dalam mengatur perjalanan ibadah Anda bersama UmrahApp.',
+                    description:
+                        'Nikmati kemudahan dalam mengatur perjalanan ibadah Anda bersama UmrahApp.',
                   ),
                   OnboardingPage(
                     imagePath: 'assets/images/mekah.png',
                     title: 'Pantau Perjalanan',
-                    description: 'Dapatkan notifikasi dan informasi penting selama perjalanan Anda.',
+                    description:
+                        'Dapatkan notifikasi dan informasi penting selama perjalanan Anda.',
                   ),
                 ],
               ),
@@ -94,24 +98,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       borderRadius: BorderRadius.circular(25),
                     ),
                     backgroundColor: _currentIndex == 2
-                        ? const Color.fromARGB(255, 113, 6, 97)
-                        : const Color.fromARGB(255, 243, 243, 243),
-                      ),
-                      child: Text(
-                      _currentIndex == 2 ? 'Mulai' : 'Berikutnya',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: _currentIndex == 2 ? Colors.white : Color.fromARGB(255, 113, 6, 97),
-                      ),
+                        ? theme.primaryColor
+                        : Colors.white,
+                  ),
+                  child: Text(
+                    _currentIndex == 2 ? 'Mulai' : 'Berikutnya',
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: _currentIndex == 2 ? Colors.white : theme.primaryColor,
+                    ),
                   ),
                 ),
               ),
             ),
             TextButton(
               onPressed: widget.onComplete,
-              child: const Text(
+              child: Text(
                 'Lewati',
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: Colors.white,
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -126,7 +131,6 @@ class OnboardingPage extends StatelessWidget {
   final String imagePath;
   final String title;
   final String description;
-
   const OnboardingPage({
     required this.imagePath,
     required this.title,
@@ -135,6 +139,7 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Access the theme
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -142,7 +147,7 @@ class OnboardingPage extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 20), // Jarak horizontal
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            gradient: const LinearGradient(
+            gradient: LinearGradient(
               colors: [
                 Colors.white24, // Efek transisi lembut di sekitar gambar
                 Colors.transparent,
@@ -170,9 +175,7 @@ class OnboardingPage extends StatelessWidget {
         const SizedBox(height: 30),
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
+          style: theme.textTheme.headlineLarge?.copyWith(
             color: Colors.white,
           ),
           textAlign: TextAlign.center,
@@ -183,8 +186,7 @@ class OnboardingPage extends StatelessWidget {
           child: Text(
             description,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16,
+            style: theme.textTheme.bodyMedium?.copyWith(
               color: Colors.white70,
             ),
           ),

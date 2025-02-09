@@ -1,8 +1,7 @@
+// pilgrim_screen.dart
 import 'package:flutter/material.dart';
 import 'package:retali/services/api_service.dart';
-
 import '../models/pilgrim.dart';
-
 
 class PilgrimScreen extends StatefulWidget {
   const PilgrimScreen({Key? key}) : super(key: key);
@@ -22,22 +21,20 @@ class _PilgrimScreenState extends State<PilgrimScreen> {
 
   Future<List<Pilgrim>> _fetchPilgrims() async {
     final pilgrimsData = await ApiService.getPilgrims();
-    return pilgrimsData.map<Pilgrim>((json) => Pilgrim.fromJson(json)).toList();
+    return pilgrimsData.map((json) => Pilgrim.fromJson(json)).toList();
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Access the theme
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Pilgrims',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
+          style: theme.appBarTheme.titleTextStyle,
         ),
-        elevation: 2,
-        backgroundColor: Theme.of(context).primaryColor,
+        elevation: theme.appBarTheme.elevation,
+        backgroundColor: theme.primaryColor,
       ),
       body: FutureBuilder<List<Pilgrim>>(
         future: _pilgrimsFuture,
@@ -86,7 +83,6 @@ class _PilgrimScreenState extends State<PilgrimScreen> {
               ),
             );
           }
-
           final pilgrims = snapshot.data!;
           return ListView.separated(
             padding: const EdgeInsets.all(16),
@@ -95,10 +91,8 @@ class _PilgrimScreenState extends State<PilgrimScreen> {
             itemBuilder: (context, index) {
               final pilgrim = pilgrims[index];
               return Card(
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+                elevation: theme.cardTheme.elevation,
+                shape: theme.cardTheme.shape,
                 child: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Row(
@@ -109,7 +103,7 @@ class _PilgrimScreenState extends State<PilgrimScreen> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: Theme.of(context).primaryColor,
+                            color: theme.primaryColor,
                             width: 2,
                           ),
                         ),
@@ -131,8 +125,7 @@ class _PilgrimScreenState extends State<PilgrimScreen> {
                           children: [
                             Text(
                               pilgrim.name,
-                              style: const TextStyle(
-                                fontSize: 18,
+                              style: theme.textTheme.headlineLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -143,9 +136,7 @@ class _PilgrimScreenState extends State<PilgrimScreen> {
                                 const SizedBox(width: 4),
                                 Text(
                                   pilgrim.phone,
-                                  style: TextStyle(
-                                    color: Colors.grey[600],
-                                  ),
+                                  style: theme.textTheme.bodyMedium,
                                 ),
                               ],
                             ),
@@ -156,9 +147,7 @@ class _PilgrimScreenState extends State<PilgrimScreen> {
                                 const SizedBox(width: 4),
                                 Text(
                                   'Gender: ${pilgrim.gender}',
-                                  style: TextStyle(
-                                    color: Colors.grey[600],
-                                  ),
+                                  style: theme.textTheme.bodyMedium,
                                 ),
                               ],
                             ),
@@ -171,9 +160,7 @@ class _PilgrimScreenState extends State<PilgrimScreen> {
                                   Expanded(
                                     child: Text(
                                       'Health: ${pilgrim.healthNotes}',
-                                      style: TextStyle(
-                                        color: Colors.grey[600],
-                                      ),
+                                      style: theme.textTheme.bodyMedium,
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
