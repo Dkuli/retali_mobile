@@ -43,6 +43,8 @@ class _QuestionnaireDetailScreenState extends State<QuestionnaireDetailScreen> {
             'answer_text': _answers[question.id] ?? '',
           if (question.type == 'multiple_choice')
             'selected_options': _answers[question.id] ?? [],
+          if (question.type == 'rating')
+            'answer_text': _answers[question.id] ?? '',
         };
       }).toList();
 
@@ -158,6 +160,23 @@ class _QuestionnaireDetailScreenState extends State<QuestionnaireDetailScreen> {
                   });
                 },
               ),
+            );
+          }).toList(),
+        );
+
+      case 'rating':
+        return Column(
+          children: question.options!.map((option) {
+            return RadioListTile<String>(
+              title: Text(option, style: theme.textTheme.bodyMedium),
+              value: option,
+              groupValue: _answers[question.id],
+              activeColor: theme.primaryColor,
+              onChanged: (value) {
+                setState(() {
+                  _answers[question.id] = value;
+                });
+              },
             );
           }).toList(),
         );

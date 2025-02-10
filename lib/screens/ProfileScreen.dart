@@ -99,29 +99,100 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget buildStatisticsSection() {
-    // Define the buildStatisticsSection method
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Text('Statistics Section', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          // Add more widgets here as needed
-        ],
-      ),
-    );
-  }
+Widget buildStatisticsSection() {
+  return Consumer<AuthProvider>(
+    builder: (context, auth, child) {
+      final userData = auth.userData;
+      final currentGroup = userData?['current_group'];
+      final numPilgrims = currentGroup?['max_capacity'] ?? 0;
+      final itinerary = currentGroup?['itinerary'] ?? {};
+      final theme = Theme.of(context);
+
+      return Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: theme.cardTheme.color,
+          borderRadius: theme.cardTheme.shape.runtimeType is RoundedRectangleBorder
+              ? (theme.cardTheme.shape as RoundedRectangleBorder).borderRadius
+              : BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed('/pilgrim_page');
+              },
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Icon(Icons.group, color: theme.primaryColor),
+                      const SizedBox(width: 12),
+                      Text('Jumlah Jamaah: $numPilgrims', style: theme.textTheme.bodyLarge),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                  ),
+                  builder: (context) => Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Detail Itinerary', style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 16),
+                        ...itinerary.entries.map((entry) => Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Text('${entry.key}: ${entry.value}', style: theme.textTheme.bodyMedium),
+                        )),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Icon(Icons.map, color: theme.primaryColor),
+                      const SizedBox(width: 12),
+                      Text('Lihat Itinerary', style: theme.textTheme.bodyLarge),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+} 
 
   Widget buildProfileMenu(BuildContext context) {
     final theme = Theme.of(context); // Access the theme
@@ -140,13 +211,6 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
       child: Column(
-        children: [
-          buildMenuItem(context, Icons.person_outline, 'Informasi Pribadi', () {}),
-          const Divider(height: 1),
-          buildMenuItem(context, Icons.group_outlined, 'Kelompok Jamaah', () {}),
-          const Divider(height: 1),
-          buildMenuItem(context, Icons.history, 'Riwayat Perjalanan', () {}),
-        ],
       ),
     );
   }

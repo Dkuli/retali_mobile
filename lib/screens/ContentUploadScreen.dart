@@ -156,7 +156,7 @@ class _ContentUploadScreenState extends State<ContentUploadScreen> {
     return Scaffold(
             appBar: AppBar(
         title: Text(
-          'Pilgrims',
+          'UploadContent',
           style: theme.appBarTheme.titleTextStyle,
         ),
         elevation: theme.appBarTheme.elevation,

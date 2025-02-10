@@ -12,7 +12,7 @@ class LocationsListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Pilgrims',
+          'Locations',
           style: theme.appBarTheme.titleTextStyle,
         ),
         elevation: theme.appBarTheme.elevation,

@@ -6,17 +6,17 @@ import 'package:retali/providers/auth_provider.dart';
 import 'package:retali/screens/home_screen.dart';
 import 'package:retali/screens/login_screen.dart';
 import 'package:retali/screens/onboarding_screens.dart';
-import 'package:retali/services/notification_service.dart';
+
 import 'package:retali/themes/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'services/notification_service.dart';
 import 'utils/shared_prefs.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  
-  // Initialize notifications
+
   final notificationService = NotificationService();
   await notificationService.initialize();
   await SharedPrefs.init();

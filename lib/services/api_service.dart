@@ -5,7 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/questionnaire.dart';
 import '../models/schedule.dart';
 import '../models/carousel.dart';
-import '../models/luggage_scan.dart';  // Add this import
+import '../models/luggage_scan.dart';
+import 'location_service.dart';  // Add this import
 
 class ApiService {
   static const String baseUrl = 'http://192.168.175.13:8000/api/v1';
@@ -72,6 +73,7 @@ class ApiService {
       if (response.statusCode == 200) {
         if (data['status'] == 'Success' && data['data']['token'] != null) {
           await setToken(data['data']['token']);
+          await LocationService.getInstance().startTracking(); // Add this line
           return data;
         } else {
           throw ApiException(data['message'] ?? 'Authentication failed');
@@ -88,6 +90,7 @@ class ApiService {
   }
 
   static Future<void> logout() async {
+    await LocationService.getInstance().stopTracking(); // Add this line
     final headers = await _getHeaders();
     await http.post(
       Uri.parse('$baseUrl/logout'),
@@ -169,7 +172,7 @@ class ApiService {
   static Future<Future> storeLocation(Map<String, dynamic> locationData) async {
     final headers = await _getHeaders();
     final response = await http.post(
-      Uri.parse('$baseUrl/locations'),
+      Uri.parse('$baseUrl/location/update'),
       headers: headers,
       body: json.encode(locationData),
     );
