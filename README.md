@@ -18,7 +18,7 @@ To install the project, follow these steps:
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/retali_mobile.git
+    git clone https://github.com/Dkuli/retali_mobile.git
     ```
 2. Navigate to the project directory:
     ```sh
