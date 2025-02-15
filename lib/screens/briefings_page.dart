@@ -248,7 +248,7 @@ class _BriefingsPageState extends State<BriefingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Panduan Umroh',
+          'briefings',
           style: theme.textTheme.titleLarge?.copyWith(color: Colors.white),
         ),
         backgroundColor: theme.primaryColor,
